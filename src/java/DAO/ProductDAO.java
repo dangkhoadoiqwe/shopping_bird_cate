@@ -106,7 +106,7 @@ try {
     try {
         con = DBContext.getConnection();
         if (con != null) {
-            stm = con.prepareStatement("SELECT Name, Brand, Price, Description, StockQuantity, ImageURL FROM dbo.Products WHERE ProductID = ?");
+            stm = con.prepareStatement("SELECT Name, Brand, Price, Description, StockQuantity, ImageURL,ProductID FROM dbo.Products WHERE ProductID = ?");
             stm.setInt(1, id);
             rs = stm.executeQuery();
 
@@ -119,6 +119,7 @@ try {
                 product.setDescription(rs.getString("Description"));
                 product.setQuantity(rs.getInt("StockQuantity"));
                 product.setImg(rs.getString("ImageURL"));
+                product.setId(rs.getInt("ProductID"));
             }
         }
     } catch (Exception e) {
@@ -137,6 +138,51 @@ try {
     }
     
     return product; // Trả về đối tượng ProductDTO đã được thiết lập dữ liệu
+}
+public List<ProductDTO> get2id(int id1, int id2) throws SQLException {
+    List<ProductDTO> products = new ArrayList<>(); // Khởi tạo danh sách sản phẩm
+    
+    Connection con = null;
+    PreparedStatement stm = null;
+    ResultSet rs = null;
+
+    try {
+        con = DBContext.getConnection();
+        if (con != null) {
+            stm = con.prepareStatement("SELECT Name, Brand, Price, Description, StockQuantity, ImageURL, ProductID FROM dbo.Products WHERE ProductID IN (?, ?)");
+            stm.setInt(1, id1);
+            stm.setInt(2, id2);
+            rs = stm.executeQuery();
+
+            while (rs.next()) {
+                // Tạo một đối tượng ProductDTO cho mỗi sản phẩm và thiết lập dữ liệu từ ResultSet
+                ProductDTO product = new ProductDTO();
+                product.setName(rs.getString("Name"));
+                product.setBrand(rs.getString("Brand"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setDescription(rs.getString("Description"));
+                product.setQuantity(rs.getInt("StockQuantity"));
+                product.setImg(rs.getString("ImageURL"));
+                product.setId(rs.getInt("ProductID"));
+                products.add(product);
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        // Đóng tất cả các tài nguyên
+        if (rs != null) {
+            rs.close();
+        }
+        if (stm != null) {
+            stm.close();
+        }
+        if (con != null) {
+            con.close();
+        }
+    }
+    
+    return products; // Trả về danh sách sản phẩm đã được thiết lập dữ liệu
 }
 
       public static void main(String[] args) throws SQLException {

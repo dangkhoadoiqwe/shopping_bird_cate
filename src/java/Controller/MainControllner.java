@@ -28,16 +28,18 @@ public class MainControllner extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     private static final String LOAD_HOME_PAGE = "ListAllProducts";
-     private static final String pro_detail= "ProDetail";
-      private static final String pro_detail_CONTROLLNER= "productdetail";
-     private static final String shop_CONTROLLER = "product";
+    private static final String pro_detail = "ProDetail";
+    private static final String pro_detail_CONTROLLNER = "productdetail";
+    private static final String shop_CONTROLLER = "product";
     private static final String shopping = "shop";
+    private static final String comproduct = "compro";
+    private static final String pro_com_CONTROLLNER = "addcompare1";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          String url = LOAD_HOME_PAGE;
+        String url = LOAD_HOME_PAGE;
         try {
             String action = request.getParameter("action");
             if (action == null) {
@@ -47,11 +49,14 @@ public class MainControllner extends HttpServlet {
                     case shopping:
                         url = shop_CONTROLLER;
                         break;
-                         case pro_detail:
+                    case pro_detail:
                         url = pro_detail_CONTROLLNER;
                         break;
-                    }
-            }    
+                    case comproduct:
+                        url = pro_com_CONTROLLNER;
+                        break;
+                }
+            }
         } catch (Exception e) {
             log("Error at MainController" + e.toString());
             request.setAttribute("mess", e.toString());

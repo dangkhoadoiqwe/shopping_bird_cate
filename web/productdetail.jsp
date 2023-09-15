@@ -35,7 +35,7 @@
             </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-12" ">
+                    <div class="col-12" >
                         <div   style="grid-template-columns: repeat(3, 1fr);gap: 100px class;">
                             <form action="#" method="get">
                                 <button type="submit"><img style="width: 150px; margin-right: 20px; " src="images/add-to-compare-icon.jpg" alt=""></button>
@@ -96,8 +96,8 @@
 
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <a class="gallery_img" href="images/sofa.png">
-                                                <img class="d-block w-100" src="images/sofa.png" alt="First slide">
+                                            <a class="gallery_img" href="${sessionScope.prodetail.getImg()}">
+                                                <img class="d-block w-100" src="${sessionScope.prodetail.getImg()}" alt="First slide">
                                             </a>
                                         </div>
                                     </div>
@@ -110,7 +110,7 @@
                                 <!-- Product Meta Data -->
                                 <div class="product-meta-data">
                                     <div class="line"></div>
-                                    <p class="product-price">${sessionScope.prodetail.getPrice()}VND</p>
+                                    <p class="product-price">${sessionScope.prodetail.getPrice()} , ${sessionScope.prodetail.getId()}VND</p>
                                     <a href="product-details.html">
                                         <h6>${sessionScope.prodetail.getName()}</h6>
                                     </a>
@@ -124,7 +124,7 @@
                                             <i class="fa fa-star" aria-hidden="true"></i>
                                         </div>
                                         <div class="review">
-                                            <a  class="search-nav" href="#">SO SÁNH</a>
+                                            <a  class="search-nav" href="MainControllner?action=compro&proid=${sessionScope.prodetail.getId()}">SO SÁNH</a>
                                         </div>
                                     </div>
                                     <!-- Avaiable -->
