@@ -129,30 +129,24 @@
                                 </div>
                             </div>
                         </td>
+                        <c:forEach var="product" items="${prodetail}">
                         <td>
                             <div class="comparison-item"><span class="remove-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>
-                                <a class="comparison-item-thumb" href="MainControllner?action=ProDetail&proid=${sessionScope.prodetail.getId()}"><img src=" ${sessionScope.prodetail.getImg()}" alt="Apple iPhone Xs Max"></a><a class="comparison-item-title" href="MainControllner?action=ProDetail&proid=${sessionScope.prodetail.getId()}" > ${sessionScope.prodetail.getName()}</a>
+                                <a class="comparison-item-thumb" href="MainControllner?action=ProDetail&proid=${product.getId()}"><img src=" ${product.getImg()}" alt="Apple iPhone Xs Max"></a><a class="comparison-item-title" href="MainControllner?action=ProDetail&proid=${product.getId()}" > ${product.getName()}</a>
                                 <button class="btn btn-pill btn-outline-primary btn-sm" type="button" data-toggle="toast" data-target="#cart-toast">Thêm vào giỏ hàng</button>
                             </div>
                         </td>
-                        <td>
-                            <div class="comparison-item"><span class="remove-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>
-                                <a class="comparison-item-thumb" href="shop-single.html"><img src="https://www.bootdey.com/image/160x160/1E90FF/000000" alt="Google Pixel 3 XL"></a><a class="comparison-item-title" href="#" id="button">Chọn sản phảm muốn so sánh </a>
-                                <button class="btn btn-pill btn-outline-primary btn-sm" type="button" data-toggle="toast" data-target="#cart-toast">Thêm</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="comparison-item"><span class="remove-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>
-                                <a class="comparison-item-thumb" href="shop-single.html"><img src="https://www.bootdey.com/image/160x160/FF8C00/000000" alt="Samsung Galaxy S10+"></a><a class="comparison-item-title" href="shop-single.html">Chọn sản phảm muốn so sánh</a>
-                                <button class="btn btn-pill btn-outline-primary btn-sm" type="button" data-toggle="toast" data-target="#cart-toast">Thêm </button>
-                            </div>
-                        </td>
+                       
+                       
+                        </c:forEach>
+                           
+                         
                     </tr>
                 </thead>
                 <tbody id="summary" data-filter="target">
                     <tr class="bg-secondary">
                         <th class="text-uppercase">Summary</th>
-                        <td><span class="text-dark font-weight-semibold"></span>${sessionScope.prodetail.getName()}</td>
+                        <td><span class="text-dark font-weight-semibold"></span></td>
                         <td><span class="text-dark font-weight-semibold"></span></td>
                         <td><span class="text-dark font-weight-semibold"></span></td>
                     </tr>
@@ -544,32 +538,7 @@
             </table>
         </div>
     </div>
-    <div class="login-container">
-        <div class="login-body-container">
-            <span id="close" class="close_button"><img class="close-img" src="images/closeButton.png" alt="icon"/></span>
-            <div class="login-form d-flex justify-content-between">
-                <div class="untree_co-section product-section before-footer-section" style="">
-                    <div    class="container" style="">
-                        <div class="row" style="margin-top:140px ;  background-color :#fff; ">
-                            <c:forEach var="product" items="${c}">
-                                <div class="col-12 col-md-4 col-lg-3 mb-5">
-                                    <a class="product-item" href="MainControllner?action=com2&proid=${sessionScope.prodetail.getId()}&proid2=${product.getId()}">
-                                        <img src="${product.getImg()}" style=" border-radius: 15px 15px 0 0;" class="img-fluid product-thumbnail">
-                                        <h3 class="product-title">${product.getName()}</h3>
-                                        <strong class="product-price">${product.getPrice()}VND</strong>
-
-                                        <span class="icon-cross">
-                                            <img src="images/cross.svg" class="img-fluid">
-                                        </span>
-                                    </a>
-                                </div> 
-                            </c:forEach>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  
     <script>
 
         document.getElementById("button").addEventListener("click", function () {

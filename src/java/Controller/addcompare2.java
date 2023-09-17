@@ -4,13 +4,17 @@
  */
 package Controller;
 
+import DAO.ProductDAO;
+import DTO.ProductDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -28,20 +32,35 @@ public class addcompare2 extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+      private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "comparepro2.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet addcompare2</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet addcompare2 at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            HttpSession s = request.getSession();
+String url = null;
+ProductDAO a = new ProductDAO();
+
+try {
+    int pro1 = Integer.parseInt(request.getParameter("proid"));
+    int pro2 = Integer.parseInt(request.getParameter("proid2"));
+
+  
+    List<ProductDTO> d = a.get2id(pro1, pro2);
+
+    if (d != null) {
+        s.setAttribute("prodetail", d);
+        url = SUCCESS;
+    } else {
+        url = ERROR;
+    }
+} catch (Exception e) {
+    e.printStackTrace();
+}
+
+request.getRequestDispatcher(url).forward(request, response);
+
         }
     }
 

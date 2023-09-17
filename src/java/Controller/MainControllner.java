@@ -35,6 +35,8 @@ public class MainControllner extends HttpServlet {
     private static final String shopping = "shop";
     private static final String comproduct = "compro";
     private static final String pro_com_CONTROLLNER = "addcompare1";
+     private static final String pro_com2_CONTROLLNER = "com2";
+      private static final String pro_com2 = "addcompare2";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -54,6 +56,9 @@ public class MainControllner extends HttpServlet {
                         break;
                     case comproduct:
                         url = pro_com_CONTROLLNER;
+                        break;
+                         case pro_com2_CONTROLLNER:
+                        url = pro_com2;
                         break;
                 }
             }
