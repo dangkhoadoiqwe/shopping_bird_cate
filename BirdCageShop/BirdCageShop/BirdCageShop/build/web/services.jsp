@@ -21,6 +21,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
         <link href="css/tiny-slider.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
+         <link href="css/login.css" rel="stylesheet" type="text/css"/>
         <title>Furni Free Bootstrap 5 Template for Furniture and Interior Design Websites by Untree.co </title>
     </head>
 
@@ -46,8 +47,8 @@
                         <li><a class="nav-link" href="contact.jsp">Liên hệ</a></li>
                     </ul>
 
-                    <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-                        <li><a class="cd-signin" href="#">Đăng nhập<img src="images/user.svg"></a></li>
+                     <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+                        <li><a class="cd-signin" href="#"><img style =" margin-top:12px" src="images/user.svg"></a></li>
                         <li><a class="nav-link" href="cart.html"><img src="images/cart.svg"></a></li>
                     </ul>
                 </div>

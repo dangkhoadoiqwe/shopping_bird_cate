@@ -21,58 +21,38 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
         <link href="css/tiny-slider.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
+         <link href="css/login.css" rel="stylesheet" type="text/css"/>
         <title>Furni Free Bootstrap 5 Template for Furniture and Interior Design Websites by Untree.co </title>
     </head>
 
     <body>
 
         <!-- Start Header/Navigation -->
-        <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
-
-                <div class="container">
-                <a class="navbar-brand" href="homePage.jsp">Furni<span>.</span></a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarsFurni">
-                    <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="homePage.jsp">Trang chủ</a>
-                        </li>
-                        <li><a class="nav-link" href="shop.jsp">Cửa hàng</a></li>
-                        <li><a class="nav-link" href="blog.jsp">Blog</a></li>
-                        <li><a class="nav-link" href="contact.jsp">Liên hệ</a></li>
-                    </ul>
-
-                    <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-                        <li><a class="cd-signin" href="#"><img src="images/user.svg"></a></li> 
-                        <li><a class="nav-link" href="cart.html"><img src="images/cart.svg"></a></li>
-                    </ul>
-                </div>
-            </div>
-
-        </nav>
+      <header>
+            <%@include file="headerGuest.jsp"%>
+        </header>
         <!-- End Header/Navigation -->
 
         <!-- Start Hero Section -->
-        <div class="hero">
-            <div class="container">
-                <div class="row justify-content-between">
-                    <div class="col-lg-5">
-                        <div class="intro-excerpt">
-                            <h1>About Us</h1>
-                            <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
-                            <p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="#" class="btn btn-white-outline">Explore</a></p>
-                        </div>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="hero-img-wrap">
-<!--                            <img src="images/couch.png" class="img-fluid">-->
-                        </div>
-                    </div>
-                </div>
+      <div id="banner">
+            <div class="box-left">
+                <h2>
+
+
+                    <span>FURNI</span>
+                    <br>
+                    <span  style="font-size: 16px;">Không gian độc đáo cho những đôi cánh - Lồng chim, đẳng cấp dân chơi!</span>
+
+                </h2>
+
+                <p>Chuyên cung cấp các loại lồng chim cho từng loại chim của khách hàng giúp cho chim của khách hàng có 1 không gian thoải mái nhất</p>
+
+                <button>Mua ngay</button>
+            </div>
+            <div class="to-bottom">
+                <a href="">
+                    <img src="assets/to_bottom.png" alt="">
+                </a>
             </div>
         </div>
         <!-- End Hero Section -->
@@ -80,12 +60,12 @@
 
 
         <!-- Start Why Choose Us Section -->
-        <div class="why-choose-section">
+         <div class="why-choose-section">
             <div class="container">
-                <div class="row justify-content-between align-items-center">
+                <div class="row justify-content-between">
                     <div class="col-lg-6">
-                        <h2 class="section-title">Why Choose Us</h2>
-                        <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
+                        <h2 class="section-title">Lồng chim hàng đầu Việt Nam</h2>
+                        <p>Uy tín - Giá tốt nhất - chất lượng</p>
 
                         <div class="row my-5">
                             <div class="col-6 col-md-6">
@@ -93,8 +73,8 @@
                                     <div class="icon">
                                         <img src="images/truck.svg" alt="Image" class="imf-fluid">
                                     </div>
-                                    <h3>Fast &amp; Free Shipping</h3>
-                                    <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                                    <h3>Giao hàng nhanh</h3>
+                                    <p>Áp dụng cho mọi đơn hàng.</p>
                                 </div>
                             </div>
 
@@ -103,8 +83,8 @@
                                     <div class="icon">
                                         <img src="images/bag.svg" alt="Image" class="imf-fluid">
                                     </div>
-                                    <h3>Easy to Shop</h3>
-                                    <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                                    <h3>Thanh toán linh hoạt</h3>
+                                    <p> Nhận mọi hình thức thanh toán.</p>
                                 </div>
                             </div>
 
@@ -114,7 +94,7 @@
                                         <img src="images/support.svg" alt="Image" class="imf-fluid">
                                     </div>
                                     <h3>24/7 Support</h3>
-                                    <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                                    <p>Tổng đài hỗ trợ (8h00 - 17h00)  Tổng đài mua hàng: (+84) 37.251.3251 Giao nhận - Bảo hành: (+84) 37.251.3251.</p>
                                 </div>
                             </div>
 
@@ -123,8 +103,8 @@
                                     <div class="icon">
                                         <img src="images/return.svg" alt="Image" class="imf-fluid">
                                     </div>
-                                    <h3>Hassle Free Returns</h3>
-                                    <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                                    <h3>Đổi trả</h3>
+                                    <p>Đổi trả miễn phí trong vòng 3 ngày</p>
                                 </div>
                             </div>
 

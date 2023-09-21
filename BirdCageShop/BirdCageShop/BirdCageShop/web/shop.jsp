@@ -21,13 +21,14 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
         <link href="css/tiny-slider.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
+         <link href="css/login.css" rel="stylesheet" type="text/css"/>
         <title>Furni Free Bootstrap 5 Template for Furniture and Interior Design Websites by Untree.co </title>
     </head>
 
     <body>
 
         <!-- Start Header/Navigation -->
-      <header>
+        <header>
             <%@include file="headerGuest.jsp"%>
         </header>
         <!-- End Header/Navigation -->
@@ -174,7 +175,7 @@
 
 
         <!-- Start Footer Section -->
- <footer class="footer-section">
+        <footer class="footer-section">
             <div class="container relative">
 
                 <div class="sofa-img">
@@ -219,7 +220,7 @@
 
                     <div class="col-lg-8">
                         <div class="row links-wrap">
-                             <div class="col-6 col-sm-6 col-md-4">
+                            <div class="col-6 col-sm-6 col-md-4">
                                 <ul class="list-unstyled">
                                     <li><a style = color:red;>Cửa hàng</a></li>
                                     <li><a href="homePage.jsp">Giới thiệu</a></li>
@@ -229,7 +230,7 @@
                                 </ul>
                             </div>
 
-                          <div class="col-6 col-sm-6 col-md-4">
+                            <div class="col-6 col-sm-6 col-md-4">
                                 <ul class="list-unstyled">
                                     <li><a style = color:red;>Chính sách</a></li>
                                     <li><a href="chinhsachdoitra.jsp">Chính sách đổi trả</a></li>
@@ -247,13 +248,13 @@
                                 </ul>
                             </div>
 
-                       
+
                         </div>
                     </div>
 
                 </div>
 
-              
+
 
             </div>
         </footer>

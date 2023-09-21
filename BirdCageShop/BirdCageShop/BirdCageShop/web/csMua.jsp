@@ -52,7 +52,7 @@
                 <link href="css/style.css" rel="stylesheet">
                 <link href="scss/style.css" rel="stylesheet" type="text/css"/>
                 <link href="css/Csschinhsach.css" rel="stylesheet">
-
+              <link href="css/login.css" rel="stylesheet" type="text/css"/>
 
                 <title>JSP Page</title>
             </head>
