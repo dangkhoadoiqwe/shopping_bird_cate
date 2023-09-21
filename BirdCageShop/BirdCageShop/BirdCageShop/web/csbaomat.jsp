@@ -64,7 +64,7 @@
                     </ul>
 
                     <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-                        <li><a class="cd-signin" href="#">Đăng nhập<img src="images/user.svg"></a></li>
+                        <li><a class="cd-signin" href="#"><img style =" margin-top:12px" src="images/user.svg"></a></li>
                         <li><a class="nav-link" href="cart.html"><img src="images/cart.svg"></a></li>
                     </ul>
                 </div>
