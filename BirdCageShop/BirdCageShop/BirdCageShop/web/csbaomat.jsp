@@ -81,7 +81,7 @@
                 <h1 style="text-align: center;"><strong>Chính Sách Bảo Mật</strong></h1>
                 <p><span style="font-weight: 400;">longchim.vn cam kết sẽ bảo mật những thông tin mang tính riêng tư của khách hàng. Quý khách vui lòng đọc bản “Chính sách bảo mật” dưới đây để hiểu hơn những cam kết mà chúng tôi thực hiện, nhằm tôn trọng và bảo vệ quyền lợi của người truy cập:</span></p>
                 <h2><span style="color: #d83131;"><b style="font-size: 23.04px;">1. Thu thập thông tin cá nhân</b></span></h2>
-                <p><span style="font-weight: 400;">Các thông tin thu thập thông qua website www.longchim.vn sẽ giúp chúng tôi:</span></p>
+                <p><span style="font-weight: 400;">Các thông tin thu thập thông qua website Furni sẽ giúp chúng tôi:</span></p>
                 <ul>
                     <li><span style="font-weight: 400;"> Hỗ trợ khách hàng khi mua sản phẩm </span></li>
                     <li><span style="font-weight: 400;">Giải đáp thắc mắc khách hàng</span></li>

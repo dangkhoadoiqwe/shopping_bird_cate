@@ -4,7 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 
-public final class homePage_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class cart_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -46,6 +46,7 @@ public final class homePage_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write("\n");
       out.write("\n");
       out.write("\n");
       out.write("\n");
@@ -101,7 +102,7 @@ public final class homePage_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("                    <ul class=\"custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5\">\n");
       out.write("                        <li><a class=\"cd-signin\" href=\"#\"><img style =\" margin-top:12px\" src=\"images/user.svg\"></a></li>\n");
-      out.write("                        <li><a class=\"nav-link\" href=\"cart.html\"><img src=\"images/cart.svg\"></a></li>\n");
+      out.write("                        <li><a class=\"nav-link\" href=\"cart.jsp\"><img src=\"images/cart.svg\"></a></li>\n");
       out.write("                    </ul>\n");
       out.write("                </div>\n");
       out.write("            </div>\n");
@@ -415,7 +416,7 @@ public final class homePage_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("                    <!-- Start Column 2 -->\n");
       out.write("                    <div class=\"col-12 col-md-4 col-lg-3 mb-5 mb-md-0\">\n");
-      out.write("                        <a class=\"product-item\" href=\"cart.html\">\n");
+      out.write("                        <a class=\"product-item\" href=\"cart.jsp\">\n");
       out.write("                            <img src=\"images/product-1.png\" class=\"img-fluid product-thumbnail\">\n");
       out.write("                            <h3 class=\"product-title\">Lồng vuông chào mào khung gỗ</h3>\n");
       out.write("                            <strong class=\"product-price\">$50.00</strong>\n");
@@ -429,7 +430,7 @@ public final class homePage_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("                    <!-- Start Column 3 -->\n");
       out.write("                    <div class=\"col-12 col-md-4 col-lg-3 mb-5 mb-md-0\">\n");
-      out.write("                        <a class=\"product-item\" href=\"cart.html\">\n");
+      out.write("                        <a class=\"product-item\" href=\"cart.jsp\">\n");
       out.write("                            <img src=\"images/product-2.png\" class=\"img-fluid product-thumbnail\">\n");
       out.write("                            <h3 class=\"product-title\">LỒNG CHÀO MÀO CHUM CHỐNG NGƯỚC LỘN BU CHỤP TRE GIÀ CẦU RỄ CÂY</h3>\n");
       out.write("                            <strong class=\"product-price\">$78.00</strong>\n");
@@ -443,7 +444,7 @@ public final class homePage_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("                    <!-- Start Column 4 -->\n");
       out.write("                    <div class=\"col-12 col-md-4 col-lg-3 mb-5 mb-md-0\">\n");
-      out.write("                        <a class=\"product-item\" href=\"cart.html\">\n");
+      out.write("                        <a class=\"product-item\" href=\"cart.jsp\">\n");
       out.write("                            <img src=\"images/product-3.png\" class=\"img-fluid product-thumbnail\">\n");
       out.write("                            <h3 class=\"product-title\">Lồng Quả Đào Cắt Mặt 3/4 Chân Chạm</h3>\n");
       out.write("                            <strong class=\"product-price\">$43.00</strong>\n");

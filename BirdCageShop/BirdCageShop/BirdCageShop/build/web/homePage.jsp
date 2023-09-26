@@ -36,7 +36,9 @@
 
                 <p>Chuyên cung cấp các loại lồng chim cho từng loại chim của khách hàng giúp cho chim của khách hàng có 1 không gian thoải mái nhất</p>
 
-                <button>Mua ngay</button>
+                <a href="shop.jsp">
+                    <button>Mua ngay</button>
+                </a>
             </div>
             <div class="to-bottom">
                 <a href="">
@@ -61,7 +63,7 @@
 
                     <!-- Start Column 2 -->
                     <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                        <a class="product-item" href="cart.html">
+                        <a class="product-item" href="cart.jsp">
                             <img src="images/product-1.png" class="img-fluid product-thumbnail">
                             <h3 class="product-title">Lồng vuông chào mào khung gỗ</h3>
                             <strong class="product-price">$50.00</strong>
@@ -75,7 +77,7 @@
 
                     <!-- Start Column 3 -->
                     <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                        <a class="product-item" href="cart.html">
+                        <a class="product-item" href="cart.jsp">
                             <img src="images/product-2.png" class="img-fluid product-thumbnail">
                             <h3 class="product-title">LỒNG CHÀO MÀO CHUM CHỐNG NGƯỚC LỘN BU CHỤP TRE GIÀ CẦU RỄ CÂY</h3>
                             <strong class="product-price">$78.00</strong>
@@ -89,7 +91,7 @@
 
                     <!-- Start Column 4 -->
                     <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                        <a class="product-item" href="cart.html">
+                        <a class="product-item" href="cart.jsp">
                             <img src="images/product-3.png" class="img-fluid product-thumbnail">
                             <h3 class="product-title">Lồng Quả Đào Cắt Mặt 3/4 Chân Chạm</h3>
                             <strong class="product-price">$43.00</strong>
