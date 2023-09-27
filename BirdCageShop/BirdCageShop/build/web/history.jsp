@@ -59,7 +59,7 @@
                         <td>1</td>
                         <td>$100.00</td>
                         <td>Đã giao</td>
-                        <td><a class="btn-details" href="#">Xem chi tiết</a></td>
+                        <td><a class="btn-details" href="feedback.jsp">Xem chi tiết</a></td>
                        
                     </tr>
                     <tr>
