@@ -45,7 +45,7 @@ public class addcompare1 extends HttpServlet {
             try {
                  
                  ProductDTO check = a.getid(pro);
-                  List<ProductDTO> d = a.getTop3();
+                  List<ProductDTO> d = a.getnotid(pro);
                 if (check != null) {
                       s.setAttribute("prodetail", check);
                         s.setAttribute("product", d);

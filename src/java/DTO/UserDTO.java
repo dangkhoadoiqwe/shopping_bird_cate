@@ -15,93 +15,53 @@ import java.text.SimpleDateFormat;
  */
 public class UserDTO {
 
-    private String username;
-    private String password;
+   private int id;
+    private String firstName;
+    private String lastName;
     private String email;
+    private String password;
+    private String address;
     private String phone;
-
-    private Date date_of_birth;
-    private String fullname;
-    private String gender;
-    private String bio;
-    private String image;
-    private boolean status;
     private String role;
-    private Date dateDate;
-    private String date;
+    private int status;
 
     public UserDTO() {
     }
 
-    public UserDTO(String username, String password, String email, String phone, Date date_of_birth, String fullname, String gender, String bio, String image, boolean status, String role) {
-
-        this.username = username;
-        this.password = password;
+    public UserDTO(int id, String firstName, String lastName, String email, String password, String address, String phone, String role, int status) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
+        this.password = password;
+        this.address = address;
         this.phone = phone;
-
-        this.date_of_birth = date_of_birth;
-        this.fullname = fullname;
-        this.gender = gender;
-        this.bio = bio;
-        this.image = image;
-        this.status = status;
-
         this.role = role;
+        this.status = status;
     }
 
-    public UserDTO(String username, String email, String phone, Date date_of_birth, String fullname, String gender, String image) {
-        this.username = username;
-        this.email = email;
-        this.phone = phone;
-        this.date_of_birth = date_of_birth;
-        this.fullname = fullname;
-        this.gender = gender;
-        this.image = image;
-    }
-    
-      public UserDTO(String username, String email, String phone, String date, String fullname, String gender, String image) {
-        this.username = username;
-        this.email = email;
-        this.phone = phone;
-        this.date = date;
-        this.fullname = fullname;
-        this.gender = gender;
-        this.image = image;
-  }
-
-    public String getDate() {
-        return date;
+    public int getId() {
+        return id;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-      
-      
-
-    public Date getDateDate() {
-        return dateDate;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setDateDate(Date dateDate) {
-        this.dateDate = dateDate;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getUsername() {
-        return username;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -112,62 +72,28 @@ public class UserDTO {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public Date getDate_of_birth() {
-        return date_of_birth;
-    }
-
-    public void setDate_of_birth(Date date_of_birth) {
-        this.date_of_birth = date_of_birth;
-
-    }
-
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
     }
 
     public String getRole() {
@@ -178,10 +104,14 @@ public class UserDTO {
         this.role = role;
     }
 
-    @Override
-    public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return "UserDTO{" + "username=" + username + ", password=" + password + ", email=" + email + ", phone=" + phone + ", date_of_birth=" + sdf.format(date_of_birth) + ", fullname=" + fullname + ", gender=" + gender + ", bio=" + bio + ", image=" + image + ", status=" + status + ", role=" + role + '}';
+    public int getStatus() {
+        return status;
     }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    
 
 }

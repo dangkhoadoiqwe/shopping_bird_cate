@@ -20,7 +20,7 @@
 			<div class="container relative">
 
 				<div class="sofa-img">
-					<img src="images/sofa.png" alt="Image" class="img-fluid">
+					<img src="images/1.jpg" alt="Image" class="img-fluid" style="border-radius: 15px;">
 				</div>
 
 				<div class="row">

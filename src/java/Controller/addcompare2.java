@@ -48,9 +48,10 @@ try {
 
   
     List<ProductDTO> d = a.get2id(pro1, pro2);
-
+    List<ProductDTO> c= a.getnot2id(pro2, pro1);
     if (d != null) {
         s.setAttribute("prodetail", d);
+           s.setAttribute("product", c);
         url = SUCCESS;
     } else {
         url = ERROR;

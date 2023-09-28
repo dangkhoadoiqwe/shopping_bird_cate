@@ -102,7 +102,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-    <%@include file ="Headeruser.jsp"%>
+   <c:choose>
+            <c:when test="${sessionScope.account.role == 1}">
+                <jsp:include page="Headeruser.jsp" ></jsp:include>
+            </c:when>
+            
+            <c:otherwise>
+                <jsp:include page="Headerguest.jsp" ></jsp:include>
+            </c:otherwise>
+        </c:choose>
     <div class="container pb-5 mb-2">
         <div class="comparison-table">
             <table class="table table-bordered">

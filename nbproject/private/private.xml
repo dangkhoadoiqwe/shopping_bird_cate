@@ -3,8 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/Shoppee/shopping_bird_cate/src/java/DTO/ProductDTO.java</file>
-            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/Shoppee/shopping_bird_cate/src/java/DAO/ProductDAO.java</file>
+            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/Shoppee/shopping_bird_cate/web/cart.jsp</file>
+            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/Shoppee/shopping_bird_cate/web/Headeruser.jsp</file>
+            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/Shoppee/shopping_bird_cate/web/shop.jsp</file>
+            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/Shoppee/shopping_bird_cate/web/shop1.jsp</file>
+            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/Shoppee/shopping_bird_cate/web/Headerguest.jsp</file>
+            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/Shoppee/shopping_bird_cate/src/java/Controller/addtocart.java</file>
+            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/Shoppee/shopping_bird_cate/web/js/index.js</file>
             <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/Shoppee/shopping_bird_cate/web/productdetail.jsp</file>
         </group>
     </open-files>

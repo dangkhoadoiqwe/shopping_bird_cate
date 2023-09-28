@@ -1,0 +1,1 @@
+Controller.addcompare3

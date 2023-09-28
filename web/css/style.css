@@ -8,6 +8,45 @@
 body {
   overflow-x: hidden;
   position: relative; }
+.search-wrapper .search-content form {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.075); }
+    .search-wrapper .search-content form input {
+      width: 100%;
+      height: 60px;
+      border: none;
+      padding-left: 50px;
+      font-size: 14px;
+      color: #6b6b6b; }
+    .search-wrapper .search-content form button {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border: none;
+      width: 50px;
+      height: 60px;
+      z-index: 10;
+      cursor: pointer;
+      background-color: transparent;
+      text-align: center; }
+  .search-wrapper .search-close {
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    text-align: center;
+    color: #fff;
+    line-height: 40px;
+    font-size: 12px;
+    cursor: pointer;
+    background-color: #fbb710; }
+    .search-wrapper .search-close:hover {
+      background-color: #131212; }
 
 body {
   font-family: "Inter", sans-serif;
@@ -49,6 +88,70 @@ a {
     .custom-navbar .custom-navbar-nav li {
       margin-left: 15px;
       margin-right: 15px; } }
+  
+  #banner {
+    width: 100%;
+    background-image :url("../images/bird-Background.jpeg"); 
+    height: 463px;
+    display: flex;
+    padding:0px 133px;
+    position:relative;
+}
+
+#banner .box-left ,#banner .box-right {
+    width: 50%;
+}
+
+#banner  .box-left h2 {
+    font-size:48px;
+    margin-top:75px;
+    color:#fff;
+}
+
+#banner .box-left p {
+    color:#D0D0D0;
+}
+
+#banner .box-left button {
+    width: 191px;
+    height: 40px;
+    margin-top:41px;
+    background:#1d1a1a;
+    border:none;
+    outline:none;
+    color:#fff;
+    font-weight: bold;
+    border-radius: 20px;
+    transition:0.4s;
+}
+
+#banner .box-left button:hover {
+    background:orange;
+}
+
+#banner .box-right {
+    padding-left:200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#banner .box-right img {
+    margin:0px 10px;
+    animation :animation 3s infinite linear; 
+    width: 100px;
+}
+
+
+#banner .box-right .img1 img:nth-child(1)
+{
+    animation-delay: 0.5s;
+}
+#banner .box-right .img2 img:nth-child(2)
+{
+    
+    animation-delay: 1s;
+}
   .custom-navbar .custom-navbar-nav li a {
     font-weight: 500;
     color: #ffffff !important;
