@@ -3,7 +3,7 @@
     Created on : May 29, 2023, 5:06:25 PM
     Author     : MSI AD
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -45,7 +45,15 @@
         <div class="main-wrapper">
 
 
-  <jsp:include page="Headeruser.jsp"/>
+<c:choose>
+            <c:when test="${sessionScope.account.role == 1}">
+                <jsp:include page="Headeruser.jsp" ></jsp:include>
+            </c:when>
+            
+            <c:otherwise>
+                <jsp:include page="Headerguest.jsp" ></jsp:include>
+            </c:otherwise>
+        </c:choose>
             <!-- /Header -->
 
             <!-- Page Content -->
@@ -62,11 +70,11 @@
                                     </div>
                                     <div class="col-md-12 col-lg-6 login-right">
                                         <div class="login-header">
-                                            <h3>Login to thedearbird</h3>
+                                            <h3>Login to shop</h3>
                                         </div>
                                         <form action="MainController" method="post">
                                             <div class="form-group form-focus">
-                                                <input name="username" type="text" class="form-control floating">
+                                                <input name="username" type="text" class="form-control floating" >
                                                 <label class="focus-label">Username</label>
                                             </div>
 

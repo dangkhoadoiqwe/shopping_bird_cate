@@ -10,6 +10,7 @@ import DTO.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Minh
  */
+@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
 
     /**
@@ -39,16 +41,16 @@ public class LoginController extends HttpServlet {
         String errorLogin = "The username or password is invalid";
 
         UserDAO dao = new UserDAO();
-        UserDTO user = dao.Login(userName, password);
+        UserDTO user = dao.login(userName, password);
         if (user == null) {
             request.setAttribute("errorLogin", errorLogin);
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
         } else {
             String getRoleID = user.getRole().trim();
             if (getRoleID.equalsIgnoreCase("1") || getRoleID.equalsIgnoreCase("5")) {
                 HttpSession session = request.getSession();
                 session.setAttribute("account", user);
-                response.sendRedirect("admin/index.jsp");
+                response.sendRedirect("HomePage.jsp");
             } else if (getRoleID.equalsIgnoreCase("3")) {
                 HttpSession session = request.getSession();
                 session.setAttribute("account", user);

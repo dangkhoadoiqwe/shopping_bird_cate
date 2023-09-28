@@ -1,0 +1,253 @@
+.footer{
+    width: 100%;
+    height: 355px;
+    border-top: 1px solid rgb(225, 225, 227);
+    background-color:hsl(0 0% 100%);
+}
+.icon-ft{
+    width: 1280px;
+    height: 355px;
+    margin-left: 98px;
+}
+.footer .ft1{
+    display:flex;
+    justify-content:space-between;
+    width: 1232px;
+    height: 231px;
+    margin-top: 24px;
+    margin-left: 24px;
+}
+.footer .svg-ft {
+    color:#ff443d;
+    display:inline;
+    fill:#000000;
+    margin-top: 40px;
+    margin-left: 24px;
+    width: 104px;
+    height: 32px;
+}
+.ft1-td1 .cp {
+    font-size:14px;
+    font-weight:600;
+    line-height:20px;
+    width: 446px;
+    margin: 0 0 16px;
+}
+.cty{
+    display: flex;
+    flex-direction:column;
+    justify-content:flex-start;
+}
+.ft1-td1{
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    width: 446px;
+    height: 231px;
+}
+.nty{
+    font-size:12px;
+    margin:0px 0px 16px;
+}
+.bang {
+    display:table;
+    line-height:18.4px;
+    margin:0px 0px 40px;
+    width: 245px;
+    height: 79px;
+}
+
+.bang .tb1 .tb-icon{
+    color:#757585;
+    font-size:12px;
+    line-height:16.344px;
+    margin-top: 10px;
+}
+.bang .tb1 .tb-icon1{
+    font-size:12px;
+    line-height:16.344px;
+    margin:0px 0px 16px;
+}
+.ft1-icon .icon-app{
+    display:flex;
+    justify-items:center ;
+    height: 44px;
+    width: 446px;
+}
+.ft2{
+    width: 67px;
+    height: 231px;
+    margin-left: 130px;
+}
+.ft3{
+    width: 168px;
+    height: 231px;
+    margin-left: 130px;
+}
+.ft4{
+    width: 132px;
+    height: 231px;
+    margin-left: 130px;
+}
+.ft1-td2{
+    font-size:14px;
+    font-weight:600;
+    margin: 0 0 16px;
+}
+.menu-td2{
+    list-style: none;
+    flex-direction:column;
+    justify-content:flex-start;
+    display: flex;
+}
+.menu-td2 .li-td2 {
+    font-size:12px;
+    text-align:left;
+}
+.a-ft1{
+    text-decoration: none;
+    font-size:12px;
+    font-weight:500;
+    text-align:left;
+    color: #000000;
+    margin-top: 10px ;
+}
+.span-td3 {
+    margin-top: 10px;
+}
+.menu-td3{
+    list-style: none;
+    padding: 0;
+}
+
+.icon-ap{
+    font-size:14px;
+    justify-content: space-around;
+}
+.ap2 {
+    margin-left: 30px;
+}
+.menu-td3{
+    align-items:flex-start;
+    display:flex;
+    flex-direction:column;
+    line-height:18.4px;
+    margin-right: 50px;
+}
+.sc-135n61u-0{
+    margin-left: 8px;
+    font-size: 12px;
+    font-weight: 500;
+}
+.sc-6dt8ej-0{
+    margin-top: 2px;
+}
+.sc-1rktlvz-0{
+    text-decoration: none;
+    color: #000000;
+
+}
+.ft2 {
+    margin-right: 20px;
+}
+.li-td2 {
+    margin-top: 10px;
+    width: 67px;
+}
+.li-td3 {
+    margin-top: 10px;
+    width: 168px;
+}
+.li-td4 {
+    margin-top: 10px;
+    width: 132px;
+}
+.iconxh {
+    width: 132px;
+    height: 24px;
+    display: flex;
+    justify-content: space-around;
+}
+.iconxh a{
+    margin: 0 5px;
+    margin-top: 40px;
+}
+.footer1{
+    width: 100%;
+    background-color:#334155;
+    height: 57px;
+}
+.footer1-ic{
+    display: flex;
+    justify-content: space-between;
+    width: 1232px;
+    height: 25px;
+    margin-left: 122px;
+    padding-top: 16px;
+}
+.footer1-td{
+    color: #ffffff;
+}
+.sc-cwSeag-ft1{
+    margin-left: 10px;
+    text-decoration: none;
+}
+.taive{
+    width: 100%;
+    height: 705px;
+    background-image: linear-gradient(0deg, rgba(255, 138, 138, 0.3) 0%, rgba(255, 255, 255, 0) 38.77%);
+    position: relative;
+}
+.icon-tv{
+    width: 1024px;
+    height: 705px;
+    display:flex;
+    justify-content:center;
+    margin-left: 226px;
+}
+.tdtv{
+    width: 366px;
+    height: 513px;
+    margin-top: 96px;
+}
+.tv-svg{
+    margin-top: 80px;
+}
+.span-tv{
+    width: 366px;
+    height: 48px;
+}
+.span-tv p{
+    color: #ff443d;
+    width: 325px;
+    height: 39px;
+    font-size:32px;
+    font-weight:600;
+    line-height: 30px;
+    margin-left: 21px;
+}
+.span-tv1{
+    width: 302px;
+    height:40px;
+    margin-left: 32px;
+}
+.span-tv1 p {
+    color: #292931;
+    width: 292px;
+    height: 37px;
+    font-size:14px;
+    line-height:20px;
+    text-align:center;
+}
+.ap-tv{
+    width: 366px;
+    height: 136px;
+    margin-top: 30px;
+    line-height: 45px;
+}
+.ap-tv1{
+    margin-left: 84px;
+}
+.ap-tv2{
+    margin-top: 20px;
+}

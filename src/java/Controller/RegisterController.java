@@ -86,7 +86,7 @@ public class RegisterController extends HttpServlet {
                 UserDTO user = dao.checkExistAccount(username);
                 if (user == null) {
                     dao.signUpAccount(username, fullname_decode, email, gender, sqlDate, phone, password);
-                    UserDTO a = dao.Login(username, password);
+                    UserDTO a = dao.login(username, password);
                     session.setAttribute("account", a);
                     response.sendRedirect("index-2.jsp");
                 } else {

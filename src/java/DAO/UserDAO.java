@@ -53,158 +53,153 @@ public class UserDAO {
     }
     
     
-    public UserDTO checkExistAccount(String username) {
-        String query = "SELECT * FROM Customers WHERE user_name = ?";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(query);
-            ps.setString(1, username);
-            rs = ps.executeQuery();
-            while (rs.next()) {
+   public UserDTO checkExistAccount(String username) {
+    String query = "SELECT * FROM Customers WHERE email = ?";
+    try (
+        Connection conn = new DBContext().getConnection();
+        PreparedStatement ps = conn.prepareStatement(query);
+    ) {
+        ps.setString(1, username);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
                 return new UserDTO(
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getDate(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getBoolean(10),
-                        rs.getString(11));
+                    rs.getInt("ID"),
+                    rs.getString("FirstName"),
+                    rs.getString("LastName"),
+                    rs.getString("Email"),
+                    rs.getString("Password"),
+                    rs.getString("Address"),
+                    rs.getString("Phone"),
+                    rs.getString("Roles"),
+                    rs.getInt("Status")
+                );
             }
-        } catch (Exception e) {
         }
-        return null;
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    return null;
+}
 
-    public UserDTO checkExistEmail(String email) {
-        String query = "SELECT * FROM Customers WHERE email = ?";
-        try {
-            conn =  DBContext.getConnection();
-            ps = conn.prepareStatement(query);
-            ps.setString(1, email);
-            rs = ps.executeQuery();
-            while (rs.next()) {
+
+ public UserDTO checkExistEmail(String email) {
+    String query = "SELECT * FROM Customers WHERE email = ?";
+    try (
+        Connection conn = new DBContext().getConnection();
+        PreparedStatement ps = conn.prepareStatement(query);
+    ) {
+        ps.setString(1, email);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
                 return new UserDTO(
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getDate(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getBoolean(10),
-                        rs.getString(11));
+                    rs.getInt("ID"),
+                    rs.getString("FirstName"),
+                    rs.getString("LastName"),
+                    rs.getString("Email"),
+                    rs.getString("Password"),
+                    rs.getString("Address"),
+                    rs.getString("Phone"),
+                    rs.getString("Roles"),
+                    rs.getInt("Status")
+                );
             }
-        } catch (Exception e) {
         }
-        return null;
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    return null;
+}
 
-    public UserDTO checkExistPhone(String phone) {
-        String query = "SELECT * FROM Customers WHERE phone = ?";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(query);
-            ps.setString(1, phone);
-            rs = ps.executeQuery();
-            while (rs.next()) {
+   public UserDTO checkExistPhone(String phone) {
+    String query = "SELECT * FROM Customers WHERE phone = ?";
+    try (
+        Connection conn = new DBContext().getConnection();
+        PreparedStatement ps = conn.prepareStatement(query);
+    ) {
+        ps.setString(1, phone);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
                 return new UserDTO(
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getDate(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getBoolean(10),
-                        rs.getString(11));
+                    rs.getInt("ID"),
+                    rs.getString("FirstName"),
+                    rs.getString("LastName"),
+                    rs.getString("Email"),
+                    rs.getString("Password"),
+                    rs.getString("Address"),
+                    rs.getString("Phone"),
+                    rs.getString("Roles"),
+                    rs.getInt("Status")
+                );
             }
-        } catch (Exception e) {
-
         }
-        return null;
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    return null;
+}
 
   
-    public UserDTO Login(String username, String password) {
-        String query = "SELECT * FROM Customers WHERE user_name = ? AND password = ? AND status = 1";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(query);
-            ps.setString(1, username);
-            ps.setString(2, password);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                return new UserDTO(
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getDate(5),
-                        rs.getNString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getBoolean(10),
-                        rs.getString(11));
-            }
-
-        } catch (Exception e) {
+    public UserDTO login(String username, String password) {
+         UserDTO user = null;
+    String query = "SELECT * FROM Customers WHERE Email = ? AND Password = ? AND status = 1";
+    try {
+        conn = new DBContext().getConnection();
+        ps = conn.prepareStatement(query);
+        ps.setString(1, username);
+        ps.setString(2, password);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+            user = new UserDTO(
+                rs.getInt("CustomerID"),
+                rs.getString("FirstName"),
+                rs.getString("LastName"),
+                rs.getString("Email"),
+                rs.getString("Password"),
+                rs.getString("Address"),
+                rs.getString("PhoneNumber"),
+                rs.getString("Roles"),
+                rs.getInt("status")
+            );
         }
-        return null;
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        // Close database connections here
     }
+    return user;
+}
+
 
     private static final String LOGIN_GOOGLE = "SELECT * FROM Customers WHERE email = ?";
 
-    public UserDTO checkLogin(String email) throws SQLException {
-        UserDTO user = null;
-        Connection conn = null;
-        PreparedStatement ptm = null;
-        ResultSet rs = null;
-        try {
-            conn = DBContext.getConnection();
-            if (conn != null) {
-                ptm = conn.prepareStatement(LOGIN_GOOGLE);
-                ptm.setString(1, email);
-                rs = ptm.executeQuery();
-                if (rs.next()) {
-                    String email_ = rs.getString("email");
-                    user = new UserDTO(rs.getString(1),
-                            rs.getString(2),
-                            rs.getString(3),
-                            rs.getString(4),
-                            rs.getDate(5),
-                            rs.getNString(6),
-                            rs.getString(7),
-                            rs.getString(8),
-                            rs.getString(9),
-                            rs.getBoolean(10),
-                            rs.getString(11));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
+   public UserDTO checkLogin(String email) throws SQLException {
+    UserDTO user = null;
+    try (
+        Connection conn = DBContext.getConnection();
+        PreparedStatement ptm = conn.prepareStatement(LOGIN_GOOGLE);
+    ) {
+        ptm.setString(1, email);
+        try (ResultSet rs = ptm.executeQuery()) {
+            if (rs.next()) {
+                user = new UserDTO(
+                    rs.getInt("ID"),
+                    rs.getString("FirstName"),
+                    rs.getString("LastName"),
+                    rs.getString("Email"),
+                    rs.getString("Password"),
+                    rs.getString("Address"),
+                    rs.getString("Phone"),
+                    rs.getString("Roles"),
+                    rs.getInt("Status")
+                );
             }
         }
-        return user;
-
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    return user;
+}
+
    
 
     public void changePasswordByEmail(String password, String email) {
@@ -223,7 +218,7 @@ public class UserDAO {
 
     public String getEmailByUsername(String user_name) {
         String email = "";
-        String query = "SELECT email FROM Customers WHERE user_name = ? AND status = 1";
+        String query = "SELECT email FROM Customers WHERE LastName = ? AND status = 1";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
