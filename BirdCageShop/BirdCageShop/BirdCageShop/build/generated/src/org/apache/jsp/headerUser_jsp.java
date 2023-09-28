@@ -4,7 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 
-public final class headerGuest_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class headerUser_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -43,7 +43,6 @@ public final class headerGuest_jsp extends org.apache.jasper.runtime.HttpJspBase
 
       out.write("\n");
       out.write("\n");
-      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
@@ -74,23 +73,18 @@ public final class headerGuest_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <li><a class=\"nav-link\" href=\"blog.jsp\">Blog</a></li>\n");
       out.write("                        <li><a class=\"nav-link\" href=\"contact.jsp\">Liên hệ</a></li>\n");
       out.write("                    </ul>\n");
-      out.write("                    <!--                                        Thêm menu \"Setting\" -->\n");
-      out.write("                    <ul>\n");
+      out.write("                    <ul><!-- Thêm menu \"Setting\" -->\n");
       out.write("                        <li class=\"nav-item dropdown\">\n");
       out.write("                            <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"settingDropdown\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" style=\"margin-top:15px;color:#ffffff; \">\n");
-      out.write("                                Tôi\n");
+      out.write("                                <img style =\" margin-top:12px\" src=\"images/user.svg\">\n");
       out.write("                            </a>\n");
-      out.write("                            <ul class=\"dropdown-menu show\" aria-labelledby=\"settingDropdown\">\n");
+      out.write("                            <ul class=\"dropdown-menu\" aria-labelledby=\"settingDropdown\">\n");
       out.write("                                <li><a class=\"dropdown-item\" href=\"Profile.jsp\">Profile</a></li>\n");
-      out.write("                                <li><a class=\"dropdown-item\" href=\"delivery.jsp\">Đơn hàng</a></li>\n");
-      out.write("                                <li><a class=\"dropdown-item\" href=\"history.jsp\">Lịch sử thanh toán</a></li>\n");
-      out.write("                                <li><a class=\"dropdown-item\" href=\"homePage.jsp\">Logout</a></li>\n");
+      out.write("                                <li><a class=\"dropdown-item\" href=\"MainController?action=logout\">Logout</a></li>\n");
       out.write("                            </ul>\n");
-      out.write("                        </li>\n");
-      out.write("                    </ul>\n");
-      out.write("                    \n");
+      out.write("                        </  li></ul>\n");
       out.write("                    <ul class=\"custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5\">\n");
-      out.write("                        <li><a class=\"cd-signin\" href=\"#\"><img style =\" margin-top:12px\" src=\"images/user.svg\"></a></li>\n");
+      out.write("                        <li><a class=\"cd-signin\" href=\"#\">Đăng nhập</a></li>\n");
       out.write("                        <li><a class=\"nav-link\" href=\"cart.jsp\"><img src=\"images/cart.svg\"></a></li>\n");
       out.write("                    </ul>\n");
       out.write("                </div>\n");

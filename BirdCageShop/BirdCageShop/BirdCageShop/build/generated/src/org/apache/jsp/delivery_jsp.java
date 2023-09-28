@@ -4,12 +4,17 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 
-public final class headerGuest_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class delivery_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
 
   private static java.util.List<String> _jspx_dependants;
+
+  static {
+    _jspx_dependants = new java.util.ArrayList<String>(1);
+    _jspx_dependants.add("/headerGuest.jsp");
+  }
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
@@ -48,6 +53,26 @@ public final class headerGuest_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
+      out.write("        <link href=\"css/delivery.css\" rel=\"stylesheet\">\n");
+      out.write("       <link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">\n");
+      out.write("        <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css\" rel=\"stylesheet\">\n");
+      out.write("        <link href=\"css/tiny-slider.css\" rel=\"stylesheet\">\n");
+      out.write("        <link href=\"css/style.css\" rel=\"stylesheet\">\n");
+      out.write("        <link href=\"scss/style.css\" rel=\"stylesheet\" type=\"text/css\"/>\n");
+      out.write("        <link href=\"css/login.css\" rel=\"stylesheet\" type=\"text/css\"/>\n");
+      out.write("       \n");
+      out.write("        <title>JSP Page</title>\n");
+      out.write("    </head>\n");
+      out.write("    <body>\n");
+      out.write("           <header>\n");
+      out.write("            ");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("<!DOCTYPE html>\n");
+      out.write("<html>\n");
+      out.write("    <head>\n");
+      out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
       out.write("        <title>JSP Page</title>\n");
       out.write("        <link href=\"scss/login.css\" rel=\"stylesheet\" type=\"text/css\"/>\n");
       out.write("        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js\">\n");
@@ -74,21 +99,18 @@ public final class headerGuest_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <li><a class=\"nav-link\" href=\"blog.jsp\">Blog</a></li>\n");
       out.write("                        <li><a class=\"nav-link\" href=\"contact.jsp\">Liên hệ</a></li>\n");
       out.write("                    </ul>\n");
-      out.write("                    <!--                                        Thêm menu \"Setting\" -->\n");
-      out.write("                    <ul>\n");
+      out.write("                    <ul><!-- Thêm menu \"Setting\" -->\n");
       out.write("                        <li class=\"nav-item dropdown\">\n");
       out.write("                            <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"settingDropdown\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" style=\"margin-top:15px;color:#ffffff; \">\n");
       out.write("                                Tôi\n");
       out.write("                            </a>\n");
-      out.write("                            <ul class=\"dropdown-menu show\" aria-labelledby=\"settingDropdown\">\n");
+      out.write("                            <ul class=\"dropdown-menu\" aria-labelledby=\"settingDropdown\">\n");
       out.write("                                <li><a class=\"dropdown-item\" href=\"Profile.jsp\">Profile</a></li>\n");
       out.write("                                <li><a class=\"dropdown-item\" href=\"delivery.jsp\">Đơn hàng</a></li>\n");
-      out.write("                                <li><a class=\"dropdown-item\" href=\"history.jsp\">Lịch sử thanh toán</a></li>\n");
       out.write("                                <li><a class=\"dropdown-item\" href=\"homePage.jsp\">Logout</a></li>\n");
       out.write("                            </ul>\n");
       out.write("                        </li>\n");
       out.write("                    </ul>\n");
-      out.write("                    \n");
       out.write("                    <ul class=\"custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5\">\n");
       out.write("                        <li><a class=\"cd-signin\" href=\"#\"><img style =\" margin-top:12px\" src=\"images/user.svg\"></a></li>\n");
       out.write("                        <li><a class=\"nav-link\" href=\"cart.jsp\"><img src=\"images/cart.svg\"></a></li>\n");
@@ -361,6 +383,54 @@ public final class headerGuest_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        }\n");
       out.write("        );\n");
       out.write("    </script>\n");
+      out.write("</html>\n");
+      out.write("\n");
+      out.write("        </header>\n");
+      out.write("        <div class=\"container\">\n");
+      out.write("            <article class=\"card\">\n");
+      out.write("                <header class=\"card-header\"> My Orders / Tracking </header>\n");
+      out.write("                <div class=\"card-body\">\n");
+      out.write("                    <h6>Order ID: OD45345345435</h6>\n");
+      out.write("                    <article class=\"card\">\n");
+      out.write("                        <div class=\"card-body row\">\n");
+      out.write("                            <div class=\"col\"> <strong>Thời gian giao hàng ước tính:</strong> <br>6/9/2023 </div>\n");
+      out.write("                            <div class=\"col\"> <strong>vận chuyển bởi:</strong> <br> Quang, | <i class=\"fa fa-phone\"></i> +1598675986 </div>\n");
+      out.write("                            <div class=\"col\"> <strong>trạng thái:</strong> <br> đã thanh toán </div>\n");
+      out.write("                           \n");
+      out.write("                        </div>\n");
+      out.write("                    </article>\n");
+      out.write("                    <div class=\"track\">\n");
+      out.write("                        <div class=\"step active\"> <span class=\"icon\"> <i class=\"fa fa-check\"></i> </span> <span class=\"text\">Xác nhận</span> </div>\n");
+      out.write("                        <div class=\"step active\"> <span class=\"icon\"> <i class=\"fa fa-user\"></i> </span> <span class=\"text\"> kho vận chuyển</span> </div>\n");
+      out.write("                        <div class=\"step\"> <span class=\"icon\"> <i class=\"fa fa-truck\"></i> </span> <span class=\"text\"> đang trên đường </span> </div>\n");
+      out.write("                        <div class=\"step\"> <span class=\"icon\"> <i class=\"fa fa-box\"></i> </span> <span class=\"text\">hoàn thành</span> </div>\n");
+      out.write("                    </div>\n");
+      out.write("                    <hr>\n");
+      out.write("                    <ul class=\"row\">\n");
+      out.write("                        <li class=\"col-md-12\">\n");
+      out.write("                            <figure class=\"itemside mb-3\">\n");
+      out.write("                                <div class=\"aside\"><img src=\"images/product-2.png\" class=\"img-sm border\"></div>\n");
+      out.write("                                <figcaption class=\"info align-self-center\">\n");
+      out.write("                                    <p class=\"title\">Lồng chào mào  <br> chum chống</p> <span class=\"text-muted\">$950 </span>\n");
+      out.write("                                </figcaption>\n");
+      out.write("                            </figure>\n");
+      out.write("                        </li>\n");
+      out.write("                        <li class=\"col-md-12\">\n");
+      out.write("                            <figure class=\"itemside mb-3\">\n");
+      out.write("                                 <div class=\"aside\"><img src=\"images/product-1.png\" class=\"img-sm border\"></div>\n");
+      out.write("                                <figcaption class=\"info align-self-center\">\n");
+      out.write("                                   <p class=\"title\">Lồng chào mào khung gỗ  <br>vuông </p> <span class=\"text-muted\">$950 </span>\n");
+      out.write("                                </figcaption>\n");
+      out.write("                            </figure>\n");
+      out.write("                        </li>\n");
+      out.write("                     \n");
+      out.write("                    </ul>\n");
+      out.write("                    <hr>\n");
+      out.write("                    <a href=\"shop.jsps\" class=\"btn btn-warning\" data-abc=\"true\"> <i class=\"fa fa-chevron-left\"></i> cửa hàng</a>\n");
+      out.write("                </div>\n");
+      out.write("            </article>\n");
+      out.write("        </div>\n");
+      out.write("    </body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){

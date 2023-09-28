@@ -16,6 +16,7 @@
         <link href="css/style.css" rel="stylesheet">
         <link href="scss/style.css" rel="stylesheet" type="text/css"/>
         <link href="css/login.css" rel="stylesheet" type="text/css"/>
+        
         <title>Furni Free Bootstrap 5 Template for Furniture and Interior Design Websites by Untree.co </title>
     </head>
     <body>

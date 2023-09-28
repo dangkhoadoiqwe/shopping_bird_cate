@@ -35,7 +35,21 @@
                         <li><a class="nav-link" href="blog.jsp">Blog</a></li>
                         <li><a class="nav-link" href="contact.jsp">Liên hệ</a></li>
                     </ul>
-
+                    <!--                                        Thêm menu "Setting" -->
+                    <ul>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="settingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-top:15px;color:#ffffff; ">
+                                Tôi
+                            </a>
+                            <ul class="dropdown-menu " aria-labelledby="settingDropdown">
+                                <li><a class="dropdown-item" href="Profile.jsp">Profile</a></li>
+                                <li><a class="dropdown-item" href="delivery.jsp">Đơn hàng</a></li>
+                                <li><a class="dropdown-item" href="history.jsp">Lịch sử thanh toán</a></li>
+                                <li><a class="dropdown-item" href="homePage.jsp">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
                     <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
                         <li><a class="cd-signin" href="#"><img style =" margin-top:12px" src="images/user.svg"></a></li>
                         <li><a class="nav-link" href="cart.jsp"><img src="images/cart.svg"></a></li>
@@ -308,4 +322,5 @@
         }
         );
     </script>
+  
 </html>

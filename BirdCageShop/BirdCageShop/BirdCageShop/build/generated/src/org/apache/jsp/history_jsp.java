@@ -4,12 +4,17 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 
-public final class headerGuest_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class history_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
 
   private static java.util.List<String> _jspx_dependants;
+
+  static {
+    _jspx_dependants = new java.util.ArrayList<String>(1);
+    _jspx_dependants.add("/headerGuest.jsp");
+  }
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
@@ -41,6 +46,38 @@ public final class headerGuest_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("<!DOCTYPE html>\n");
+      out.write("<!DOCTYPE html>\n");
+      out.write("<!DOCTYPE html>\n");
+      out.write("<html lang=\"en\">\n");
+      out.write("    <head>\n");
+      out.write("        <meta charset=\"UTF-8\">\n");
+      out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n");
+      out.write("    <head>\n");
+      out.write("        <meta charset=\"utf-8\">\n");
+      out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n");
+      out.write("        <meta name=\"author\" content=\"Untree.co\">\n");
+      out.write("        <link rel=\"shortcut icon\" href=\"favicon.png\">\n");
+      out.write("\n");
+      out.write("        <meta name=\"description\" content=\"\" />\n");
+      out.write("        <meta name=\"keywords\" content=\"bootstrap, bootstrap4\" />\n");
+      out.write("\n");
+      out.write("        <!-- Bootstrap CSS -->\n");
+      out.write("        <link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">\n");
+      out.write("        <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css\" rel=\"stylesheet\">\n");
+      out.write("        <link href=\"css/tiny-slider.css\" rel=\"stylesheet\">\n");
+      out.write("        <link href=\"css/style.css\" rel=\"stylesheet\">\n");
+      out.write("        <link href=\"css/history.css\" rel=\"stylesheet\">\n");
+      out.write("        <link href=\"css/login.css\" rel=\"stylesheet\" type=\"text/css\"/>\n");
+      out.write("        <title>Lịch sử thanh toán</title>\n");
+      out.write("\n");
+      out.write("    </head>\n");
+      out.write("    <body>\n");
+      out.write("            <header>\n");
+      out.write("            ");
       out.write("\n");
       out.write("\n");
       out.write("\n");
@@ -80,10 +117,9 @@ public final class headerGuest_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"settingDropdown\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" style=\"margin-top:15px;color:#ffffff; \">\n");
       out.write("                                Tôi\n");
       out.write("                            </a>\n");
-      out.write("                            <ul class=\"dropdown-menu show\" aria-labelledby=\"settingDropdown\">\n");
+      out.write("                            <ul class=\"dropdown-menu\" aria-labelledby=\"settingDropdown\">\n");
       out.write("                                <li><a class=\"dropdown-item\" href=\"Profile.jsp\">Profile</a></li>\n");
       out.write("                                <li><a class=\"dropdown-item\" href=\"delivery.jsp\">Đơn hàng</a></li>\n");
-      out.write("                                <li><a class=\"dropdown-item\" href=\"history.jsp\">Lịch sử thanh toán</a></li>\n");
       out.write("                                <li><a class=\"dropdown-item\" href=\"homePage.jsp\">Logout</a></li>\n");
       out.write("                            </ul>\n");
       out.write("                        </li>\n");
@@ -362,6 +398,53 @@ public final class headerGuest_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        );\n");
       out.write("    </script>\n");
       out.write("</html>\n");
+      out.write("\n");
+      out.write("        </header>\n");
+      out.write("        <div class=\"payment-history\">\n");
+      out.write("            <h1>Lịch sử thanh toán</h1>\n");
+      out.write("            <table>\n");
+      out.write("                <thead>\n");
+      out.write("                    <tr>\n");
+      out.write("                        <th>OrderID</th>\n");
+      out.write("                        <th>Ngày thanh toán</th>\n");
+      out.write("                        <th>Sản phẩm</th>\n");
+      out.write("                        <th>số lượng</th>\n");
+      out.write("                        <th>Số tiền</th>\n");
+      out.write("                        <th>Trạng thái</th>\n");
+      out.write("                        <th>Hành động</th>\n");
+      out.write("                      \n");
+      out.write("                    </tr>\n");
+      out.write("                </thead>\n");
+      out.write("                <tbody>\n");
+      out.write("                    <!-- Dữ liệu lịch sử thanh toán sẽ được thêm vào đây từ dưới database hoặc API -->\n");
+      out.write("                    <tr>\n");
+      out.write("                        <td> OD45345345435</td>\n");
+      out.write("                        <td>2023-09-01</td>\n");
+      out.write("                        <td>Lồng chào mào khung gỗ</td>\n");
+      out.write("                        <td>1</td>\n");
+      out.write("                        <td>$100.00</td>\n");
+      out.write("                        <td>Đã giao</td>\n");
+      out.write("                        <td><a class=\"btn-details\" href=\"#\">Xem chi tiết</a></td>\n");
+      out.write("                       \n");
+      out.write("                    </tr>\n");
+      out.write("                    <tr>\n");
+      out.write("                        <td> OD45345345555</td>\n");
+      out.write("                        <td>2023-09-10</td>\n");
+      out.write("                        <td>Lồng chào mào khung gỗ</td>\n");
+      out.write("                        <td>1</td>\n");
+      out.write("                        <td>$75.00</td>\n");
+      out.write("                        <td>Đã giao</td>\n");
+      out.write("                        <td><a class=\"btn-details\" href=\"#\">Xem chi tiết</a></td>\n");
+      out.write("                        \n");
+      out.write("                    </tr>\n");
+      out.write("                    <!-- Thêm các dòng dữ liệu khác ở đây -->\n");
+      out.write("                </tbody>\n");
+      out.write("            </table>\n");
+      out.write("        </div>\n");
+      out.write("    </body>\n");
+      out.write("</html>\n");
+      out.write("\n");
+      out.write("\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

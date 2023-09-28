@@ -88,7 +88,7 @@ public final class services_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("                     <ul class=\"custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5\">\n");
       out.write("                        <li><a class=\"cd-signin\" href=\"#\"><img style =\" margin-top:12px\" src=\"images/user.svg\"></a></li>\n");
-      out.write("                        <li><a class=\"nav-link\" href=\"cart.html\"><img src=\"images/cart.svg\"></a></li>\n");
+      out.write("                        <li><a class=\"nav-link\" href=\"cart.jsp\"><img src=\"images/cart.svg\"></a></li>\n");
       out.write("                    </ul>\n");
       out.write("                </div>\n");
       out.write("            </div>\n");
