@@ -41,7 +41,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="settingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-top:15px;color:#ffffff; ">
                                 Tôi
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="settingDropdown">
+                            <ul class="dropdown-menu " aria-labelledby="settingDropdown">
                                 <li><a class="dropdown-item" href="Profile.jsp">Profile</a></li>
                                 <li><a class="dropdown-item" href="delivery.jsp">Đơn hàng</a></li>
                                 <li><a class="dropdown-item" href="history.jsp">Lịch sử thanh toán</a></li>
@@ -322,4 +322,5 @@
         }
         );
     </script>
+  
 </html>

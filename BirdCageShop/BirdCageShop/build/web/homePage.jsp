@@ -35,7 +35,7 @@
 
                 </h2>
 
-                <p>Chuyên cung cấp các loại lồng chim cho từng loại chim của khách hàng giúp cho chim của khách hàng có 1 không gian thoải mái nhất</p>
+                <p>Chuyên cung cấp các loại lồng chim giúp cho chim của khách hàng có một không gian thoải mái nhất</p>
 
                 <a href="shop.jsp">
                     <button>Mua ngay</button>
