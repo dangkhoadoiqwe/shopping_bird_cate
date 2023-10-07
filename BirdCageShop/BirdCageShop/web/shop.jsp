@@ -58,7 +58,7 @@
 
                     <!-- Start Column 1 -->
                     <div class="col-12 col-md-4 col-lg-3 mb-5">
-                        <a class="product-item" href="#">
+                        <a class="product-item" href="productdetail.jsp">
                             <img src="images/product-3.png" class="img-fluid product-thumbnail">
                             <h3 class="product-title">Lồng Quả Đào Cắt Mặt 3/4 Chân Chạm</h3>
                             <strong class="product-price">$50.00</strong>
