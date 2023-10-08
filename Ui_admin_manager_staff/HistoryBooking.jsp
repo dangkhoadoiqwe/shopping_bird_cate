@@ -60,52 +60,63 @@
         <header>
             <%@include file="headerUser.jsp"%>
         </header>
-        
+
         <div class="payment-history">
             <h1>Lịch sử yêu cầu</h1>
             <c:if test="${not empty account.getId()}">
- 
 
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Ngày đặt hàng</th>
-                        <th>Tên</th>
-                        <th>Chất liệu</th>
-                        <th>Màu</th>
-                        <th>Số lượng</th>
-                        <th>Kích thước</th>
-                        <th>Ảnh</th>
-                        <th>Chú thích</th>
-                        <th>Số tiền</th>
-                        <th>Trạng thái</th>
-                        <th>Hành động</th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Dữ liệu lịch sử thanh toán sẽ được thêm vào đây từ dưới database hoặc API -->
-                <c:forEach var="booking" items="${allBooking}">
-                <tr>
-                    <td>${booking.bookingRequestId}</td>
-                    <td>${booking.createTime}</td>
-                    <td>${booking.account.name}</td>
-                    <td>${booking.material.name}</td>
-                    <td>${booking.color}</td>
-                    <td>${booking.quantity}</td>
-                    <td>${booking.size}</td>
-                    <td>${booking.image}</td>
-                    <td>${booking.note}</td>
-                    <td>${booking.total}</td>
-                    <td>${booking.status}</td>
-                    <td> <button id="open-popup-button">Thanh toán</button>  </td>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ngày đặt hàng</th>
+                            <th>Tên</th>
+                            <th>Chất liệu</th>
+                            <th>Màu</th>
+                            <th>Số lượng</th>
+                            <th>Kích thước</th>
+                            <th>Ảnh</th>
+                            <th>Chú thích</th>
+                            <th>Số tiền</th>
+                            <th>Trạng thái</th>
+                            <th>Hành động</th>
 
-                </tr>
-              </c:forEach>
-                </tbody>
-            </table>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Dữ liệu lịch sử thanh toán sẽ được thêm vào đây từ dưới database hoặc API -->
+                        <c:forEach var="booking" items="${allBooking}">
+                            <tr>
+                                <td>${booking.bookingRequestId}</td>
+                                <td>${booking.createTime}</td>
+                                <td>${booking.account.name}</td>
+                                <td>${booking.material.name}</td>
+                                <td>${booking.color}</td>
+                                <td>${booking.quantity}</td>
+                                <td>${booking.size}</td>
+                                <td>${booking.image}</td>
+                                <td>${booking.note}</td>
+                                <td>${booking.total}</td>
+                                <td><c:choose>
+                                        <c:when test="${booking.status == 0}">
+                                            <a >Đang Xử lí</a>
+                                        </c:when>
+                                        <c:when test="${booking.status == 1}">
+                                            <a >Chấp nhận</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a>Hủy đơn</a>
+                                        </c:otherwise>
+                                    </c:choose></td>
+
+                                <td> <button id="open-popup-button">Thanh toán</button>  </td>
+
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
             </c:if>
             <div id="popup" class="popup-container">
                 <div class="popup">
