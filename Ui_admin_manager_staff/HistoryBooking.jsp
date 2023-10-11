@@ -50,11 +50,28 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
                 background: #fff;
+                width: 1000px; /* Điều chỉnh chiều rộng của popup */
+                height: 920px; /* Điều chỉnh chiều cao của popup */
                 padding: 20px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
                 z-index: 1000;
             }
+               .close-popup-button {
+        display: block;
+        margin-top: 12px;
+        padding: 10px 20px;
+        background-color: #ccc;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* CSS hover cho nút tắt */
+    .close-popup-button:hover {
+        background-color: #555;
+        color: #fff;
+    } 
         </style>
+
     </head>
     <body>
         <header>
@@ -120,69 +137,123 @@
             </c:if>
             <div id="popup" class="popup-container">
                 <div class="popup">
-                    <div class="product-price">
-                        <p class="new-price">Lồng chào mào <span>khung gỗ</span></p>
-                        <p class="new-price">Số lượng: <span>1</span></p>
-                        <p class="new-price">Giá: <span>$249.00 (5%)</span></p>
-                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-5 mb-md-0">
+                            <!--  phần hóa đơn -->
+                            <h2 class="h3 mb-3 text-black">Hóa đơn</h2>
+                            <div class="p-3 p-lg-5 border bg-white">
+                                <!-- Form hóa đơn -->
+                                <div class="form-group row">
+                                    <h3>Ngày yều cầu:10-08-2023</h3>
+                                    <div class="col-md-12">
+                                        <label for="c_fname" class="text-black">Tên <span class="text-danger"></span></label>
+                                        <input type="readonly" class="form-control" id="c_fname" name="c_fname">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="c_email" class="text-black">Email <span class="text-danger"></span></label>
+                                        <input type="readonly" class="form-control" id="c_fname" name="c_email">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="c_lname" class="text-black">Số điện thoại <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="c_lname" name="c_lname">
+                                    </div>
+                                </div>
 
-                    <div class="product-detail">
-                        <p>ngày mua : 20/8/2023</p>
-                        <p>ngày giao : 15/9/2023</p>
-                        <ul>
-                            <li>Màu: <span>nâu</span></li>
-                            <li>chất liệu <span>gỗ</span></li>
-                            <li>loại <span>Chào mào</span></li>
-                            <li>hình dáng <span>tròn</span></li>
-                        </ul>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label for="c_companyname" class="text-black">Địa chỉ<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="c_companyname" name="c_companyname">
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            
+                            <div class="form-group">
+                                <h2 class="h3 mb-3 text-black">Ghi chú</h2>
+                                <textarea name="c_order_notes" id="c_order_notes" cols="30" rows="5" class="form-control" placeholder=""></textarea>
+                            </div>
+                        </div>
+                      
+                        <div class="col-md-6" >
+                            <!-- Coupon Code và Đơn hàng -->
+                            <div class="row mb-5" style=" margin-top:40px">
+                                <div class="col-md-12" style=" margin-top:10px">
+                                    
+                                    <div class="p-3 p-lg-5 border bg-white">
+                                        <h4 class="h3 mb-3 text-black">Mã khuyến mãi</h4>
+                                        <label for="c_code" class="text-black mb-3"></label>
+                                        <div class="input-group w-75 couponcode-wrap">
+                                            <input type="text" class="form-control me-2" id="c_code" placeholder="" aria-label="" aria-describedby="button-addon2">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-black btn-sm" type="button" id="button-addon2">Thêm</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <h2 class="h3 mb-3 text-black">Yêu cầu</h2>
+                                <div class="p-3 p-lg-5 border bg-white">
+                                    <table class="table site-block-order-table mb-5">
+                                        <thead>
+                                        <th>Sản phẩm</th>
+                                        <th>Giá</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Lồng custom <strong class="mx-2"></strong> </td>
+                                                <td>250.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-black font-weight-bold"><strong>Phí ship</strong></td>
+                                                <td class="text-black">20000</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-black font-weight-bold"><strong> mã giảm</strong></td>
+                                                <td class="text-black">150000</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-black font-weight-bold"><strong>Tổng(VNĐ)</strong></td>
+                                                <td class="text-black font-weight-bold"><strong>350.00</strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="form-group">
+                                        <button class="btn btn-black btn-lg py-3 btn-block" onclick="window.location = 'thankyou.jsp'">Thanh toán</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="close-popup-button" class="close-popup-button">Close</button>
+                        </div>
                     </div>
-                    <div class="stars">
-                        <form action="">
-                            <input class="star star-5" id="star-5" type="radio" name="star"/>
-                            <label class="star star-5" for="star-5"></label>
-                            <input class="star star-4" id="star-4" type="radio" name="star"/>
-                            <label class="star star-4" for="star-4"></label>
-                            <input class="star star-3" id="star-3" type="radio" name="star"/>
-                            <label class="star star-3" for="star-3"></label>
-                            <input class="star star-2" id="star-2" type="radio" name="star"/>
-                            <label class="star star-2" for="star-2"></label>
-                            <input class="star star-1" id="star-1" type="radio" name="star"/>
-                            <label class="star star-1" for="star-1"></label>
-                        </form>
-                    </div>
-                    <section id="feedback">
-                        <h2>Đánh giá và phản hồi</h2>
-                        <form id="feedback-form">
-                            <label for="comment">Phản hồi:</label>
-                            <textarea id="comment" name="comment" rows="4" cols="50" required></textarea>
-                            <button type="submit">Gửi</button>
-                        </form>
-                    </section>
-
-                    <button id="close-popup-button" class="close-popup-button">Close</button>
                 </div>
             </div>
-            <script>
-                // Open the popup when the "Open Popup" button is clicked
-                document.getElementById("open-popup-button").addEventListener("click", function () {
-                    document.getElementById("popup").style.display = "block";
-                });
 
-                // Close the popup when the "Close" button is clicked
-                document.getElementById("close-popup-button").addEventListener("click", function () {
-                    document.getElementById("popup").style.display = "none";
-                });
+        </div>
 
-                // Handle form submission here (you can use AJAX to send data)
-                document.getElementById("feedback-form").addEventListener("submit", function (e) {
-                    e.preventDefault();
-                    // Add your code to handle form submission (e.g., sending data to the server)
-                });
+        <script>
+            // Open the popup when the "Open Popup" button is clicked
+            document.getElementById("open-popup-button").addEventListener("click", function () {
+                document.getElementById("popup").style.display = "block";
+            });
 
-            </script>
-            <script src="js/bootstrap.bundle.min.js"></script>
-            <script src="js/tiny-slider.js"></script>
-            <script src="js/custom.js"></script>
+            // Close the popup when the "Close" button is clicked
+            document.getElementById("close-popup-button").addEventListener("click", function () {
+                document.getElementById("popup").style.display = "none";
+            });
+
+            // Handle form submission here (you can use AJAX to send data)
+            document.getElementById("feedback-form").addEventListener("submit", function (e) {
+                e.preventDefault();
+                // Add your code to handle form submission (e.g., sending data to the server)
+            });
+
+        </script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/tiny-slider.js"></script>
+        <script src="js/custom.js"></script>
     </body>
 </html>
 
