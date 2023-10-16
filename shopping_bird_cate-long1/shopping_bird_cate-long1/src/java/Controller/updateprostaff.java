@@ -69,10 +69,12 @@ public class updateprostaff extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+   
+     @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
-            // Lấy các thông tin mới từ yêu cầu POST
+            // Lấy thông tin sản phẩm từ yêu cầu POST
             int productID = Integer.parseInt(request.getParameter("productID"));
             String productName = request.getParameter("productName");
             String description = request.getParameter("description");
@@ -80,7 +82,7 @@ public class updateprostaff extends HttpServlet {
             float price = Float.parseFloat(request.getParameter("price"));
             String size = request.getParameter("size");
 
-            // Gọi DAO để thực hiện cập nhật
+            // Tạo một DAO sản phẩm và thực hiện cập nhật
             ProductDao productDAO = new ProductDao();
             boolean success = productDAO.updateProduct(productID, productName, description, quantity, price, size);
 

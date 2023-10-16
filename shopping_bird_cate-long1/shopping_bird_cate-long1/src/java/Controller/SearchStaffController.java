@@ -40,20 +40,19 @@ public class SearchStaffController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
        try (PrintWriter out = response.getWriter()) {
             String url="";
-            String txtSearch = request.getParameter("txtSearch");
-            String searchBy = request.getParameter("searchBy");
-            String isSearch = request.getParameter("isSearch");
-           
+            String txtSearch = request.getParameter("txtsearch");
+            String searchBy = request.getParameter("searchby");
+            String isSearch = request.getParameter("issearch");
             if (!txtSearch.isEmpty()) {
-                ArrayList<Account> List = AccountDao.findAccByStaff(txtSearch, searchBy);
-                if (List != null && !List.isEmpty()) {
-                    request.setAttribute("searchList", List);
+                ArrayList<Account> accList = AccountDao.findAccByStaff(txtSearch, searchBy);
+                if (accList != null && !accList.isEmpty()) {
+                    request.setAttribute("searchList", accList);
                     request.setAttribute("lastSearchValue", txtSearch);
                     request.setAttribute("searchByValue", searchBy);
                     request.setAttribute("isSearch", isSearch);
                    
-                    if (List.size() > 0) {
-                        request.setAttribute("Staff",List);
+                    if (accList.size() > 0) {
+                        request.setAttribute("Staff",accList);
                         url = "allStaff.jsp";
                     }
                 } else {

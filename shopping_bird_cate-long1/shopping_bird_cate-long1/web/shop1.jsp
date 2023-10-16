@@ -69,7 +69,7 @@
 
                         <c:forEach var="product" items="${listP}">
                             <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                                <a class="product-item" href="MainController?action=ProDetail&proid=${product.getId()}">
+                                <a class="product-item" href="MainController?action=ProDetail&proid=${product.getId()} ">
                                     <img src="${product.getImage()}" class="img-fluid product-thumbnail" style="border-radius: 15px;">
                                     <h3 class="product-title">${product.getName()}</h3>
                                     <strong class="product-price">${product.getPrice()}VND</strong>

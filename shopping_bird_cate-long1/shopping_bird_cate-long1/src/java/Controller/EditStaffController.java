@@ -9,7 +9,10 @@ import DAO.AccountDao;
 import DTO.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,38 +38,51 @@ public class EditStaffController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String errorMessage = "";
-          String name = request.getParameter("ten");
-        String email = request.getParameter("email");
-        String password = request.getParameter("matKhau");
-         String phone = request.getParameter("soDienThoai");
-       
-        String diaChi = request.getParameter("diaChi");
-        int id = Integer.parseInt(request.getParameter("acID"));
-        int role = Integer.parseInt(request.getParameter("vaiTro"));
-        boolean result = false;
-          Account account = new Account();
-        account.setId(id);
-        account.setName(name);
-        account.setEmail(email);
-        account.setPhone(phone);
-        account.setAddress(diaChi);
-        account.setPassword(password);
-        account.setRole(role);
-       
+    request.setCharacterEncoding("UTF-8"); // Đảm bảo dữ liệu từ request được đọc với mã hóa UTF-8
+    String errorMessage;
+    String name = request.getParameter("ten");
+    String email = request.getParameter("email");
+    String password = request.getParameter("matKhau");
+    String phone = request.getParameter("soDienThoai");
+    String diaChi = request.getParameter("diaChi");
+    int id = Integer.parseInt(request.getParameter("acID"));
+    int role = Integer.parseInt(request.getParameter("vaiTro"));
+    
+   
+    try {
+        byte[] isoBytes = name.getBytes("ISO-8859-1"); 
+        name = new String(isoBytes, "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+        e.printStackTrace();
+    }
+    
+    Account account = new Account();
+    account.setId(id);
+    account.setName(name);
+    account.setEmail(email);
+    account.setPhone(phone);
+    account.setAddress(diaChi);
+    account.setPassword(password);
+    account.setRole(role);
+    
+    AccountDao accDao = new AccountDao();
+    boolean result = false;
         try {
-              AccountDao acc = new AccountDao();
-            result = acc.updateAccount(account);
-        } catch (SQLException e) {
-            e.printStackTrace();
+            result = accDao.updateAccount(account);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditStaffController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        if (result) {
-            errorMessage = "Cập nhật thành công";
-        } else {
-            errorMessage = "Cập nhật thất bại";
-        }
-        response.sendRedirect("MainController?action=AllSTAFF");
+    
+    String url = "MainController?action=AllSTAFF";
+    
+    if (result) {
+        errorMessage = "Cập nhật thành công";
+    } else {
+        errorMessage = "Cập nhật thất bại";
+    }
+    
+    request.setAttribute("errorMessage", errorMessage);
+    request.getRequestDispatcher(url).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

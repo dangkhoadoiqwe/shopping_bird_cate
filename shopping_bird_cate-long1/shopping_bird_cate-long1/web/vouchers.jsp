@@ -243,7 +243,7 @@ Author     : hailo
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach var="c" items="${c}" >
+                                            <c:forEach var="c" items="${vouchers}" >
                                           
                                                 <tr>
                                                       <form action="UpdateVoucherServlet" method="post">

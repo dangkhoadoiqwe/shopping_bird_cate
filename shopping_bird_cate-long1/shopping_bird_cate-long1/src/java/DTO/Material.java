@@ -9,17 +9,11 @@ package DTO;
  * @author hailo
  */
 public class Material {
-    public int id;
-    public String name;
-    public int price;
+    private int id;
+    private String name;
+    private int price;
 
     public Material() {
-    }
-
-    public Material(int id, String name, int price) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
     }
 
     public int getId() {
@@ -45,6 +39,5 @@ public class Material {
     public void setPrice(int price) {
         this.price = price;
     }
-    
     
 }

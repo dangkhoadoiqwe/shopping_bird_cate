@@ -128,7 +128,7 @@
                                     <h6>Soeng Souy</h6>
                                     <p class="text-muted mb-0">Administrator</p>
                                 </div>
-                            </div> <a class="dropdown-item" href="profile.html">My Profile</a> <a class="dropdown-item" href="settings.html">Account Settings</a> <a class="dropdown-item" href="MainController?action=logout">Logout</a> </div>
+                            </div> <a class="dropdown-item" href="profile.html">My Profile</a> <a class="dropdown-item" href="settings.html">Account Settings</a> <a class="dropdown-item" href="href="MainController?action=logout"">Logout</a> </div>
                     </li>
                 </ul>
             </div>
@@ -139,7 +139,6 @@
                             <li class="list-divider"></li>
                             <li class="submenu"> <a href="MainController?action=MANAGE_ACCOUNT"><i class="fas fa-user"></i> <span> Customers </span> <span class="menu-arrow"></span></a>
                                 <ul class="submenu_class" style="display: none;">
-                                    <a href="../src/java/Controller/SearchAccountController.java"></a>
                                     <li><a href="MainController?action=MANAGE_ACCOUNT">All Custom</a></li>
                                 </ul>
                             </li>
@@ -160,24 +159,24 @@
                         <div class="row align-items-center">
                             <div class="col">
                                 <div class="mt-5">
-                                    <h4 class="card-title float-left mt-2">All Staff</h4> <a href="admin/addstaff.jsp" class="btn btn-primary float-right veiwbutton">Thêm nhân viên</a> </div>
+                                    <h4 class="card-title float-left mt-2">All Staff</h4> <a href="addstaff.jsp" class="btn btn-primary float-right veiwbutton">Thêm nhân viên</a> </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <form action="SearchStaffController" method="post">
+                            <form action="MainController" method="post">
                                 <div class="row formtype">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <input class="form-control" name="txtSearch" type="text" value=""  placeholder='Search Keyword'
+                                            <input class="form-control" name="txtsearch" type="text" value=""  placeholder='Search Keyword'
                                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
                                             <input type="hidden" name="isSearch" value="true">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <select name="searchBy" class="form-control">
+                                            <select name="searchby" class="form-control">
                                                 <option value="byName">Theo tên</option>
                                                 <option value="byEmail">Theo Email</option>
                                                 <option value="byPhone">Theo số điện thoại</option>
@@ -186,7 +185,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <input class="btn btn-success btn-block mt-0 search_button" type="submit" name="action" value="SEARCHS"   type="submit">
+                                            <input class="btn btn-success btn-block mt-0 search_button" type="submit" name="action" value="Searchs"   type="submit">
                                         </div>
                                     </div>
                                 </div>
@@ -257,9 +256,15 @@
                                                             <div class="dropdown dropdown-action"> <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>
                                                                 <div class="dropdown-menu dropdown-menu-right">  
                                                                     <a class="dropdown-item" href="MainController?action=SearchByID&acID=${acc.id}"><i class="fas fa-trash-alt m-r-5"></i> Edit</a>
-                                                                    <a class="dropdown-item" href="MainController?action=BAN_STaff&accId=${acc.id}&accStatus=${acc.status}&lastSearchValue=${requestScope.lastSearchValue}&searchByValue=${requestScope.searchByValue}"><i class="fas fa-pencil-alt m-r-5"></i> Block</a> 
-                                                                    <a class="dropdown-item" href="MainController?action=BAN_STaff&accId=${acc.id}&accStatus=${acc.status}&lastSearchValue=${requestScope.lastSearchValue}&searchByValue=${requestScope.searchByValue}"><i class="fas fa-pencil-alt m-r-5"></i> Unblock</a></div>
-                                                            </div>
+                                                                    <c:choose>
+                                                                        <c:when test="${acc.status == 1}">
+                                                                            <a class="dropdown-item" href="MainController?action=BAN_Staff&userId=${acc.id}&accountStatus=${acc.status}&lastSearchValue=${requestScope.lastSearchValue}&searchByValue=${requestScope.searchByValue}&isSearch=${requestScope.isSearch == null ? false : requestScope.isSearch}"><i class="fas fa-pencil-alt m-r-5"></i> Block</a>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <a class="dropdown-item" href="MainController?action=BAN_Staff&userId=${acc.id}&accountStatus=${acc.status}&lastSearchValue=${requestScope.lastSearchValue}&searchByValue=${requestScope.searchByValue}&isSearch=${requestScope.isSearch == null ? false : requestScope.isSearch}"><i class="fas fa-pencil-alt m-r-5"></i> Unblock</a>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </div>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -273,56 +278,56 @@
                 </div>
             </div>
         </div>
-<!--        <div id="popup" class="popup-container">
-            <div class="popup">
-                <form action="MainController" method="post">
-                    <div class="row formtype">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Tên</label>
-                                <input class="form-control" type="text" name="ten" value="${ac.getName()}">
+        <!--        <div id="popup" class="popup-container">
+                    <div class="popup">
+                        <form action="MainController" method="post">
+                            <div class="row formtype">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Tên</label>
+                                        <input class="form-control" type="text" name="ten" value="${ac.getName()}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input class="form-control" type="text" name="email" value="${ac.getEmail()}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Địa chỉ</label>
+                                        <input class="form-control" type="text" name="diaChi" value="${ac.getAddress()}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Số điện thoại</label>
+                                        <input class="form-control" type="text" name="soDienThoai" value="${ac.getPhone()}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Mật khẩu</label>
+                                        <input class="form-control" type="password" name="matKhau" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Vai trò</label>
+                                        <select class="form-control" id="sel1" name="vaiTro"  value="${acc.getRole()}">
+                                            <option value="3">Manager</option>
+                                            <option value="1">Staff</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input class="form-control" type="text" name="email" value="${ac.getEmail()}">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Địa chỉ</label>
-                                <input class="form-control" type="text" name="diaChi" value="${ac.getAddress()}">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Số điện thoại</label>
-                                <input class="form-control" type="text" name="soDienThoai" value="${ac.getPhone()}">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Mật khẩu</label>
-                                <input class="form-control" type="password" name="matKhau" value="">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Vai trò</label>
-                                <select class="form-control" id="sel1" name="vaiTro"  value="${acc.getRole()}">
-                                    <option value="3">Manager</option>
-                                    <option value="1">Staff</option>
-                                </select>
-                            </div>
-                        </div>
+                            <button type="submit" name="action" value="Update" class="btn btn-primary buttonedit ml-2 ml-auto">Gửi</button>
+                        </form>
+                        <button id="close-popup-button" class="close-popup-button">Close</button>
+                        <p>${errorMessage}</p>
                     </div>
-                    <button type="submit" name="action" value="Update" class="btn btn-primary buttonedit ml-2 ml-auto">Gửi</button>
-                </form>
-                <button id="close-popup-button" class="close-popup-button">Close</button>
-                <p>${errorMessage}</p>
-            </div>
-        </div>-->
+                </div>-->
         <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
         <script src="assets/js/jquery-3.5.1.min.js"></script>
         <script src="assets/js/popper.min.js"></script>
@@ -332,7 +337,7 @@
         <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="assets/plugins/datatables/datatables.min.js"></script>
         <script src="assets/js/script.js"></script>
-      
+
     </body>
 
 </html>

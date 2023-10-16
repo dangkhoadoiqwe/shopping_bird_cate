@@ -28,8 +28,15 @@ public class Product {
     public String manufacturer;
     public String madeIn;
     public String size;
-    
+
     public Product() {
+    }
+
+    public Product(String name, String image, int quantity, float price) {
+        this.name = name;
+        this.image = image;
+        this.quantity = quantity;
+        this.price = price;
     }
 
     public Product(int id, String name, int quantity, float price, int height, int width, String color, String material, Date createTime, int updateId, String description, String image, int status, String manufacturer, String madeIn, String size) {

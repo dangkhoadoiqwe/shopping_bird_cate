@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import DAO.AccountDao;
 import DTO.Account;
+
 /**
  *
  * @author Quang
@@ -33,36 +34,47 @@ public class BanController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-     private static final String FAIL = "error.jsp";
+    private static final String FAIL = "error.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             int Id = Integer.parseInt(request.getParameter("userId"));
             int status = Integer.parseInt(request.getParameter("accountStatus"));
             String lastSearchValue = request.getParameter("lastSearchValue");
             String searchByValue = request.getParameter("searchByValue");
+            boolean isSearch = Boolean.parseBoolean(request.getParameter("isSearch"));
             AccountDao accDao = new AccountDao();
-            String url = "";
+            String url;
             boolean check;
             if (status == 0) {
                 check = accDao.banAccount(Id, 1);
                 if (check) {
-                    url = "MainController?action=SEARCH&txtSearch=" + lastSearchValue + "&searchBy=" + searchByValue;
-                
+                    if (isSearch) {
+                        url = "MainController?action=SEARCH&txtSearch=" + lastSearchValue + "&searchBy=" + searchByValue;
+                    } else {
+                        request.setAttribute("isSearch", isSearch);
+                        url = "MainController?action=MANAGE_ACCOUNT";
+                    }
                 } else {
                     url = FAIL;
                 }
             } else {
                 check = accDao.banAccount(Id, 0);
                 if (check) {
-                    url = "MainController?action=SEARCH&txtSearch=" + lastSearchValue + "&searchBy=" + searchByValue;
+                    if (isSearch) {
+                        url = "MainController?action=SEARCH&txtSearch=" + lastSearchValue + "&searchBy=" + searchByValue;
+                    } else {
+                        request.setAttribute("isSearch", isSearch);
+                        url = "MainController?action=MANAGE_ACCOUNT";
+                    }
                 } else {
                     url = FAIL;
                 }
             }
-            
-            response.sendRedirect(url);
+
+            request.getRequestDispatcher(url).forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(BanController.class.getName()).log(Level.SEVERE, null, ex);
         }

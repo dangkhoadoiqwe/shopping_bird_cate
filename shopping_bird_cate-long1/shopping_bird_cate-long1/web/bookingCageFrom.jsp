@@ -1,7 +1,10 @@
+<%@page import="DAO.MaterialDao"%>
+<%@page import="DTO.Material"%>
+<%@page import="java.util.List"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -9,37 +12,46 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
         <link href="css/tiny-slider.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
-        <link href="scss/style.css" rel="stylesheet" type="text/css"/>
+        <!--<link href="scss/style.css" rel="stylesheet" type="text/css"/>-->
         <link href="css/BookingCageFormStyle.css" rel="stylesheet" type="text/css"/>
         <link href="css/login.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <header>
-            <%@include file="headerGuest.jsp"%>
+            <c:choose>
+                <c:when test="${account.getRole() == 1}">
+                    <jsp:include page="headerUser.jsp"></jsp:include>
+                </c:when>
+                <c:otherwise>
+                    <jsp:include page="headerGuest.jsp"></jsp:include>
+                </c:otherwise>
+            </c:choose>
         </header>
         <div class="booking-custom-cage-form container">
             <div class="booking-custom-cage-main">
-                <form action="" method="POST">
+                <form action="MainController" method="POST">
                     <div class="update-bird-heading-form">
                         <h1>Custom Cage Booking Form</h1>
                     </div>
-                    <input type="hidden" name="accID" class="form-control" value="${requestScope.account.getAccountID()}"/>
-                    <input type="hidden" name="birdID" class="form-control" value="${requestScope.birdID}"/>
+                    <input type="hidden" name="cusId" value="${not empty account ? account.getId() : ''}">
                     <div class="form-group">
                         <label>Họ tên :</label><br>
-                        <input type="text" value="${requestScope.bird.getBirdName()}" name="bName" class="form-control input-form">                      
+                        <input type="text" id="inputName" value="${not empty account ? account.getName() : ''}" 
+                               name="cusName" class="form-control input-form" required="">                      
                     </div>
                     <div class="form-group">
                         <label>Email :</label><br>
-                        <input type="text" value="${requestScope.bird.getHeight()}" name="bHeight" class="form-control input-form" >
+                        <input type="text" value="${not empty account ? account.getEmail() : ''}" 
+                               name="email" class="form-control input-form" required="" >
                     </div>
                     <div class="form-group">
                         <label>Số điện thoại :</label><br>
-                        <input type="text" value="${requestScope.bird.getWeight()}" name="bWeight" class="form-control input-form" > 
+                        <input type="tel" value="${not empty account ? account.getPhone() : ''}"
+                               name="phone" class="form-control input-form" required="" pattern="[0-9]{10}" placeholder="123-456-7890"> 
                     </div>
                     <div class="form-group">
                         <label>Màu sắc :</label> 
-                        <select name="color" id="color" onchange="showInputColor()">
+                        <select name="color" id="color" onchange="showInputColor()" oninput="calculateTotal()">
                             <option>Đen</option>
                             <option>Đỏ</option>
                             <option>Xanh Dương</option>
@@ -47,56 +59,63 @@
                             <option>Hồng</option>
                             <option>Khác</option>
                         </select>
-                        <div id="InputColor" style="display: none">
-                            <input type="text" class="form-control" name="color" value="" placeholder="Nhập màu bạn mong muốn">
+                        <div id="InputColor" style="display: none">                         
+                            <input type="text" class="form-control" name="customColor" value="" placeholder="Nhập màu bạn mong muốn">
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Kích thước :</label> 
-                        <select name="size" id="size" onchange="showInputSize()">
-                            <option>Nhỏ (Chiều dài, chiều rộng và chiều cao khoảng 18 inch (45 cm) hoặc nhỏ hơn)</option>
-                            <option>Trung bình (Thường từ 24 đến 36 inch (61 đến 91 cm) chiều dài, chiều rộng và chiều cao  )</option>
-                            <option>Lớn (Thường là 36 inch (91 cm) trở lên chiều dài, chiều rộng và chiều cao)</option>
+                        <select name="size" id="size" onchange="showInputSize()" oninput="calculateTotal()">
+                            <option>Nhỏ (Dài, rộng, cao khoảng 18 inch (45cm) hoặc nhỏ hơn)</option>
+                            <option>Trung bình (Dài, rộng, cao khoảng 24 đến 36 inch (61 đến 91 cm)</option>
+                            <option>Lớn (Dài, rộng, cao khoảng 36 inch đổ lên(91cm đổ lên)</option>
                             <option>Khác</option>
                         </select>
                         <div id="inputSize" style="display: none">
-                            <input type="text" class="form-control" name="color" value="" placeholder="Nhập kích thước bạn mong muốn">
+                            <input type="text" class="form-control" name="customSize" value="" placeholder="hãy viết theo dạng Dài: , rộng: , cao: ">
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Loại chim :</label> 
-                        <select name="bird" id="bird" onchange="showInputBird()">
+                        <select name="birdType" id="bird" onchange="showInputBird()" oninput="calculateTotal()">
                             <option>Chào mào</option>
                             <option>Sơn ca</option>
                             <option>Cu gáy</option>
                             <option>Khác</option>
                         </select>
                         <div id="inputBirdType" style="display: none">
-                            <input type="text" class="form-control" name="color" value="" placeholder="Nhập loài chim của bạn">
-                        </div>
+                            <input type="text" class="form-control" name="customBirdType" value="" placeholder="Nhập loài chim của bạn">
+                        </div> 
                     </div>
                     <div class="form-group">
                         <label>Số lượng :</label> 
                         <div>
-                            <input type="number" class="form-control" value="" placeholder="Nhập Số lượng">
+                            <input type="number" id="quantity" name="quantity" class="form-control" value="" placeholder="Nhập Số lượng" oninput="calculateTotal()">
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Chất liệu lồng chim :</label> 
-                        <select name="material" id="material" onchange="showInputMaterial()">
-                            <option>Gỗ</option>
-                            <option>Sắt</option>
-                            <option>Tre</option>
-                            <option>Khác</option>
+                        <select name="material" id="material" onchange="showInputMaterial()" oninput="calculateTotal()">
+                            <%
+                                MaterialDao mtDao = new MaterialDao();
+                                List<Material> list = mtDao.listMaterials();
+                                for (Material mt : list) {
+                            %>
+                            <option value="<%= mt.getId()%>" price="<%= mt.getPrice()%>"><%= mt.getName()%></option>
+                            <%
+                                }
+                            %>
+
                         </select>
                         <div id="inputMaterial" style="display: none">
-                            <input type="text" class="form-control" name="color" value="" placeholder="Nhập chất liệu mà bạn muốn">
+                            <input type="text" step="0.01" min="0" class="form-control" name="customMaterial" value="" placeholder="Nhập chất liệu mà bạn muốn">
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Địa chỉ:</label> 
                         <div>
-                            <input type="text" class="form-control" value="" placeholder="Tỉnh/ Thành phố, Quận/Huyện, Phường/Xã, Đường">
+                            <input type="text" name="address" class="form-control" value="" 
+                                   placeholder="Tỉnh/ Thành phố, Quận/Huyện, Phường/Xã, Đường" required="">
                         </div>
                     </div>   
                     <div class="form-group">
@@ -110,19 +129,32 @@
                         </div>
                     </div> 
                     <div class="form-group">
-                        <!--<label>Thành tiền(Chưa bao gồm tiền gia công,...):</label>-->
-                        <h4>Thành tiền: 600.000 vnd</h4>
+                        <h5 id="textTotal">
+                            <div id="total"></div>
+                            <input type="hidden" name="subtotal" id="subtotal" value="">
+                            <input type="hidden" name="status" id="status" value="">                       
+                        </h5>                                        
                         <h5><font style="color: red">(Lưu ý đây mới là giá nguyên liệu, chưa bao gồm các phụ phí khác như tiền gia công,....)</h5>
                     </div>
-                    <div class=" btn-update-bird">
-                        <button type="submit" class="btn btn-primary" name="" value="UPDATE_BIRD">Gửi</button>
+                    <div class="btn-update-bird">
+                        <c:choose>
+                            <c:when test="${sessionScope.account != null}">
+                                <button type="submit" class="btn btn-primary" name="action" value="BOOKING">Gửi</button>
+                            </c:when>
+                            <c:otherwise>
+                                <h5>Bạn cần phải đăng nhập trước.</h5>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </form>
+                <h5>${msg}</h5>
                 <div style="color: red; font-size: 20px;">${mess}</div>
             </div>
         </div>
     </body>
-    <script> const fileInput2 = document.getElementById('input-img2');
+    <script>
+
+        const fileInput2 = document.getElementById('input-img2');
         const previewImg2 = document.getElementById('previewImg2');
         fileInput2.addEventListener('change', function () {
             if (fileInput2.files && fileInput2.files[0]) {
@@ -134,6 +166,40 @@
             }
         });
 
+        function calculateTotal() {
+            var color = document.getElementById('color').value;
+            var quantity = parseFloat(document.getElementById('quantity').value) || 0;
+            var size = document.getElementById('size').value;
+            var birdType = document.getElementById('bird').value;
+            var materialSelectOption = document.getElementById('material').options[document.getElementById('material').selectedIndex];
+            var materialPrice = parseInt(materialSelectOption.getAttribute('price'));
+            var status = document.getElementById('status');
+            var colorPrice = color === "Khác" ? 20.000 : 10.000;
+            var sizePrice = size.includes("Nhỏ") ? 1 : size.includes("Trung bình") ? 2 : size.includes("Lớn") ? 3 : 1;
+            var birdTypePrice = birdType === "Khác" ? 20.000 : 10.000;
+            var total = document.getElementById('total');
+            var totalPrice = (colorPrice + birdTypePrice + (materialPrice * 1.000)) * sizePrice * quantity;
+            var formStatus = parseInt(status.value);
+            var text = "";
+            if (size === "Khác") {
+                text += ", tiền kích thước";
+            }
+            if (materialPrice === 0) {
+                text += ", tiền vật liệu";
+            }
+            if (text !== "") {
+                text += " sẽ được cộng sau";
+                formStatus = 0;
+            } else {
+                formStatus = 1;
+            }
+            status.value = formStatus;
+            total.innerHTML = 'Thành tiền: ' + totalPrice.toFixed(3) + text;
+            document.getElementById('subtotal').value = totalPrice.toFixed(3) + text;
+            console.log(document.getElementById('subtotal').value);
+        }
+
+
         function showInputColor() {
             const color = document.getElementById('color');
             const inputColor = document.getElementById('InputColor');
@@ -143,18 +209,17 @@
                 inputColor.style.display = 'none';
             }
         }
-        ;
 
         function showInputSize() {
             const size = document.getElementById('size');
             const inputSize = document.getElementById('inputSize');
-            if (size.value === 'Khác') {
+            if (size.value === "Khác") {
                 inputSize.style.display = 'block';
             } else {
                 inputSize.style.display = 'none';
             }
         }
-        ;
+
         function showInputBird() {
             const bird = document.getElementById('bird');
             const inputBirdType = document.getElementById('inputBirdType');
@@ -164,17 +229,20 @@
                 inputBirdType.style.display = 'none';
             }
         }
-        ;
 
         function showInputMaterial() {
             const material = document.getElementById('material');
             const inputMaterial = document.getElementById('inputMaterial');
-            if (material.value === 'Khác') {
+            if (parseInt(material.value) === 4) {
                 inputMaterial.style.display = 'block';
             } else {
                 inputMaterial.style.display = 'none';
             }
         }
-        ;
+
+
     </script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/tiny-slider.js"></script>
+    <script src="js/custom.js"></script>
 </html>

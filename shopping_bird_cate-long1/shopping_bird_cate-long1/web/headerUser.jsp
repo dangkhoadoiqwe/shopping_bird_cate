@@ -41,13 +41,17 @@
                               Welcome  ${sessionScope.account.getName()}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="settingDropdown">
+                              
                                 <li><a class="dropdown-item" href="MainController?action=delivery&payid=${sessionScope.account.getId()}">Đơn hàng</a></li>
+                                <li><a class="dropdown-item" href="history.jsp">Lịch sử thanh toán</a></li>
+                                <li><a class="dropdown-item" href="MainController?action=His&accid=${account.getId()}">Lịch sử yêu cầu</a></li>
+                              
                                 <li><a class="dropdown-item" href="MainController?action=logout">Logout</a></li>
                             </ul>
                         </li></ul>
                             
                              <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-                        <li><a class="cd-signin" href="MainController?action=loadacc&id=${sessionScope.account.getId()}"><img style =" margin-top:12px" src="images/user.svg"></a></li>
+                        <li><a class="cd-signin" href="MainController?action=loadacc&id=${account.getId()}"><img style =" margin-top:12px" src="images/user.svg"></a></li>
                         <li><a class="nav-link" href="cart.jsp"><img src="images/cart.svg"></a></li>
                          <li style="width: 25px; height: 25px; background-color: red; border-radius: 50%; text-align: center; color: white; margin-top: 10px;">
                             ${sessionScope.cart.getItems().size()}

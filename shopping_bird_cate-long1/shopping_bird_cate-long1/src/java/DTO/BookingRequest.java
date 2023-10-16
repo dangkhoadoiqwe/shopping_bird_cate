@@ -14,18 +14,73 @@ public class BookingRequest {
     private Account account;
     private Material material;
     private int bookingRequestId;
+    private String email;
+    private String cusPhone;
+    private String cusAddress;
     private String birdType;
     private String color;
+    private String size;
+    private String materialCustom;
     private int height;
     private int width;
     private String image;
     private int quantity;
     private int status;
-    private int subtotal;
+    private String subtotal;
     private int total;
     private Date createTime;
-    private String size;
-      private String note;
+    private String note;
+
+    public String getMaterialCustom() {
+        return materialCustom;
+    }
+
+    public void setMaterialCustom(String materialCustom) {
+        this.materialCustom = materialCustom;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCusPhone() {
+        return cusPhone;
+    }
+
+    public void setCusPhone(String cusPhone) {
+        this.cusPhone = cusPhone;
+    }
+
+    public String getCusAddress() {
+        return cusAddress;
+    }
+
+    public void setCusAddress(String cusAddress) {
+        this.cusAddress = cusAddress;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public BookingRequest() {
+    }
+
+    public String getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(String subtotal) {
+        this.subtotal = subtotal;
+    }
 
     public String getSize() {
         return size;
@@ -34,36 +89,6 @@ public class BookingRequest {
     public void setSize(String size) {
         this.size = size;
     }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public BookingRequest(Account account, Material material, int bookingRequestId, String birdType, String color, int height, int width, String image, int quantity, int status, int subtotal, int total, Date createTime, String size, String note) {
-        this.account = account;
-        this.material = material;
-        this.bookingRequestId = bookingRequestId;
-        this.birdType = birdType;
-        this.color = color;
-        this.height = height;
-        this.width = width;
-        this.image = image;
-        this.quantity = quantity;
-        this.status = status;
-        this.subtotal = subtotal;
-        this.total = total;
-        this.createTime = createTime;
-        this.size = size;
-        this.note = note;
-    }
-
-    public BookingRequest() {
-    }
-
 
     public Account getAccount() {
         return account;
@@ -145,13 +170,7 @@ public class BookingRequest {
         this.status = status;
     }
 
-    public int getSubtotal() {
-        return subtotal;
-    }
 
-    public void setSubtotal(int subtotal) {
-        this.subtotal = subtotal;
-    }
 
     public int getTotal() {
         return total;
@@ -168,5 +187,6 @@ public class BookingRequest {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
     
 }

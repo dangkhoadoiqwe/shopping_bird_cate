@@ -115,15 +115,15 @@
                             <li class="list-divider"></li>
                             <li class="submenu"> <a href="MainController?action=MANAGE_ACCOUNT"><i class="fas fa-user"></i> <span> Customers </span> <span class="menu-arrow"></span></a>
                                 <ul class="submenu_class" style="display: none;">
-                                   <li><a href="MainController?action=MANAGE_ACCOUNT">All Custom</a></li>
+                                    <li><a href="MainController?action=MANAGE_ACCOUNT">All Custom</a></li>
                                     <!--								<li><a href="edit-customer.html"> Edit Customer </a></li>
                                                                                                     <li><a href="add-customer.html"> Add Customer </a></li>-->
                                 </ul>
                             <li class="submenu"> <a href="MainController?action=Staff"><i class="fas fa-user"></i> <span> Staff </span> <span class="menu-arrow"></span></a>
                                 <ul class="submenu_class" style="display: none;">
                                     <li><a href="MainController?action=AllSTAFF">All Staff </a></li>
-<!--                                    <li><a href="editStaff.jsp"> Edit Staff </a></li>-->
-                                    <li><a href="admin/addstaff.jsp"> Add Staff </a></li>
+                                    <!--                                    <li><a href="editStaff.jsp"> Edit Staff </a></li>-->
+                                    <li><a href="addstaff.jsp"> Add Staff </a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -178,7 +178,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                     <th>Ảnh</th>
+                                                    <th>Ảnh</th>
                                                     <th>Tên</th>
                                                     <th>Số điện thoại</th>
                                                     <th>Email</th>
@@ -187,42 +187,48 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <c:forEach var="account" items="${allCus}">
-                                                <tr>
-                                                    <td>${account.id}</td>
-                                                    <td>
-                                                        <h2 class="table-avatar">
-                                                            <a  class="avatar avatar-sm mr-2">
-                                                                <img class="avatar-img rounded-circle" src="${account.profilePhoto}" alt="User Image">
-                                                            </a>
-                                                           
-                                                        </h2>
-                                                    </td>
-                                                    <td>${account.name}</td>
-                                                    <td>${account.phone}</td>
-                                                    <td>${account.email}</td>
-                                                    <td>
-                                                        <div class="actions">
-                                                            <c:choose>
-                                                                <c:when test="${account.status == 1}">
-                                                                    <a class="btn btn-sm bg-success-light mr-2">Đang hoạt động</a>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                     <a class="btn btn-sm bg-danger-light mr-2">Không hoạt động</a>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right">
-                                                        <div class="dropdown dropdown-action"> <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>
-                                                            <div class="dropdown-menu dropdown-menu-right">  
-                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_asset"><i class="fas fa-trash-alt m-r-5"></i> Delete</a>
-                                                                <a class="dropdown-item" href="MainController?action=BAN_ACCOUNT&userId=${account.id}&accountStatus=${account.status}&lastSearchValue=${requestScope.lastSearchValue}&searchByValue=${requestScope.searchByValue}"><i class="fas fa-pencil-alt m-r-5"></i> Block</a> 
-                                                                <a class="dropdown-item" href="MainController?action=BAN_ACCOUNT&userId=${account.id}&accountStatus=${account.status}&lastSearchValue=${requestScope.lastSearchValue}&searchByValue=${requestScope.searchByValue}"><i class="fas fa-pencil-alt m-r-5"></i> Unblock</a></div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </c:forEach>
+                                                <c:forEach var="account" items="${allCus}">
+                                                    <tr>
+                                                        <td>${account.id}</td>
+                                                        <td>
+                                                            <h2 class="table-avatar">
+                                                                <a  class="avatar avatar-sm mr-2">
+                                                                    <img class="avatar-img rounded-circle" src="${account.profilePhoto}" alt="User Image">
+                                                                </a>
+
+                                                            </h2>
+                                                        </td>
+                                                        <td>${account.name}</td>
+                                                        <td>${account.phone}</td>
+                                                        <td>${account.email}</td>
+                                                        <td>
+                                                            <div class="actions">
+                                                                <c:choose>
+                                                                    <c:when test="${account.status == 1}">
+                                                                        <a class="btn btn-sm bg-success-light mr-2">Đang hoạt động</a>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <a class="btn btn-sm bg-danger-light mr-2">Không hoạt động</a>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <div class="dropdown dropdown-action"> <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>
+                                                                <div class="dropdown-menu dropdown-menu-right">  
+                                                        
+                                                                    <c:choose>
+                                                                        <c:when test="${account.status == 1}">
+                                                                            <a class="dropdown-item" href="MainController?action=BAN_ACCOUNT&userId=${account.id}&accountStatus=${account.status}&lastSearchValue=${requestScope.lastSearchValue}&searchByValue=${requestScope.searchByValue}&isSearch=${requestScope.isSearch == null ? false : requestScope.isSearch}"><i class="fas fa-pencil-alt m-r-5"></i> Block</a>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <a class="dropdown-item" href="MainController?action=BAN_ACCOUNT&userId=${account.id}&accountStatus=${account.status}&lastSearchValue=${requestScope.lastSearchValue}&searchByValue=${requestScope.searchByValue}&isSearch=${requestScope.isSearch == null ? false : requestScope.isSearch}"><i class="fas fa-pencil-alt m-r-5"></i> Unblock</a>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </div>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>

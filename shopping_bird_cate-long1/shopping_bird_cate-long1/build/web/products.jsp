@@ -259,60 +259,58 @@
                                     <div class="table-responsive">
 
 
-
-
-                                        <table class="datatable table table-striped">
-                                            <thead>
-                                                <tr>
-
-                                                    <th>Tên sản phẩm</th>
-                                                    <th>Mô tả sản phẩm</th>
-                                                    <th>Số lượng</th> 
-                                                    <th>Giá sản phẩm(VND)</th>
-                                                    <th> Kích thước(30cmx30cm)</th> 
-                                                    <th>Hình ảnh</th>
-                                                    <th>Trạng thái</th>
-                                                    <th class="text-right">Chức năng</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <c:forEach var="product" items="${prolist}">
-                                                    <tr>
-                                                <form action="updateprostaff" method="post">
-                                                    <input type="hidden" name="productID" value="${product.getId()}"> 
-                                                    <td><input type="text" name="productName" value="${product.getName()}" ></td>
-                                                    <td><input type="text" name="description" value="${product.getDescription()}" ></td>
-                                                    <td><input type="number" name="quantity" value="${product.getQuantity()}"></td>
-                                                    <td><input type="text" name="price" value="${product.getPrice()}"></td>
-                                                    <td><input type="text" name="size" value="${product.getSize()}"></td>
-                                                    <td><img src="${product.getImage()}" style="height: 50px; width: 50px;"></td>
-                                                    <td>
-
-                                                        <c:choose>
-                                                            <c:when test="${product.getStatus() == 1 && product.getQuantity() > 0}">
-                                                                <p class="btn btn-success">Còn hàng</p>
-                                                            </c:when>
-                                                            <c:when test="${product.getStatus() == 0 && product.getQuantity() == 0}">
-                                                                <p class="btn btn-danger">Hết hàng</p>
-                                                            </c:when>
-                                                            <c:when test="${product.getStatus() == 1 && product.getQuantity() == 0}">
-                                                                <p class="btn btn-danger">Hết hàng</p>
-                                                            </c:when>
-                                                        </c:choose>
-
-                                                    </td>
-                                                    <td class="text-right">
-                                                        <button class="btn btn-sm bg-success-light mr-2" type="submit">
-                                                            Cập nhật
-                                                        </button>
-                                                        </td>
-                                                    </form>
-                                                    </tr>
-                                            </c:forEach>
-                                            </tbody>
-
-                                        </table>
+ 
+<table class="datatable table table-striped">
+        <thead>
+            <tr>
+                <th>Tên sản phẩm</th>
+                <th>Mô tả sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Giá sản phẩm (VND)</th>
+                <th>Kích thước (30cmx30cm)</th>
+                <th>Hình ảnh</th>
+                <th>Trạng thái</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <c:forEach var="product" items="${prolist}">
+                <tr>
+                    
+                    
+                        <form action="updateProduct" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="productID" value="${product.getId()}">
+                            <td><input type="text" name="productName" value="${product.getName()}"></td>
+                            <td><input type="text" name="description" value="${product.getDescription()}"></td>
+                            <td><input type="number" name="quantity" value="${product.getQuantity()}"></td>
+                            <td><input type="text" name="price" value="${product.getPrice()}"></td>
+                            <td><input type="text" name="size" value="${product.getSize()}"></td>
+                            <td><img src="${product.getImage()}" style="height: 50px; width: 50px;"></td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${product.getStatus()  == 1 && product.getQuantity()  > 0}">
+                                        <p class="btn btn-success">Còn hàng</p>
+                                    </c:when>
+                                    <c:when test="${product.getStatus()  == 0 && product.getQuantity()  == 0}">
+                                        <p class="btn btn-danger">Hết hàng</p>
+                                    </c:when>
+                                    <c:when test="${product.getStatus()  == 1 && product.getQuantity()  == 0}">
+                                        <p class="btn btn-danger">Hết hàng</p>
+                                    </c:when>
+                                </c:choose>
+                            </td>
+                            <td class="text-right">
+                                <button class="btn btn-sm bg-success-light mr-2" type="submit">
+                                    Cập nhật
+                                </button>
+                            </td>
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
 
                                     </div>
                                 </div>

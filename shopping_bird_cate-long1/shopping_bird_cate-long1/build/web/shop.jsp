@@ -71,21 +71,11 @@
                 <div class="row">
 
                     <!-- Start Column 1 -->
-                    <div class="col-12 col-md-4 col-lg-3 mb-5">
-                        <a class="product-item" href="#">
-                            <img src="images/product-3.png" class="img-fluid product-thumbnail">
-                            <h3 class="product-title">Lồng Quả Đào Cắt Mặt 3/4 Chân Chạm</h3>
-                            <strong class="product-price">$50.00</strong>
-
-                            <span class="icon-cross">
-                                <img src="images/cross.svg" class="img-fluid">
-                            </span>
-                        </a>
-                    </div> 
+               
                     <!-- End Column 1 -->
                     <c:forEach var="product" items="${c}">
                             <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                                <a class="product-item" href="MainController?action=ProDetail&proid=${product.getId()}">
+                                <a class="product-item" href="MainController?action=ProDetail&proid=${product.getId()} ">
                                     <img src="${product.getImage()}" class="img-fluid product-thumbnail" style="border-radius: 15px;">
                                     <h3 class="product-title">${product.getName()}</h3>
                                     <strong class="product-price">${product.getPrice()}VND</strong>

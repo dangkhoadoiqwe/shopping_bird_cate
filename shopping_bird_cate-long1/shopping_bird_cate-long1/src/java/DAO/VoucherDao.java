@@ -163,17 +163,18 @@ public class VoucherDao {
     }
 }
 
-
-    public int getCoupon(String code, String id) throws SQLException {
+    public int getCoupon(String code) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             con = DBContext.getConnection();
             if (con != null) {
-                stm = con.prepareStatement(" select value from [Voucher] where voucherName = ? AND accountID = ?");
+                stm = con.prepareStatement(" SELECT value\n"
+                        + "FROM Voucher\n"
+                        + "WHERE voucherName = ? AND accountID = 1 AND voucherStatus = 1;");
                 stm.setString(1, code);
-                 stm.setString(2, id);
+               
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     return rs.getInt(1);
@@ -236,5 +237,46 @@ public class VoucherDao {
     }
     return list;
 }
+public List<Voucher> getAllVoucher1() throws SQLException {
+    List<Voucher> list = new ArrayList<>();
+    Connection con = null;
+    PreparedStatement stm = null;
+    ResultSet rs = null;
 
+    try {
+        con = DBContext.getConnection();
+        if (con != null) {
+            stm = con.prepareStatement("SELECT [voucherID],accountID, voucherName, dateStart, dateEnd, voucherStatus ,value FROM Voucher where voucherStatus = 1 AND accountID = 1  ");
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Voucher vu = new Voucher();
+                Account ac = new Account();
+                vu.setId(rs.getInt("voucherID"));
+                // Lấy thông tin từ kết quả truy vấn và đặt vào đối tượng Voucher và Account
+                ac.setId(rs.getInt("accountID"));
+                vu.setAccount(ac);
+                vu.setName(rs.getString("voucherName"));
+                vu.setDateStart(rs.getDate("dateStart"));
+                vu.setDateEnd(rs.getDate("dateEnd"));
+                vu.setStatus(rs.getInt("voucherStatus"));
+                vu.setCode(rs.getString("value"));
+                // Thêm đối tượng Voucher vào danh sách
+                list.add(vu);
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        if (rs != null) {
+            rs.close();
+        }
+        if (stm != null) {
+            stm.close();
+        }
+        if (con != null) {
+            con.close();
+        }
+    }
+    return list;
+}
 }

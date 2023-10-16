@@ -16,7 +16,7 @@ public class DBContext {
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
         Connection conn = null;
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        String url = "jdbc:sqlserver://localhost:1433;databaseName=BirdCage3";
+        String url = "jdbc:sqlserver://localhost:1433;databaseName=BirdCage3;characterEncoding=UTF-8";
         String userName = "sa";
         String password = "12345";
         conn = DriverManager.getConnection(url, userName, password);
