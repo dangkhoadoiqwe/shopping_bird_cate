@@ -64,6 +64,7 @@
                 <div id="cd-login"> 
                     <!-- log in form -->
                     <form class="cd-form" action="MainController" method="post">
+                        <input type="hidden" name="webUrl" id="url">
                         <p class="fieldset">
                             <label class="image-replace cd-email" for="signin-email">Email
                             </label>
@@ -343,5 +344,11 @@
         );
      var currentURL = window.location.href;
                         console.log(webUrl);
+    </script>
+    <script>
+        // Get the current URL
+        var webUrl = window.location.href;
+        var lines = webUrl.split("/");
+        document.getElementById('url').value = lines[lines.length - 1];
     </script>
 </html>

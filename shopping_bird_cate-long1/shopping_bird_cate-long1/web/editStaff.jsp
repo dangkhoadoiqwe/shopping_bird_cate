@@ -337,7 +337,7 @@
 
                 // Thay thế mật khẩu bằng các dấu "*"
                 var maskedPassword = "*".repeat(originalPassword.length);
-                passwordInput.value = maskedPassword;
+//                passwordInput.value = maskedPassword;
             });
         </script>
     </body>

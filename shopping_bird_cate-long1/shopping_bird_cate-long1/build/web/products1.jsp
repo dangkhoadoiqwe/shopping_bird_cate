@@ -263,54 +263,136 @@
                                         <c:if test="${not empty searchResults}">
                                             <table class="datatable table table-striped">
                                                 <thead>
-                                                    <tr>
-
-                                                        <th>Tên sản phẩm</th>
-                                                        <th>Mô tả sản phẩm</th>
-                                                        <th>Số lượng</th> 
-                                                        <th>Giá sản phẩm(VND)</th>
-                                                        <th> Kích thước(30cmx30cm)</th> 
-                                                        <th>Hình ảnh</th>
-                                                        <th>Trạng thái</th>
-                                                        <th class="text-right">Chức năng</th>
-                                                    </tr>
+                                                 <tr>
+                                                    <th>Tên sản phẩm</th>
+                                                    <th>Mô tả sản phẩm</th>
+                                                    <th>Loại lồng </th>
+                                                    <th>Số lượng</th>
+                                                    <th>Giá (VND)</th>
+                                                    <th>Kích thước (30cmx30cmx30cm)</th>
+                                                    <th>Màu sắc</th>
+                                                    <th>nhà sản xuất </th>
+                                                    <th>sản xuất ở </th>
+                                                    <th>Hình ảnh</th>
+                                                    <th>Trạng thái</th>
+                                                    <th>Chức năng</th>
+                                                </tr>
                                                 </thead>
-
+                                                <c:forEach var="product" items="${searchResults}">
                                                 <tbody>
-                                                    <c:forEach var="product" items="${searchResults}">
-                                                        <tr>
-                                                    <form action="updateprostaff" method="post">
-                                                        <input type="hidden" name="productID" value="${product.getId()}"> 
-                                                        <td><input type="text" name="productName" value="${product.getName()}" ></td>
-                                                        <td><input type="text" name="description" value="${product.getDescription()}" ></td>
-                                                        <td><input type="number" name="quantity" value="${product.getQuantity()}"></td>
-                                                        <td><input type="text" name="price" value="${product.getPrice()}"></td>
-                                                        <td><input type="text" name="size" value="${product.getSize()}"></td>
+                                                    
+                                                       <tr> 
+                                                        <td>${product.getName()} </td>
+                                                        <td>${product.getDescription()}</td>
+                                                        <td>${product.getCate().getCategoryName()}</td>
+                                                        <td>${product.getQuantity()}</td>
+                                                        <td> ${product.getPrice()}</td>
+                                                         <td>${product.getSize()}</td>
+                                                        <td>${product.getColor()}</td>
+                                                        <td>${product.getManufacturer()}</td>
+                                                        <td>${product.getMadeIn()}</td>
+                                                        
                                                         <td><img src="${product.getImage()}" style="height: 50px; width: 50px;"></td>
                                                         <td>
-
                                                             <c:choose>
-                                                                <c:when test="${product.getStatus() == 1 && product.getQuantity() > 0}">
+                                                                <c:when test="${product.getStatus()  == 1 && product.getQuantity()  > 0}">
                                                                     <p class="btn btn-success">Còn hàng</p>
                                                                 </c:when>
-                                                                <c:when test="${product.getStatus() == 0 && product.getQuantity() == 0}">
+                                                                <c:when test="${product.getStatus()  == 0 && product.getQuantity()  == 0}">
                                                                     <p class="btn btn-danger">Hết hàng</p>
                                                                 </c:when>
-                                                                <c:when test="${product.getStatus() == 1 && product.getQuantity() == 0}">
+                                                                <c:when test="${product.getStatus()  == 1 && product.getQuantity()  == 0}">
+                                                                    <p class="btn btn-danger">Hết hàng</p>
+                                                                </c:when>
+                                                                <c:when test="${product.getStatus()  == 0 }">
                                                                     <p class="btn btn-danger">Hết hàng</p>
                                                                 </c:when>
                                                             </c:choose>
-
                                                         </td>
                                                         <td class="text-right">
-                                                            <button class="btn btn-sm bg-success-light mr-2" type="submit">
+                                                            <button  type="button" class="btn btn-sm bg-success-light mr-2"   data-toggle="modal" data-target="#delete_asset_${product.getId()}">
                                                                 Cập nhật
                                                             </button>
-                                                        </td>
-                                                    </form>
+                                                            <div id="delete_asset_${product.getId()}" class="modal fade delete-modal" role="dialog">
+                                                                <div class="modal-dialog modal-dialog-centered">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-body text-center">  
+                                                                            
+                                                                            
+                                                                            <form action="UpdateProductServlet" method="post">
+                                                                                <input type="hidden" name="productId" value="${product.getId()}">
+
+                                                                                <div class="form-group">
+                                                                                    <label   class="float-left" for="productName">Product Name </label>
+                                                                                    <input type="text" name="productName" class="form-control" value="${product.getName()}">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="float-left" for="categoryId">Category</label>
+                                                                                   <select name="categoryId" required class="form-control">
+                                                                                    <c:forEach var="d" items="${cate}">
+                                                                                        <option value="${d.getCategoryId()}">${d.getCategoryName()}</option>
+                                                                                    </c:forEach>
+                                                                                </select>   
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label  for="quantity" class="float-left">Quantity</label>
+                                                                                    <input type="number" name="quantity"   class="form-control" value="${product.getQuantity()}">
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label class="float-left"  class="float-left" for="price">Price</label>
+                                                                                    <input type="number" name="price"  class="form-control" value="${product.getPrice()}">
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label  class="float-left" for="size">Size</label>
+                                                                                    <input type="text" name="size"  class="form-control" value="${product.getSize()}">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="float-left" for="color">Color</label>
+                                                                                    <input type="text" name="color"  class="form-control" value="${product.getColor()}">
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label  class="float-left" for="image">Image</label>
+                                                                                    <input type="text" name="image"     class="form-control-file"  value="${product.getImage()}">
+
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label  class="float-left" for="manufacturer">Manufacturer</label>
+                                                                                    <input type="text" name="manufacturer"  class="form-control" value="${product.getManufacturer()}">
+                                                                                </div>
+
+
+                                                                                <div class="form-group">
+                                                                                    <label class="float-left" for="material">Material</label>
+                                                                                    <input type="text" name="material"   class="form-control" value="${product.getMaterial()}">
+                                                                                </div>
+
+
+                                                                                <div class="form-group">
+                                                                                    <label class="float-left" for="madeIn">Made In</label>
+                                                                                    <input type="text" name="madeIn" class="form-control" value="${product.getMadeIn()}">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="float-left" for="description">Description</label>
+                                                                                    <input type="text" name="description"  class="form-control" value="${product.getDescription()}">
+                                                                                </div>
+
+                                                                                <button type="submit" class="btn btn-primary">Update</button>
+                                                                                <button id="closePopupButton" class="btn btn-secondary">Close</button>
+                                                                            </form>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>  
+                                                        </td> 
                                                     </tr>
-                                                </c:forEach>
+                                                 
                                                 </tbody>
+                                                </c:forEach>
 
                                             </table>
                                         </c:if>

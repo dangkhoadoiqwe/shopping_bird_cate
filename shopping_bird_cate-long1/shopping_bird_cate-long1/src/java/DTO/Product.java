@@ -14,6 +14,7 @@ public class Product {
     public CategoryDTO cate;
     public int id;
     public String name;
+    public int cateID;
     public int quantity;
     public float price;
     public int height;
@@ -32,11 +33,40 @@ public class Product {
     public Product() {
     }
 
+    public int getCateID() {
+        return cateID;
+    }
+
+    public void setCateID(int cateID) {
+        this.cateID = cateID;
+    }
+
     public Product(String name, String image, int quantity, float price) {
         this.name = name;
         this.image = image;
         this.quantity = quantity;
         this.price = price;
+    }
+
+    public Product(CategoryDTO cate, int id, String name, int cateID, int quantity, float price, int height, int width, String color, String material, Date createTime, int updateId, String description, String image, int status, String manufacturer, String madeIn, String size) {
+        this.cate = cate;
+        this.id = id;
+        this.name = name;
+        this.cateID = cateID;
+        this.quantity = quantity;
+        this.price = price;
+        this.height = height;
+        this.width = width;
+        this.color = color;
+        this.material = material;
+        this.createTime = createTime;
+        this.updateId = updateId;
+        this.description = description;
+        this.image = image;
+        this.status = status;
+        this.manufacturer = manufacturer;
+        this.madeIn = madeIn;
+        this.size = size;
     }
 
     public Product(int id, String name, int quantity, float price, int height, int width, String color, String material, Date createTime, int updateId, String description, String image, int status, String manufacturer, String madeIn, String size) {

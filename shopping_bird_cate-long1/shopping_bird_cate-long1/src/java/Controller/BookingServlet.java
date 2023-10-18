@@ -28,28 +28,46 @@ public class BookingServlet extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("cusId"));
             int phone = Integer.parseInt(request.getParameter("phone"));
             String color = request.getParameter("color");
-            System.out.println(color);
-            if (color.equalsIgnoreCase("Khác")) {
-                color = new String(request.getParameter("customColor").getBytes("iso-8859-1"), "utf-8");
-            }
-            String size = new String(request.getParameter("size").getBytes("iso-8859-1"), "utf-8");
-            if (size.equalsIgnoreCase("Khác")) {
-                size = new String(request.getParameter("customSize").getBytes("iso-8859-1"), "utf-8");
-            }
-            String birdType = new String(request.getParameter("birdType").getBytes("iso-8859-1"), "utf-8");
-            if (birdType.equalsIgnoreCase("Khác")) {
-                birdType = new String(request.getParameter("customBirdType").getBytes("iso-8859-1"), "utf-8");
-            }
+            String size = request.getParameter("size");
+            String birdType = request.getParameter("birdType");
             int quantity = Integer.parseInt(request.getParameter("quantity"));
             int material = Integer.parseInt(request.getParameter("material"));
             String materialCustom = "";
-            if (material == 4) {
-                materialCustom = new String(request.getParameter("customMaterial").getBytes("iso-8859-1"), "utf-8");
-            }
-            String address = new String(request.getParameter("address").getBytes("iso-8859-1"), "utf-8");
-            String image = new String(request.getParameter("image").getBytes("iso-8859-1"), "utf-8");
-            String subtotal = new String(request.getParameter("subtotal").getBytes("iso-8859-1"), "utf-8");
+            String address = request.getParameter("address");
+            String image = request.getParameter("image");
+            String subtotal = request.getParameter("subtotal");
             int status = Integer.parseInt(request.getParameter("status"));
+
+            // Xử lý các trường tùy chọn 'Khác' nếu được chọn
+            if ("Khác".equals(color)) {
+                color = new String(request.getParameter("customColor").getBytes("ISO-8859-1"), "UTF-8");
+            }
+            if ("Khác".equals(size)) {
+                size = new String(request.getParameter("customSize").getBytes("ISO-8859-1"), "UTF-8");
+            }
+            if ("Khác".equals(birdType)) {
+                birdType = new String(request.getParameter("customBirdType").getBytes("ISO-8859-1"), "UTF-8");
+            }
+            if (material == 4) {
+                materialCustom = new String(request.getParameter("customMaterial").getBytes("ISO-8859-1"), "UTF-8");
+            }
+
+            // Xử lý lỗi trong trường hợp số liệu không hợp lệ
+            if (id < 0 || quantity < 0 || material < 0 || status < 0) {
+                throw new NumberFormatException("Số liệu không hợp lệ");
+            }
+//            try {
+//                byte[] isoBytes = color.getBytes("ISO-8859-1");
+//                color = new String(isoBytes, "UTF-8");
+//                byte[] si = size.getBytes("ISO-8859-1");
+//                size = new String(isoBytes, "UTF-8");
+//                byte[] isoBy = birdType.getBytes("ISO-8859-1");
+//                birdType = new String(isoBytes, "UTF-8");
+//
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
+            // Gọi đối tượng DAO để thực hiện thêm đơn đặt hàng
             BookingDao bookingDao = new BookingDao();
             boolean check = bookingDao.addBookingRequest(id, birdType, color, size, material, materialCustom, image, quantity, status, subtotal, 0, new Date(), "", address, phone);
             String msg;
@@ -60,7 +78,9 @@ public class BookingServlet extends HttpServlet {
             }
             request.setAttribute("msg", msg);
             request.getRequestDispatcher("bookingCageFrom.jsp").forward(request, response);
-        } catch (IOException | NumberFormatException | ServletException e) {
+        } catch (IOException | NumberFormatException e) {
+            // Xử lý lỗi ở đây, ví dụ: ghi log hoặc thông báo lỗi
+            e.printStackTrace();
         }
     }
 

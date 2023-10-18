@@ -113,6 +113,7 @@ public class BookingDao {
                             booking.setCusPhone(rs.getString("cusPhone"));
                             booking.setQuantity(rs.getInt("quantity"));
                             booking.setMaterialCustom(rs.getString("materialCustom"));
+                      
                             list.add(booking);
                         }
                     }

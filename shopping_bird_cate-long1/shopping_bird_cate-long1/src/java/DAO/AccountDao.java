@@ -124,14 +124,15 @@ private static final String REGIS = "INSERT INTO Account(email, password, name, 
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
-                    Account ac = new Account();
+                     Account ac = new Account();
                     ac.setId(rs.getInt("accountID"));
                     ac.setEmail(rs.getString("email"));
                     ac.setName(rs.getString("name"));
                     ac.setProfilePhoto(rs.getString("profilePhoto"));
                     ac.setPhone(rs.getString("phone"));
-                    ac.setStatus(rs.getInt("role"));
+                    ac.setRole(rs.getInt("role"));
                     ac.setAddress(rs.getString("Address"));
+                    ac.setStatus(rs.getInt("accountStatus"));
                     list.add(ac);
                 }
             }
@@ -253,7 +254,7 @@ private static final String REGIS = "INSERT INTO Account(email, password, name, 
         }
         return check;
     }
-    private static final String FIND_ACCOUNT_BY_Staff = "SELECT * FROM Account WHERE (role = 1 OR role = 3)";
+    private static final String FIND_ACCOUNT_BY_Staff = "SELECT * FROM Account WHERE (role = 4 OR role = 3)";
 
     public static ArrayList<Account> findAccByStaff(String txtSearch, String searchBy) throws SQLException {
         Connection con = null;
@@ -306,7 +307,7 @@ private static final String REGIS = "INSERT INTO Account(email, password, name, 
         }
         return list;
     }
-   private static final String FIND_ACCOUNT_BY_OPTION = "SELECT * FROM Account WHERE role = 4 ";
+   private static final String FIND_ACCOUNT_BY_OPTION = "SELECT * FROM Account WHERE role = 1 ";
 
     public static ArrayList<Account> findAccByOption(String txtSearch, String searchBy) throws SQLException {
         Connection con = null;

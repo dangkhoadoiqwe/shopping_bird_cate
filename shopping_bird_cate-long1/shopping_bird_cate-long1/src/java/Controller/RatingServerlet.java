@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -76,7 +77,9 @@ public class RatingServerlet extends HttpServlet {
     @Override
       protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
           // Lấy các tham số từ yêu cầu HTTP
-          
+            response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession();
           int productID = Integer.parseInt(request.getParameter("productID"));
           int accountID = Integer.parseInt(request.getParameter("accountID"));
           int rating = Integer.parseInt(request.getParameter("rating"));
@@ -86,7 +89,7 @@ public class RatingServerlet extends HttpServlet {
           boolean success = ratingDAO.addRatingAndFeedback(productID, accountID, rating, comment);
           try (PrintWriter out = response.getWriter()) {
               out.println("<script type=\"text/javascript\">");
-              out.println("alert('Đơn hàng của bạn đặt thành công!!');");
+              out.println("alert('Successfully!!');");
               out.println("location='" + request.getContextPath() + "/homePage.jsp';");
               out.println("</script>");
           }

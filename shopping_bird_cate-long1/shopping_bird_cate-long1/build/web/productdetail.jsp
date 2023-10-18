@@ -44,60 +44,60 @@
                 content: '\2605';
                 color: gold;
             }
-            
-            
+
+
             body {
-    background-color: #eee
-}
+                background-color: #eee
+            }
 
-.card {
-    background-color: #fff;
-    border: none
-}
+            .card {
+                background-color: #fff;
+                border: none
+            }
 
-.form-color {
-    background-color: #fafafa
-}
+            .form-color {
+                background-color: #fafafa
+            }
 
-.form-control {
-    height: 48px;
-    border-radius: 25px
-}
+            .form-control {
+                height: 48px;
+                border-radius: 25px
+            }
 
-.form-control:focus {
-    color: #495057;
-    background-color: #fff;
-    border-color: #35b69f;
-    outline: 0;
-    box-shadow: none;
-    text-indent: 10px
-}
+            .form-control:focus {
+                color: #495057;
+                background-color: #fff;
+                border-color: #35b69f;
+                outline: 0;
+                box-shadow: none;
+                text-indent: 10px
+            }
 
-.c-badge {
-    background-color: #35b69f;
-    color: white;
-    height: 20px;
-    font-size: 11px;
-    width: 92px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2px
-}
+            .c-badge {
+                background-color: #35b69f;
+                color: white;
+                height: 20px;
+                font-size: 11px;
+                width: 92px;
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 2px
+            }
 
-.comment-text {
-    font-size: 13px
-}
+            .comment-text {
+                font-size: 13px
+            }
 
-.wish {
-    color: #35b69f
-}
+            .wish {
+                color: #35b69f
+            }
 
-.user-feed {
-    font-size: 14px;
-    margin-top: 12px
-}
+            .user-feed {
+                font-size: 14px;
+                margin-top: 12px
+            }
 
         </style>
         <link rel="stylesheet" href="pro-detail/pro-detail/vendors/bootstrap/bootstrap.min.css">
@@ -204,6 +204,7 @@
                             <c:set var="id1" value="${prodetail}" />
                             <!-- Add to Cart Form -->
                             <form class="cart clearfix" method="get" action="addtocart">
+                                
                                 <div class="cart-btn d-flex mb-50" >
                                     <input type="hidden" name="productId" value="${id1.getId()}">
                                     <p>SL</p>
@@ -226,16 +227,16 @@
 
                                     </div>
                                 </div>
-                               <c:choose>
-    <c:when test="${id1.quantity == 0}">
-        <!-- Condition 1: If the quantity is 0 -->
-        <p>Item is out of stock.</p>
-    </c:when>
-    
-    <c:otherwise>
-        <button class="btn amado-btn" name="action" value="Add to cart" type="submit" onclick="enroll()">Thêm vào giỏ hàng  </button>
-    </c:otherwise>
-</c:choose>
+                                <c:choose>
+                                    <c:when test="${id1.quantity == 0}">
+                                        <!-- Condition 1: If the quantity is 0 -->
+                                        <p>Item is out of stock.</p>
+                                    </c:when>
+
+                                    <c:otherwise>
+                                        <button class="btn amado-btn" name="action" value="Add to cart" type="submit" onclick="enroll()">Thêm vào giỏ hàng  </button>
+                                    </c:otherwise>
+                                </c:choose>
 
 
                             </form>
@@ -250,26 +251,26 @@
             List<Feedback> feedbacks = (List<Feedback>) request.getAttribute("feedbacks");
         %>
         <div class="container mt-5 mb-5">
-    <div class="row height d-flex justify-content-center align-items-center">
-        <div class="col-md-7">
-            <div class="card">
-                <div class="p-3">
-                    <h6>ĐÁNH GIÁ</h6>
-                </div>
-                 <c:choose>
-            <c:when test="${empty feedbacks}">
-                <p>Không có phản hồi nào được tìm thấy.</p>
-            </c:when>
-            <c:otherwise>
-                <c:forEach items="${feedbacks}" var="feedback">
-                 <div class="mt-2">
-                     <div class="d-flex flex-row p-3"> <img src="images/person_4.jpg" width="40" height="40" class="rounded-circle mr-3">
-                        <div class="w-100">
-                            <div class="d-flex justify-content-between align-items-center">
-                                        <div class="d-flex flex-row align-items-center"> <span class="mr-2">${feedback.getAccount().getName()}</span>   </div> <small>${feedback.getCreateTime()}</small>
-                            </div>
-                            <p>
-                                  <c:choose>
+            <div class="row height d-flex justify-content-center align-items-center">
+                <div class="col-md-7">
+                    <div class="card">
+                        <div class="p-3">
+                            <h6>ĐÁNH GIÁ</h6>
+                        </div>
+                        <c:choose>
+                            <c:when test="${empty feedbacks}">
+                                <p>Không có phản hồi nào được tìm thấy.</p>
+                            </c:when>
+                            <c:otherwise>
+                                <c:forEach items="${feedbacks}" var="feedback">
+                                    <div class="mt-2">
+                                        <div class="d-flex flex-row p-3"> <img src="images/person_4.jpg" width="40" height="40" class="rounded-circle mr-3">
+                                            <div class="w-100">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="d-flex flex-row align-items-center"> <span class="mr-2">${feedback.getAccount().getName()}</span>   </div> <small>${feedback.getCreateTime()}</small>
+                                                </div>
+                                                <p>
+                                                    <c:choose>
                                                         <c:when test="${feedback.rating == 5}">
                                                             <i class="fa fa-star" style="color: gold"></i>
                                                             <i class="fa fa-star" style="color: gold"></i>
@@ -286,7 +287,7 @@
                                                         </c:when>
                                                         <c:when test="${feedback.rating == 3}">
                                                             <i class="fa fa-star" style="color: gold"></i>
-                                                            <i class "fa-star" style="color: gold"></i>
+                                                            <i class ="fa fa-star" style="color: gold"></i>
                                                             <i class="fa fa-star" style="color: gold"></i>
                                                             <i class="fa fa-star"></i>
                                                             <i class="fa fa-star"></i>
@@ -313,138 +314,138 @@
                                                             <i class="fa fa-star"></i>
                                                         </c:otherwise>
                                                     </c:choose>
-                            </p>
-                            <p class="text-justify comment-text mb-0">${feedback.getComment()}</p>
-                            
-                        </div>
+                                                </p>
+                                                <p class="text-justify comment-text mb-0">${feedback.getComment()}</p>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
-                   
-                </div>
-                  </c:forEach>
-                   </c:otherwise>
-        </c:choose>
-            </div>
-        </div>
-    </div>
-</div>
-    
- 
-    <section> 
-        <div class="product-section">
-            <div class="container">
-                <div class="row">
-
-                    <!-- Start Column 1 -->
-                    <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
-                        <h2 class="mb-4 section-title">Thiết kế lồng chim với các nguyên liệu phù hợp.</h2>
-                        <p class="mb-4">Khám phá chiếc lồng hoàn hảo cho chú chim của bạn! Lựa chọn của chúng tôi mang đến sự an toàn và phong cách. Hãy nâng tầm ngôi nhà cho chú chim của bạn ngay hôm nay. </p>
-                        <p><a href="bookingCageFrom.jsp" class="btn">Đặt ngay</a></p>
-                    </div> 
-                    <c:forEach var="product" items="${product}">
-                        <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                            <a class="product-item" href="MainController?action=ProDetail&proid=${product.getId()}">
-                                <img src="${product.getImage()}" class="img-fluid product-thumbnail">
-                                <h3 class="product-title">${product.getName()}</h3>
-                                <strong class="product-price">${product.getPrice()}VND</strong>
-
-                                <span class="icon-cross">
-                                    <img src="images/cross.svg" class="img-fluid">
-                                </span>
-                            </a>
-                        </div>
-                    </c:forEach>
-
                 </div>
             </div>
         </div>
-    </section>
- 
-         
-         
-         <!-- ##### Main Content Wrapper End ##### -->
 
-    <!-- ##### Newsletter Area Start ##### -->
 
-    <jsp:include page="footer.jsp" ></jsp:include>
-  <script>
-        function enroll() {
-            // Gửi yêu cầu Ajax để đăng nhập
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/LoginServlet", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        // Xử lý phản hồi thành công
-                        var response = xhr.responseText;
-                        // Cập nhật phần giao diện tùy ý
-                        // Ví dụ: ẩn nút "Add to cart" và hiển thị nội dung đã đăng ký thành công
-                        var addToCartButton = document.querySelector("button[value='Add to cart']");
-                        if (addToCartButton) {
-                            addToCartButton.style.display = "none";
+        <section> 
+            <div class="product-section">
+                <div class="container">
+                    <div class="row">
+
+                        <!-- Start Column 1 -->
+                        <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+                            <h2 class="mb-4 section-title">Thiết kế lồng chim với các nguyên liệu phù hợp.</h2>
+                            <p class="mb-4">Khám phá chiếc lồng hoàn hảo cho chú chim của bạn! Lựa chọn của chúng tôi mang đến sự an toàn và phong cách. Hãy nâng tầm ngôi nhà cho chú chim của bạn ngay hôm nay. </p>
+                            <p><a href="bookingCageFrom.jsp" class="btn">Đặt ngay</a></p>
+                        </div> 
+                        <c:forEach var="product" items="${product}">
+                            <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                                <a class="product-item" href="MainController?action=ProDetail&proid=${product.getId()}">
+                                    <img src="${product.getImage()}" class="img-fluid product-thumbnail">
+                                    <h3 class="product-title">${product.getName()}</h3>
+                                    <strong class="product-price">${product.getPrice()}VND</strong>
+
+                                    <span class="icon-cross">
+                                        <img src="images/cross.svg" class="img-fluid">
+                                    </span>
+                                </a>
+                            </div>
+                        </c:forEach>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- ##### Main Content Wrapper End ##### -->
+
+        <!-- ##### Newsletter Area Start ##### -->
+
+        <jsp:include page="footer.jsp" ></jsp:include>
+        <script>
+            function enroll() {
+                // Gửi yêu cầu Ajax để đăng nhập
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/LoginServlet", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            // Xử lý phản hồi thành công
+                            var response = xhr.responseText;
+                            // Cập nhật phần giao diện tùy ý
+                            // Ví dụ: ẩn nút "Add to cart" và hiển thị nội dung đã đăng ký thành công
+                            var addToCartButton = document.querySelector("button[value='Add to cart']");
+                            if (addToCartButton) {
+                                addToCartButton.style.display = "none";
+                            }
+                            var enrollSuccessMessage = document.getElementById("enrollSuccessMessage");
+                            if (enrollSuccessMessage) {
+                                enrollSuccessMessage.style.display = "block";
+                            }
+      //                         Cập nhật window.location.href nếu bạn muốn điều hướng sau khi đăng ký thành công
+                            var currentURL = window.location.href;
+                            console.log("webUrl");
                         }
-                        var enrollSuccessMessage = document.getElementById("enrollSuccessMessage");
-                        if (enrollSuccessMessage) {
-                            enrollSuccessMessage.style.display = "block";
-                        }
-//                         Cập nhật window.location.href nếu bạn muốn điều hướng sau khi đăng ký thành công
-                        var currentURL = window.location.href;
-                        console.log("webUrl");
                     }
-                }
-            };
-            xhr.send();
-        }
+                };
+                xhr.send();
+            }
 
-        function showLoginContainer() {
-            var $form_modal = $('.cd-user-modal');
-            var $form_login = $form_modal.find('#cd-login');
+            function showLoginContainer() {
+                var $form_modal = $('.cd-user-modal');
+                var $form_login = $form_modal.find('#cd-login');
 
-            $form_modal.addClass('is-visible');
-            $form_login.addClass('is-selected');
-        }
-    </script>
-    <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="js/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Plugins js -->
-    <script src="js/plugins.js"></script>
-    <!-- Active js -->
-    <script src="js/active.js"></script>
-    <script>
-                                            // JavaScript để hiển thị và ẩn popover
-                                            function showPopover() {
-                                                var popover = document.getElementById("popover");
-                                                popover.style.display = "block";
-                                            }
+                $form_modal.addClass('is-visible');
+                $form_login.addClass('is-selected');
+            }
+        </script>
+        <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
+        <script src="js/jquery/jquery-2.2.4.min.js"></script>
+        <!-- Popper js -->
+        <script src="js/popper.min.js"></script>
+        <!-- Bootstrap js -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- Plugins js -->
+        <script src="js/plugins.js"></script>
+        <!-- Active js -->
+        <script src="js/active.js"></script>
+        <script>
+          // JavaScript để hiển thị và ẩn popover
+          function showPopover() {
+              var popover = document.getElementById("popover");
+              popover.style.display = "block";
+          }
 
-                                            function hidePopover() {
-                                                var popover = document.getElementById("popover");
-                                                popover.style.display = "none";
-                                            }
+          function hidePopover() {
+              var popover = document.getElementById("popover");
+              popover.style.display = "none";
+          }
 
-                                            // JavaScript để thực hiện các hành động khi thêm sản phẩm vào giỏ hàng
-                                            function addToCart() {
-                                                // Thêm sản phẩm vào giỏ hàng
-                                                alert("Sản phẩm đã được thêm vào giỏ hàng!");
-                                            }
+          // JavaScript để thực hiện các hành động khi thêm sản phẩm vào giỏ hàng
+          function addToCart() {
+              // Thêm sản phẩm vào giỏ hàng
+              alert("Sản phẩm đã được thêm vào giỏ hàng!");
+          }
 
-                                            // JavaScript để đóng popover
-                                            function closePopover() {
-                                                var popover = document.getElementById("popover");
-                                                popover.style.display = "none";
-                                            }
-    </script>
-</body>
-<script src="pro-detail/vendors/jquery/jquery-3.2.1.min.js"></script>
-<script src="pro-detail/vendors/bootstrap/bootstrap.bundle.min.js"></script>
-<script src="pro-detail/vendors/skrollr.min.js"></script>
-<script src="pro-detail/vendors/owl-carousel/owl.carousel.min.js"></script>
-<script src="pro-detail/vendors/nice-select/jquery.nice-select.min.js"></script>
-<script src="pro-detail/vendors/jquery.ajaxchimp.min.js"></script>
-<script src="pro-detail/vendors/mail-script.js"></script>
-<script src="pro-detail/js/main.js"></script>
+          // JavaScript để đóng popover
+          function closePopover() {
+              var popover = document.getElementById("popover");
+              popover.style.display = "none";
+          }
+        </script>
+    </body>
+    <script src="pro-detail/vendors/jquery/jquery-3.2.1.min.js"></script>
+    <script src="pro-detail/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="pro-detail/vendors/skrollr.min.js"></script>
+    <script src="pro-detail/vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="pro-detail/vendors/nice-select/jquery.nice-select.min.js"></script>
+    <script src="pro-detail/vendors/jquery.ajaxchimp.min.js"></script>
+    <script src="pro-detail/vendors/mail-script.js"></script>
+    <script src="pro-detail/js/main.js"></script>
 </html>

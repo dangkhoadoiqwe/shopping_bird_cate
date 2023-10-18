@@ -141,6 +141,9 @@ public class MainController extends HttpServlet {
                     case "BOOKING":
                         url = "BookingServlet";
                         break;
+                    case "ALLBOOKING":
+                        url="ListBookingServlet";
+                        break;
                 }
             }
         } catch (Exception e) {
