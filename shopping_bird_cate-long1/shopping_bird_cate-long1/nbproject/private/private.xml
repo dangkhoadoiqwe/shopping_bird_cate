@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/Shoppee/shopping_bird_cate-long1/shopping_bird_cate-long1/src/java/Controller/ManageOders.java</file>
-            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/Shoppee/shopping_bird_cate-long1/shopping_bird_cate-long1/src/java/Controller/updateStatus.java</file>
-            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/Shoppee/shopping_bird_cate-long1/shopping_bird_cate-long1/src/java/Controller/MainController.java</file>
-            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/Shoppee/shopping_bird_cate-long1/shopping_bird_cate-long1/web/orders.jsp</file>
+            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/Shoppee/Longcage/shopping_bird_cate-long1/web/products.jsp</file>
+            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/Shoppee/Longcage/shopping_bird_cate-long1/src/java/DAO/ProductDao.java</file>
+            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/Shoppee/Longcage/shopping_bird_cate-long1/src/java/DTO/Product.java</file>
+            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/Shoppee/Longcage/shopping_bird_cate-long1/src/java/Controller/UpdateProductServlet.java</file>
         </group>
     </open-files>
 </project-private>

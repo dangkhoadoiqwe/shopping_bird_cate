@@ -3,7 +3,7 @@
     Created on : 30-09-2023, 16:45:27
     Author     : Quang
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 ﻿<!DOCTYPE html>
@@ -119,16 +119,16 @@
                     <div id="sidebar-menu" class="sidebar-menu">
                         <ul>
                             <li class="list-divider"></li>
-                            <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Customers </span> <span class="menu-arrow"></span></a>
+                            <li class="submenu"> <a href="MainController?action=MANAGE_ACCOUNT"><i class="fas fa-user"></i> <span> Customers </span> <span class="menu-arrow"></span></a>
                                 <ul class="submenu_class" style="display: none;">
-                                    <li><a href="allCus.jsp"> All customers </a></li>
+                                     <li><a href="MainController?action=MANAGE_ACCOUNT">All Custom</a></li>
                                 </ul>
                             </li>
                             <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Staff </span> <span class="menu-arrow"></span></a>
                                 <ul class="submenu_class" style="display: none;">
-                                    <li><a href="MainController?action=allcuss">All Staff </a></li>
-                                    <li><a href="editStaff.jsp"> Edit Staff </a></li>
-                                    <li><a href="addstaff.jsp"> Add Staff </a></li>
+                                    <li><a href="MainController?action=AllSTAFF">All Staff </a></li>
+<!--                                    <li><a href="editStaff.jsp"> Edit Staff </a></li>-->
+                                    <li><a href="admin/addstaff.jsp"> Add Staff </a></li>
                                 </ul>
                             </li>
                         </ul>

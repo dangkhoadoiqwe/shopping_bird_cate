@@ -4,7 +4,9 @@
  */
 package Controller;
 
+import DAO.CategoryDAO;
 import DAO.ProductDao;
+import DTO.CategoryDTO;
 import DTO.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -82,10 +84,11 @@ public class SearchProStaff extends HttpServlet {
             // Gọi phương thức tìm kiếm sản phẩm từ ProductDao
             ProductDao productDao = new ProductDao();
             List<Product> searchResults = productDao.searchProductsByCategoryAndName(categoryID, productName);
-
+              CategoryDAO b = new CategoryDAO();
+              List<CategoryDTO> c = b.getid();
             // Lưu kết quả tìm kiếm vào request attribute
             request.setAttribute("searchResults", searchResults);
-
+              request.setAttribute("cate", c);
             // Chuyển hướng đến trang hiển thị kết quả tìm kiếm
             request.getRequestDispatcher("products1.jsp").forward(request, response);
         } catch (Exception e) {

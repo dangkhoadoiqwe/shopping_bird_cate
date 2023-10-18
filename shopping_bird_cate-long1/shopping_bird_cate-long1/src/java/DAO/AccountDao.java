@@ -12,12 +12,34 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author hailo
  */
 public class AccountDao {
+private static final String REGIS = "INSERT INTO Account(email, password, name, role, phone, accountStatus, point)VALUES(?, ?, ?, ?, ?, 1, 10)";
+
+     public boolean registerAccount(Account account) throws SQLException {
+        String insertQuery = "INSERT INTO Account(email, password, name, role, phone, accountStatus, point) VALUES (?, ?, ?, ?, ?, 1, 10)";
+        try (Connection connection = DBContext.getConnection();
+             PreparedStatement statement = connection.prepareStatement(insertQuery)) {
+            statement.setString(1, account.getEmail());
+            statement.setString(2, account.getPassword());
+            statement.setString(3, account.getName());
+            statement.setInt(4, 1);
+            statement.setString(5, account.getPhone());
+            
+
+            int rowsInserted = statement.executeUpdate();
+            return rowsInserted > 0;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AccountDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
       private static final String CHECK_DUPLICATE = "SELECT email FROM Account WHERE email = ? COLLATE SQL_Latin1_General_CP1_CS_AS";
 
     public boolean checkDuplicate(String email) throws SQLException {
@@ -84,9 +106,10 @@ public class AccountDao {
         }
         return check;
     }
+    
      private static final String GET_Staff = "SELECT accountID, email, name, profilePhoto, phone, Address, accountStatus, role\n"
             + "         FROM Account\n"
-            + "         WHERE role != 2 AND role != 4";
+            + "         WHERE role =3";
 
     public static List<Account>getStaff() throws SQLException {
         List<Account> list = new ArrayList<>();
@@ -101,14 +124,15 @@ public class AccountDao {
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
-                    Account ac = new Account();
+                     Account ac = new Account();
                     ac.setId(rs.getInt("accountID"));
                     ac.setEmail(rs.getString("email"));
                     ac.setName(rs.getString("name"));
                     ac.setProfilePhoto(rs.getString("profilePhoto"));
                     ac.setPhone(rs.getString("phone"));
-                    ac.setStatus(rs.getInt("role"));
+                    ac.setRole(rs.getInt("role"));
                     ac.setAddress(rs.getString("Address"));
+                    ac.setStatus(rs.getInt("accountStatus"));
                     list.add(ac);
                 }
             }
@@ -130,7 +154,8 @@ public class AccountDao {
         }
         return list;
     }
-     private static final String GET_allCus = "SELECT accountID, email, name, profilePhoto, phone, accountStatus FROM Account WHERE role = 4";
+    
+     private static final String GET_allCus = "SELECT accountID, email, name, profilePhoto, phone, accountStatus FROM Account WHERE role = 1";
 
     public static List<Account> getAllCus() throws SQLException {
         List<Account> list = new ArrayList<>();
@@ -176,6 +201,7 @@ public class AccountDao {
         boolean check = false;
         try {
             con = DBContext.getConnection();
+             stm = con.prepareStatement(UPDATE_ACCOUNT);
             if (con != null) {
               stm.setString(1, account.getName());
             stm.setString(2, account.getEmail());
@@ -228,7 +254,7 @@ public class AccountDao {
         }
         return check;
     }
-     private static final String FIND_ACCOUNT_BY_Staff = "SELECT * FROM Account WHERE (role = 1 OR role = 3)";
+    private static final String FIND_ACCOUNT_BY_Staff = "SELECT * FROM Account WHERE (role = 4 OR role = 3)";
 
     public static ArrayList<Account> findAccByStaff(String txtSearch, String searchBy) throws SQLException {
         Connection con = null;
@@ -238,7 +264,7 @@ public class AccountDao {
         try {
             con = DBContext.getConnection();
             if (con != null) {
-                String sql = FIND_ACCOUNT_BY_Staff; // Sửa tên biến SQL đúng
+                String sql = FIND_ACCOUNT_BY_Staff; 
                 if (searchBy.equalsIgnoreCase("byName")) {
                     sql += " AND name LIKE ?";
                 } else if (searchBy.equalsIgnoreCase("byEmail")) {
@@ -256,8 +282,9 @@ public class AccountDao {
                     ac.setName(rs.getString("name"));
                     ac.setProfilePhoto(rs.getString("profilePhoto"));
                     ac.setPhone(rs.getString("phone"));
-                    ac.setStatus(rs.getInt("role"));
+                    ac.setRole(rs.getInt("role"));
                     ac.setAddress(rs.getString("Address"));
+                    ac.setStatus(rs.getInt("accountStatus"));
                     list.add(ac);
                 }
             }
@@ -280,7 +307,7 @@ public class AccountDao {
         }
         return list;
     }
-   private static final String FIND_ACCOUNT_BY_OPTION = "SELECT * FROM Account WHERE role = 4 ";
+   private static final String FIND_ACCOUNT_BY_OPTION = "SELECT * FROM Account WHERE role = 1 ";
 
     public static ArrayList<Account> findAccByOption(String txtSearch, String searchBy) throws SQLException {
         Connection con = null;
@@ -456,7 +483,7 @@ public Account getAccountByID(int accountID) throws SQLException {
         try {
             try (Connection con = DBContext.getConnection()) {
                 if (con != null) {
-                    String sql = "SELECT * FROM Account WHERE email = ? and Password = ?";
+                    String sql = "SELECT * FROM Account WHERE email = ? and Password = ?   ";
                     try (PreparedStatement stm = con.prepareStatement(sql)) {
                         stm.setString(1, username);
                         stm.setString(2, password);
@@ -467,7 +494,7 @@ public Account getAccountByID(int accountID) throws SQLException {
                                 acc.setName(rs.getString(2));
                                 acc.setPassword(rs.getString(3));
                                 acc.setProfilePhoto(rs.getString(4));
-                                acc.setPhone(rs.getString(5));
+                                acc.setPhone(rs.getString(5).trim());
                                 acc.setRole(rs.getInt(6));
                                 acc.setStatus(rs.getInt(7));
                                 acc.setEmail(rs.getString(8));

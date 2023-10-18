@@ -4,7 +4,9 @@
  */
 package Controller;
 
+import DAO.FeedbackDao;
 import DAO.ProductDao;
+import DTO.Feedback;
 import DTO.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,18 +40,20 @@ public class productdetail extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-             HttpSession s = request.getSession();
-           String url = null;
-             ProductDao a = new ProductDao();
+            HttpSession s = request.getSession();
+            String url = null;
+            ProductDao a = new ProductDao();
+            FeedbackDao fed = new FeedbackDao();
             int pro = Integer.parseInt(request.getParameter("proid"));
 
             try {
-                 
-                 Product check = a.getid(pro);
-                  List<Product> d = a.getTop3();
+                List<Feedback> feedbacks = fed.getALLfeedback(pro);
+                Product check = a.getid(pro);
+                List<Product> d = a.getTop3();
                 if (check != null) {
-                      s.setAttribute("prodetail", check);
-                        s.setAttribute("product", d);
+                    s.setAttribute("prodetail", check);
+                    s.setAttribute("product", d);
+                    s.setAttribute("feedbacks", feedbacks);
                     url = SUCCESS;
                 } else {
                     url = ERROR;

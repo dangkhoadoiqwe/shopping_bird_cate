@@ -25,30 +25,44 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = "";
+        HttpSession session = request.getSession();
         String username = request.getParameter("username");
-        System.out.println(username);
         String password = request.getParameter("password");
+        String webUrl = request.getParameter("webUrl");
         AccountDao accDao = new AccountDao();
         Account account = accDao.getAccount(username, password);
+        String msg;
+//        role 1 cus
+//        role 2 admin
+//role 3 staff
+// role 4 manager
         if (account != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("account", account);
-            switch (account.getRole()) {
-                case 2:
-                    url = "MainController?action=MANAGE_ACCOUNT";
-                    break;
-                case 1:
-                    url = "ListAllProducts";
-                    break;
-                case 0 :
-                     url = "homePage.jsp";
-                    break;
-                case 3:
-                    url ="ManageOders";
-                    break;
+            if (account.getStatus() == 0) {
+                request.setAttribute("msg", "Tài khoản của bạn đã bị khóa!!!!");
+                url = "homePage.jsp";
+            } else {
+                session.setAttribute("account", account);
+                switch (account.getRole()) {
+                    case 4:
+                        url = "homeManager.jsp";
+                        break;
+                    case 2:
+                        url = "MainController?action=MANAGE_ACCOUNT";
+                        break;
+                    case 1:
+                         url = "homePage.jsp";
+                        break;
+
+                    case 3:
+                        url = "ManageOders";
+                        break;
+                }
             }
+        } else {
+            request.setAttribute("msg", "Đăng nhập thất bại");
+            url = "homePage.jsp";
         }
-        response.sendRedirect(url);
+        request.getRequestDispatcher(url).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

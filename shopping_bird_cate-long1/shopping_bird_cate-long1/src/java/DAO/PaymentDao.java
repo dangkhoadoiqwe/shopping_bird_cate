@@ -18,6 +18,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -55,35 +57,41 @@ public class PaymentDao {
         return check;
     }
 
-    public boolean updateProductStatus(String cartID, String newStatus) throws SQLException {
-        Connection con = null;
-        PreparedStatement stm = null;
-        boolean check = false;
-        try {
-            con = DBContext.getConnection();
-            if (con != null) {
-                stm = con.prepareStatement("UPDATE Delivery\n"
-                        + "SET Status = ?\n"
-                        + "FROM Delivery\n"
-                        + "INNER JOIN Payment ON Delivery.deliveryID = Payment.deliveryID\n"
-                        + "WHERE Payment.cartID = ?;");
-                stm.setString(1, newStatus);
-                stm.setString(2, cartID);
-                check = stm.executeUpdate() > 0;
+  public boolean updateProductStatus(String cartID, String newStatus) throws SQLException {
+    try (Connection con = DBContext.getConnection();
+         PreparedStatement updateDeliveryStatus = con.prepareStatement(
+            "UPDATE Delivery " +
+            "SET Status = ? " +
+            "FROM Delivery " +
+            "INNER JOIN Payment ON Delivery.deliveryID = Payment.deliveryID " +
+            "WHERE Payment.cartID = ?;");
+         PreparedStatement updatePaymentStatus = con.prepareStatement(
+            "UPDATE payment " +
+            "SET paymentStatus = 1 " +
+            "WHERE EXISTS ( " +
+            "    SELECT 1 " +
+            "    FROM delivery " +
+            "    WHERE delivery.deliveryID = payment.deliveryID " +
+            "    AND delivery.status = 3);")) {
 
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
+        // Cập nhật Delivery Status
+        updateDeliveryStatus.setString(1, newStatus);
+        updateDeliveryStatus.setString(2, cartID);
+        boolean deliveryStatusUpdated = updateDeliveryStatus.executeUpdate() > 0;
+
+        // Cập nhật paymentStatus
+        boolean paymentStatusUpdated = updatePaymentStatus.executeUpdate() > 0;
+
+        return deliveryStatusUpdated && paymentStatusUpdated;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    }   catch (ClassNotFoundException ex) {
+            Logger.getLogger(PaymentDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return check;
-    }
+        return false;
+}
+
 
     public List<Payment> getid(int id) throws SQLException {
         List<Payment> list = new ArrayList<>(); // Khởi tạo đối tượng ProductDTO

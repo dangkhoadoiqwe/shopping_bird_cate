@@ -9,6 +9,7 @@ import DAO.AccountDao;
 import DTO.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,21 +35,20 @@ public class SearchByID extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int accountId = Integer.parseInt(request.getParameter("acID")); 
-   
+        int accountId = Integer.parseInt(request.getParameter("acID"));
+
         try {
-              AccountDao acc = new AccountDao();
-             Account  account  = acc.getAccountByID(accountId);
-            if (acc != null) {
-               
-                request.setAttribute("acID",  account);
+            AccountDao accDao = new AccountDao();
+            Account account = accDao.getAccountByID(accountId);
+            if (account != null) {
+                request.setAttribute("acID", account);
                 request.getRequestDispatcher("editStaff.jsp").forward(request, response);
             } else {
                 response.getWriter().write("Không tìm thấy tài khoản với ID: " + accountId);
             }
-        } catch (Exception e) {
+        } catch (IOException | SQLException | ServletException e) {
             e.printStackTrace();
-            
+
         }
     }
 

@@ -37,9 +37,9 @@ public class bookingHistory extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-          int  accountId = Integer.parseInt(request.getParameter("accid"));
-
-            List<BookingRequest> list = BookingDao.getBookingRequestsByAccountId(accountId);
+            int accountId = Integer.parseInt(request.getParameter("accid"));
+            BookingDao bookingDao = new BookingDao();
+            List<BookingRequest> list = bookingDao.getBookingRequestsByAccountId(accountId);
 
             if (list != null && !list.isEmpty()) {
                 request.setAttribute("allBooking", list);

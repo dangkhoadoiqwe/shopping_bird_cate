@@ -35,8 +35,9 @@ public class MainController extends HttpServlet {
     private static final String pro_com2 = "addcompare2";
     private static final String pro_com3_CONTROLLNER = "com3";
     private static final String pro_com3 = "addcompare3";
-     private static final String List_cus = "allcuss";
-      private static final String  List_cus_controllner = "ListALLcus";
+    private static final String List_cus = "allcuss";
+    private static final String List_cus_controllner = "ListALLcus";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -48,30 +49,38 @@ public class MainController extends HttpServlet {
                 url = LOAD_HOME_PAGE;
             } else {
                 switch (action) {
+                    case "delidetail":
+                        url = "Loaddeliverydetail";
+                        break;
+                        case "acc":
+                        url = "updateacc";
+                        break;                  
+                    case "Register":
+                        url = "RegisterController1";
+                        break;
+
                     case "pro":
                         url = "ManagePro";
                         break;
-                         case "vu":
+                    case "vu":
                         url = "ManagerVoucherStaff";
                         break;
-                     case "delivery":
+                    case "delivery":
                         url = "deliverycontrollner";
                         break;
-                     
                     case "orderslist":
                         url = "ManageOders";
                         break;
-                     
                     case "login":
                         url = "LoginServlet";
                         break;
-                        case "loadacc":
+                    case "loadacc":
                         url = "Loadacccontrollner";
                         break;
                     case add:
                         url = add_controllner;
                         break;
-                        case List_cus:
+                    case List_cus:
                         url = List_cus_controllner;
                         break;
                     case LOGOUT:
@@ -95,7 +104,7 @@ public class MainController extends HttpServlet {
                     case pro_com3_CONTROLLNER:
                         url = pro_com3;
                         break;
-                         case "MANAGE_ACCOUNT":
+                    case "MANAGE_ACCOUNT":
                         url = "allCusController";
                         break;
                     case "BAN_ACCOUNT":
@@ -109,14 +118,14 @@ public class MainController extends HttpServlet {
                         break;
                     case "AllSTAFF":
                         url = "AllStaffSevlet";
-                        break;
+                        break;                       
                     case "SEARCHS":
                         url = "SearchStaffController";
                         break;
                     case "addStaff":
                         url = "addStaffController";
                         break;
-                    case "BAN_STaff":
+                    case "BAN_Staff":
                         url = "BanStaffController";
                         break;
 
@@ -125,6 +134,15 @@ public class MainController extends HttpServlet {
                         break;
                     case "SearchByID":
                         url = "SearchByID";
+                        break;
+                    case "Searchs":
+                        url = "SearchStaffController";
+                        break;
+                    case "BOOKING":
+                        url = "BookingServlet";
+                        break;
+                    case "ALLBOOKING":
+                        url="ListBookingServlet";
                         break;
                 }
             }

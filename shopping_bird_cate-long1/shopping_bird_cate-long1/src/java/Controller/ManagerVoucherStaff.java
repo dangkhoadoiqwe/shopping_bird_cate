@@ -58,7 +58,7 @@ public class ManagerVoucherStaff extends HttpServlet {
                     }
                 }
 
-            session.setAttribute("c", vouchers); // Lưu danh sách voucher sau khi cập nhật trạng thái
+            session.setAttribute("vouchers", vouchers); // Lưu danh sách voucher sau khi cập nhật trạng thái
             String url = SUCCESS;
             request.getRequestDispatcher(url).forward(request, response);
         } else {

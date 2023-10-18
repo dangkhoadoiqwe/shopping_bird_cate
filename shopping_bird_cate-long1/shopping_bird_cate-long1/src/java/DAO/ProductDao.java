@@ -23,8 +23,52 @@ import java.util.logging.Logger;
  * @author hailo
  */
 public class ProductDao {
+
+    public List<Product> getProductsByCartID(int cartID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Product> products = new ArrayList<>();
+
+        try {
+            conn = DBContext.getConnection(); // Khởi tạo kết nối đến cơ sở dữ liệu
+            String sql = "SELECT  p.[productID],p.productName, p.image, p.quantity, p.price "
+                    + "FROM Product p "
+                    + "INNER JOIN CartDetail cd ON p.productID = cd.productID "
+                    + "WHERE cd.cartID = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, cartID);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Product product = new Product();
+                product.setId(rs.getInt("productID"));
+                product.setName(rs.getString("productName"));
+                product.setQuantity(rs.getInt("quantity"));
+                product.setPrice(rs.getFloat("price"));
+                product.setImage(rs.getString("image"));
+                products.add(product);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            // Đảm bảo tài nguyên được đóng sau khi sử dụng
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return products;
+    }
+
     public List<Product> searchProductsByCategoryAndName(int categoryID, String productName) {
-    List<Product> productList = new ArrayList<>();
+        List<Product> productList = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -48,6 +92,7 @@ public class ProductDao {
                     product.setId(rs.getInt("productID"));
                     product.setName(rs.getString("productName"));
                     a.setCategoryName(rs.getString("categoriesName"));
+                    product.setCate(a);
                     product.setQuantity(rs.getInt("quantity"));
                     product.setPrice(rs.getFloat("price"));
                     product.setSize(rs.getString("size"));
@@ -59,32 +104,31 @@ public class ProductDao {
                     product.setManufacturer(rs.getString("manufacturer"));
                     product.setMadeIn(rs.getString("madeIn"));
 
-                productList.add(product);
-            }
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    } catch (ClassNotFoundException ex) {
-        ex.printStackTrace();
-    } finally {
-        try {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stmt != null) {
-                stmt.close();
-            }
-            if (conn != null) {
-                conn.close();
+                    productList.add(product);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+
+        return productList;
     }
-
-    return productList;
-}
-
 
     public int insertProduct(Product product) throws SQLException {
         Connection conn = null;
@@ -395,7 +439,7 @@ public class ProductDao {
         return products; // Trả về danh sách sản phẩm đã được thiết lập dữ liệu
     }
 
-    public void insertCheckout(cartDAO cart, String name, String address, String phone, Account user, float discountTotal, String note) throws ClassNotFoundException, SQLException {
+    public void insertCheckout(cartDAO cart, String name, String address, String phone, Account user, float discountTotal, String note, int status, int voucher) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement statement = null;
         ResultSet rs = null;
@@ -463,17 +507,19 @@ public class ProductDao {
                     insertOrderDetailsStmt.executeUpdate();
                 }
 
-                String insertpaymentDetailsQuery = "INSERT INTO Payment ([createTime], feeShip, [total], [paymentStatus], [deliveryID], [cartID], [cusPhone], [cusAddress],  [cusName])"
-                        + " VALUES (GETDATE(), 30, ?, 1, ?, ?, ?, ?, ?)";
+                String insertpaymentDetailsQuery = "INSERT INTO Payment ([createTime], feeShip,voucherID, [total], [paymentStatus], [deliveryID], [cartID], [cusPhone], [cusAddress],  [cusName])"
+                        + " VALUES (GETDATE(), 30,?, ?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement insertpaymentDetailsStmt = con.prepareStatement(insertpaymentDetailsQuery);
 
                 for (cartDTO item : cart.getItems()) {
-                    insertpaymentDetailsStmt.setDouble(1, discountTotal);
-                    insertpaymentDetailsStmt.setInt(2, pid);
-                    insertpaymentDetailsStmt.setInt(3, bid);
-                    insertpaymentDetailsStmt.setString(4, phone);
-                    insertpaymentDetailsStmt.setString(5, address); 
-                    insertpaymentDetailsStmt.setString(6, name); 
+                    insertpaymentDetailsStmt.setDouble(1, voucher);
+                    insertpaymentDetailsStmt.setDouble(2, discountTotal);
+                    insertpaymentDetailsStmt.setInt(3, status);
+                    insertpaymentDetailsStmt.setInt(4, pid);
+                    insertpaymentDetailsStmt.setInt(5, bid);
+                    insertpaymentDetailsStmt.setString(6, phone);
+                    insertpaymentDetailsStmt.setString(7, address);
+                    insertpaymentDetailsStmt.setString(8, name);
                     insertpaymentDetailsStmt.executeUpdate();
                 }
                 String updatepointacc = "UPDATE Account\n"
@@ -518,48 +564,72 @@ public class ProductDao {
             }
         }
     }
- 
-    public boolean updateProduct(int productID, String productName, String description, int quantity, float price, String size) throws ClassNotFoundException {
-        Connection connection = null;
-        PreparedStatement stm = null;
 
-        String updateQuery = "UPDATE Product "
-                + "SET [productName] = ?, "
-                + "    [description] = ?, "
-                + "    [quantity] = ?, "
-                + "    [price] = ?, "
-                + "    [size] = ? "
-                + "WHERE [productID] = ?";
+    public boolean updateProduct(int productID, String productName, int categoriesID, int quantity, float price, String size,
+            String color, String material, String image, String manufacturer, String madeIn, String description) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        boolean success = false;
 
         try {
-            connection = DBContext.getConnection(); // Mở kết nối
-            stm = connection.prepareStatement(updateQuery);
-            stm.setString(1, productName);
-            stm.setString(2, description);
-            stm.setInt(3, quantity);
-            stm.setFloat(4, price);
-            stm.setString(5, size);
-            stm.setInt(6, productID);
+            conn = DBContext.getConnection();
 
-            int rowsUpdated = stm.executeUpdate();
+            String sql = "UPDATE Product "
+                    + "SET productName = ?, "
+                    + "categoriesID = ?, "
+                    + "quantity = ? ,"
+                    + "price = ? , "
+                    + "size = ? ,"
+                    + "color = ? ,"
+                    + "material = ? ,"
+                    + "image = ?, "
+                    + "manufacturer = ?, "
+                    + "madeIn = ?, "
+                    + "description = ? "
+                    + "WHERE productID = ?";
 
-            return rowsUpdated > 0;
-        } catch (SQLException e) {
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, productName);
+            stmt.setInt(2, categoriesID);
+            stmt.setInt(3, quantity);
+            stmt.setFloat(4, price);
+            stmt.setString(5, size);
+            stmt.setString(6, color);
+            stmt.setString(7, material);
+            stmt.setString(8, image);
+            stmt.setString(9, manufacturer);
+            stmt.setString(10, madeIn);
+            stmt.setString(11, description);
+            stmt.setInt(12, productID);
+
+            int rowsUpdated = stmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                success = true;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            // Properly handle and log the exception
             e.printStackTrace();
-            return false;
-        } finally {
-            // Đảm bảo rằng kết nối được đóng ngay cả khi có lỗi
+
+        } // Properly handle and log the exception
+        finally {
+            // Close the resources in reverse order of opening
             try {
-                if (stm != null) {
-                    stm.close();
+                if (stmt != null) {
+                    stmt.close();
                 }
-                if (connection != null) {
-                    connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (conn != null) {
+                    conn.close();
                 }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
+
+        return success;
     }
 
     public Product getid(int id) throws SQLException {
@@ -696,28 +766,29 @@ public class ProductDao {
         try {
             con = DBContext.getConnection();
             if (con != null) {
-                stm = con.prepareStatement("SELECT p.productID, \n"
-                        + "    p.productName,\n"
-                        + "    c.categoriesName,\n"
-                        + "    p.quantity,\n"
-                        + "    p.price,\n"
-                        + "    p.size,\n"
-                        + "    p.color,\n"
-                        + "    p.material,\n"
-                        + "    p.createTime,\n"
-                        + "    p.description,\n"
-                        + "    p.image,\n"
-                        + "    p.manufacturer,\n"
-                        + "    p.madeIn,\n"
-                        + "    p.productStatus\n"
-                        + "FROM dbo.Product p\n"
-                        + "INNER JOIN dbo.Category c ON p.categoriesID = c.categoriesID; ");
+                stm = con.prepareStatement("SELECT p.productID,  \n"
+                        + "                           p.productName,  p.categoriesID,\n"
+                        + "                           c.categoriesName, \n"
+                        + "                           p.quantity, \n"
+                        + "                           p.price, \n"
+                        + "                           p.size, \n"
+                        + "                           p.color, \n"
+                        + "                           p.material, \n"
+                        + "                           p.createTime, \n"
+                        + "                           p.description, \n"
+                        + "                           p.image, \n"
+                        + "                           p.manufacturer, \n"
+                        + "                           p.madeIn, \n"
+                        + "                           p.productStatus \n"
+                        + "                        FROM dbo.Product p \n"
+                        + "                        INNER JOIN dbo.Category c ON p.categoriesID = c.categoriesID; ");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     Product product = new Product();
                     CategoryDTO a = new CategoryDTO();
                     product.setId(rs.getInt("productID"));
                     product.setName(rs.getString("productName"));
+                    product.setCateID(rs.getInt("categoriesID"));
                     a.setCategoryName(rs.getString("categoriesName"));
                     product.setCate(a);
                     product.setQuantity(rs.getInt("quantity"));

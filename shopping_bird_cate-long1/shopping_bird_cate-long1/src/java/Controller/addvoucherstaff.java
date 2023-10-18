@@ -7,12 +7,14 @@ package Controller;
 import DAO.VoucherDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static org.eclipse.jdt.internal.compiler.parser.Parser.name;
 
 /**
  *
@@ -84,7 +86,12 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             response.sendRedirect("error.jsp");
             return;
         }
-        
+        try {
+        byte[] isoBytes = voucherName.getBytes("ISO-8859-1"); 
+        voucherName = new String(isoBytes, "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+        e.printStackTrace();
+    }
         int accountID = 1;
         Date dateStart = Date.valueOf(dateStartStr);
         Date dateEnd = Date.valueOf(dateEndStr);

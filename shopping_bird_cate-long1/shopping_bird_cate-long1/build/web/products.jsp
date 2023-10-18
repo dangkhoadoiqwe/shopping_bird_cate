@@ -21,6 +21,40 @@
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="assets/css/style.css"> 
         <style>
+            .popup-container {
+                background-color: #f5f5f5;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                padding: 10px;
+                max-width: 300px;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            .popup-container input[type="text"],
+            .popup-container input[type="number"] {
+                width: 100%;
+                padding: 5px;
+                margin: 5px 0;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+            }
+
+            .popup-container input[type="text"]:focus,
+            .popup-container input[type="number"]:focus {
+                outline: none;
+                border: 1px solid #007bff;
+            }
+
+            .popup-container input[type="submit"] {
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 3px;
+                padding: 5px 10px;
+                cursor: pointer;
+            }
+
             /* Định dạng các ô input trong bảng */
             table input {
                 width: 100%;
@@ -111,7 +145,7 @@
             <div class="sidebar" id="sidebar">
                 <div class="sidebar-inner slimscroll">
                     <div id="sidebar-menu" class="sidebar-menu">
-                       <ul>
+                        <ul>
                             <li class="active"> <a href="MainController?action=pro"><i class="fas fa-cube"></i> <span>Sản phẩm</span></a> </li>
                             <li class="active"> <a href="MainController?action=orderslist"><i class="fas fa-cube"></i> <span>Đơn đặt hàng</span></a> </li>
                             <li class="active"> <a  href="MainController?action=vu"><i class="fas fa-cube"></i> <span>Vouchers</span></a> </li>
@@ -226,14 +260,14 @@
                         <div class="col-lg-12">
                             <form action="SearchProStaff" method="post"> 
                                 <div class="row formtype">
-                                     
+
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Loại sản phẩm</label>
                                             <select class="form-control" id="sel1" name="categoryID">
                                                 <c:forEach var="d" items="${cate}"> 
-                                                                <option value="${d.getCategoryId()}" name"categoryID">${d.getCategoryName()} </option>
-                                                            </c:forEach>
+                                                    <option value="${d.getCategoryId()}" name"categoryID">${d.getCategoryName()} </option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>
@@ -247,7 +281,7 @@
                                         <div class="form-group">
                                             <label>Tìm kiếm</label> <button type="submit" href="#" class="btn btn-success btn-block mt-0 search_button"> Tìm kiếm </button> </div>
                                     </div>
-                                        
+
                                 </div>
                             </form>
                         </div>
@@ -260,58 +294,141 @@
 
 
 
-
                                         <table class="datatable table table-striped">
                                             <thead>
                                                 <tr>
-
                                                     <th>Tên sản phẩm</th>
                                                     <th>Mô tả sản phẩm</th>
-                                                    <th>Số lượng</th> 
-                                                    <th>Giá sản phẩm(VND)</th>
-                                                    <th> Kích thước(30cmx30cm)</th> 
+                                                    <th>Loại lồng </th>
+                                                    <th>Số lượng</th>
+                                                    <th>Giá (VND)</th>
+                                                    <th>Kích thước (30cmx30cmx30cm)</th>
+                                                    <th>Màu sắc</th>
+                                                    <th>nhà sản xuất </th>
+                                                    <th>sản xuất ở </th>
                                                     <th>Hình ảnh</th>
                                                     <th>Trạng thái</th>
-                                                    <th class="text-right">Chức năng</th>
+                                                    <th>Chức năng</th>
                                                 </tr>
                                             </thead>
+                                            <c:forEach var="product" items="${prolist}">
 
-                                            <tbody>
-                                                <c:forEach var="product" items="${prolist}">
-                                                    <tr>
-                                                <form action="updateprostaff" method="post">
-                                                    <input type="hidden" name="productID" value="${product.getId()}"> 
-                                                    <td><input type="text" name="productName" value="${product.getName()}" ></td>
-                                                    <td><input type="text" name="description" value="${product.getDescription()}" ></td>
-                                                    <td><input type="number" name="quantity" value="${product.getQuantity()}"></td>
-                                                    <td><input type="text" name="price" value="${product.getPrice()}"></td>
-                                                    <td><input type="text" name="size" value="${product.getSize()}"></td>
-                                                    <td><img src="${product.getImage()}" style="height: 50px; width: 50px;"></td>
-                                                    <td>
+                                                <tbody>
 
-                                                        <c:choose>
-                                                            <c:when test="${product.getStatus() == 1 && product.getQuantity() > 0}">
-                                                                <p class="btn btn-success">Còn hàng</p>
-                                                            </c:when>
-                                                            <c:when test="${product.getStatus() == 0 && product.getQuantity() == 0}">
-                                                                <p class="btn btn-danger">Hết hàng</p>
-                                                            </c:when>
-                                                            <c:when test="${product.getStatus() == 1 && product.getQuantity() == 0}">
-                                                                <p class="btn btn-danger">Hết hàng</p>
-                                                            </c:when>
-                                                        </c:choose>
 
-                                                    </td>
-                                                    <td class="text-right">
-                                                        <button class="btn btn-sm bg-success-light mr-2" type="submit">
-                                                            Cập nhật
-                                                        </button>
+                                                    <tr> 
+                                                        <td>${product.getName()} </td>
+                                                        <td>${product.getDescription()}</td>
+                                                        <td>${product.getCate().getCategoryName()}</td>
+                                                        <td>${product.getQuantity()}</td>
+                                                        <td> ${product.getPrice()}</td>
+                                                         <td>${product.getSize()}</td>
+                                                        <td>${product.getColor()}</td>
+                                                        <td>${product.getManufacturer()}</td>
+                                                        <td>${product.getMadeIn()}</td>
+                                                        
+                                                        <td><img src="${product.getImage()}" style="height: 50px; width: 50px;"></td>
+                                                        <td>
+                                                            <c:choose>
+                                                                <c:when test="${product.getStatus()  == 1 && product.getQuantity()  > 0}">
+                                                                    <p class="btn btn-success">Còn hàng</p>
+                                                                </c:when>
+                                                                <c:when test="${product.getStatus()  == 0 && product.getQuantity()  == 0}">
+                                                                    <p class="btn btn-danger">Hết hàng</p>
+                                                                </c:when>
+                                                                <c:when test="${product.getStatus()  == 1 && product.getQuantity()  == 0}">
+                                                                    <p class="btn btn-danger">Hết hàng</p>
+                                                                </c:when>
+                                                                <c:when test="${product.getStatus()  == 0 }">
+                                                                    <p class="btn btn-danger">Hết hàng</p>
+                                                                </c:when>
+                                                            </c:choose>
                                                         </td>
-                                                    </form>
-                                                    </tr>
-                                            </c:forEach>
-                                            </tbody>
+                                                        <td class="text-right">
+                                                            <button  type="button" class="btn btn-sm bg-success-light mr-2"   data-toggle="modal" data-target="#delete_asset_${product.getId()}">
+                                                                Cập nhật
+                                                            </button>
+                                                            <div id="delete_asset_${product.getId()}" class="modal fade delete-modal" role="dialog">
+                                                                <div class="modal-dialog modal-dialog-centered">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-body text-center">  
+                                                                            
+                                                                            
+                                                                            <form action="UpdateProductServlet" method="post">
+                                                                                <input type="hidden" name="productId" value="${product.getId()}">
 
+                                                                                <div class="form-group">
+                                                                                    <label   class="float-left" for="productName">Product Name </label>
+                                                                                    <input type="text" name="productName" class="form-control" value="${product.getName()}">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="float-left" for="categoryId">Category</label>
+                                                                                   <select name="categoryId" required class="form-control">
+                                                                                    <c:forEach var="d" items="${cate}">
+                                                                                        <option value="${d.getCategoryId()}">${d.getCategoryName()}</option>
+                                                                                    </c:forEach>
+                                                                                </select>   
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label  for="quantity" class="float-left">Quantity</label>
+                                                                                    <input type="number" name="quantity"   class="form-control" value="${product.getQuantity()}">
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label class="float-left"  class="float-left" for="price">Price</label>
+                                                                                    <input type="number" name="price"  class="form-control" value="${product.getPrice()}">
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label  class="float-left" for="size">Size</label>
+                                                                                    <input type="text" name="size"  class="form-control" value="${product.getSize()}">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="float-left" for="color">Color</label>
+                                                                                    <input type="text" name="color"  class="form-control" value="${product.getColor()}">
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label  class="float-left" for="image">Image</label>
+                                                                                    <input type="text" name="image"     class="form-control-file"  value="${product.getImage()}">
+
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label  class="float-left" for="manufacturer">Manufacturer</label>
+                                                                                    <input type="text" name="manufacturer"  class="form-control" value="${product.getManufacturer()}">
+                                                                                </div>
+
+
+                                                                                <div class="form-group">
+                                                                                    <label class="float-left" for="material">Material</label>
+                                                                                    <input type="text" name="material"   class="form-control" value="${product.getMaterial()}">
+                                                                                </div>
+
+
+                                                                                <div class="form-group">
+                                                                                    <label class="float-left" for="madeIn">Made In</label>
+                                                                                    <input type="text" name="madeIn" class="form-control" value="${product.getMadeIn()}">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="float-left" for="description">Description</label>
+                                                                                    <input type="text" name="description"  class="form-control" value="${product.getDescription()}">
+                                                                                </div>
+
+                                                                                <button type="submit" class="btn btn-primary">Update</button>
+                                                                                <button id="closePopupButton" class="btn btn-secondary">Close</button>
+                                                                            </form>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>  
+                                                        </td> 
+                                                    </tr>
+
+                                                </tbody>
+                                                </form>
+                                            </c:forEach>
                                         </table>
 
                                     </div>
@@ -320,21 +437,54 @@
                         </div>
                     </div>
 
-                    <div id="delete_asset" class="modal fade delete-modal" role="dialog">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-body text-center"> <img src="assets/img/sent.png" alt="" width="50" height="46">
-                                    <h3 class="delete_class">Bạn có chắc chắn muốn xóa sản phẩm này?</h3>
-                                    <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Đóng</a>
-                                        <button type="submit" class="btn btn-danger">Xóa</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
+        <script>
+            $(function () {
+                $('#datetimepicker3').datetimepicker({
+                    format: 'LT'
+                });
+            });
+        </script>
+        <script>
+            // Kiểm tra xem biểu mẫu đã được gửi thành công chưa
+            var formSubmitted = false;
+
+            document.getElementById("statusForm").addEventListener("submit", function (event) {
+                if (formSubmitted) {
+                    // Nếu biểu mẫu đã được gửi thành công trước đó, vô hiệu hóa trường select
+                    event.preventDefault();
+                } else {
+                    // Đánh dấu biểu mẫu đã được gửi thành công
+                    formSubmitted = true;
+                }
+            });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                document.body.addEventListener('click', function (e) {
+                    const target = e.target;
+
+                    // Check if a popup trigger link was clicked
+                    if (target.classList.contains('popup-trigger')) {
+                        e.preventDefault();
+                        const popup = target.nextElementSibling;
+                        popup.style.display = 'block';
+                    } else if (target.classList.contains('cus-popup-trigger')) {
+                        e.preventDefault();
+                        const popup = target.nextElementSibling;
+                        popup.style.display = 'block';
+                    }
+
+                    // Check if a close button was clicked
+                    if (target.classList.contains('close-button')) {
+                        const popup = target.parentElement;
+                        popup.style.display = 'none';
+                    }
+                });
+            });
+        </script>
         <script src="assets/js/jquery-3.5.1.min.js"></script>
         <script src="assets/js/popper.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>

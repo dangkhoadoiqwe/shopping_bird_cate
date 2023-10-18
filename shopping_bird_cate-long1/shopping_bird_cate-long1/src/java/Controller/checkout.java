@@ -9,9 +9,11 @@ import DAO.VoucherDao;
 import DAO.cartDAO;
 import DTO.Account;
 import DTO.Product;
+import DTO.Voucher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -71,29 +73,34 @@ public class checkout extends HttpServlet {
         HttpSession session = request.getSession();
 
         try {
-
+            
             String code = request.getParameter("code");
             String id = request.getParameter("accid");
             VoucherDao dao = new VoucherDao();
-            int discount = dao.getCoupon(code, id);
+            int discount = dao.getCoupon(code);
             Object object = session.getAttribute("account");
             cartDAO cart = (cartDAO) session.getAttribute("cart");
             Account user = (Account) object;
-            if (cart == null ){
-                  request.getRequestDispatcher("homePage.jsp").forward(request, response);
+            VoucherDao voucherDao = new VoucherDao();
+            List<Voucher> vouchers = voucherDao.getAllVoucher1();
+            if (cart == null) {
+                request.getRequestDispatcher("homePage.jsp").forward(request, response);
             } else {
-            if (discount == 0) {
+                if (discount == 0) {
                 float discountTotal = cart.getTotalBill();
                 System.out.println(cart.getTotalBill());
-                request.setAttribute("discountTotal", discountTotal);
-                request.setAttribute("discount", 0);
+                    request.setAttribute("discountTotal", discountTotal);
+                    request.setAttribute("discount", 0);
+                    session.setAttribute("vouchers", vouchers);
 
-            } else {
-                float discountTotal = cart.getTotalBill() * (100 - discount) / 100;
-                request.setAttribute("discount", discount);
-
-                request.setAttribute("discountTotal", discountTotal);
-            }
+                } else {
+                    float discountTotal = cart.getTotalBill() * (100 - discount) / 100;
+                    request.setAttribute("discount", discount);
+                    session.setAttribute("vouchers", vouchers);
+                    request.setAttribute("discountTotal", discountTotal);
+                    request.setAttribute("code", code);
+                    request.setAttribute("id", id);
+                }
             }
             request.getRequestDispatcher("checkout.jsp").forward(request, response);
 
@@ -132,7 +139,11 @@ public class checkout extends HttpServlet {
             String Address = request.getParameter("Address").trim();
             String Phone = request.getParameter("Phone").trim();
             String note = request.getParameter("note").trim();
-            dao.insertCheckout(cart, Name, Address, Phone, user, discountTotal, note);
+              int value = Integer.parseInt(request.getParameter("status").trim());
+              
+               
+              int voucher = Integer.parseInt(request.getParameter("voucherid").trim());
+            dao.insertCheckout(cart, Name, Address, Phone, user, discountTotal, note, value,voucher );
             cart.removeAllItems();
             try (PrintWriter out = response.getWriter()) {
                 out.println("<script type=\"text/javascript\">");

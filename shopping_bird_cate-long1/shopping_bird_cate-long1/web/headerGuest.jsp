@@ -1,9 +1,9 @@
 <%-- 
     Document   : headerGuest
     Created on : Sep 18, 2023, 11:27:27 AM
-    Author     : hailo
+    Author     : Quang
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,21 +29,18 @@
                 <div class="collapse navbar-collapse" id="navbarsFurni">
                     <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
                         <li class="nav-item active">
-                            <a class="nav-link" href="MainController?action=LOAD_HOME_PAGE">Trang chủ</a>
+                            <a class="nav-link" href="homePage.jsp">Trang chủ</a>
                         </li>
                         <li><a class="nav-link" href="MainController?action=shop">Cửa hàng</a></li>
                         <li><a class="nav-link" href="blog.jsp">Blog</a></li>
                         <li><a class="nav-link" href="contact.jsp">Liên hệ</a></li>
                     </ul>
                     <!--                                        Thêm menu "Setting" -->
-                    
-                    
+
+
                     <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
                         <li><a class="cd-signin" href="#"><img style =" margin-top:12px" src="images/user.svg"></a></li>
                         <li><a class="nav-link" href="cart.jsp"><img src="images/cart.svg"></a></li>
-                         <li style="width: 25px; height: 25px; background-color: red; border-radius: 50%; text-align: center; color: white; margin-top: 10px;">
-                            ${sessionScope.cart.getItems().size()}
-                        </li>    
                     </ul>
                 </div>
             </div>
@@ -67,6 +64,7 @@
                 <div id="cd-login"> 
                     <!-- log in form -->
                     <form class="cd-form" action="MainController" method="post">
+                        <input type="hidden" name="webUrl" id="url">
                         <p class="fieldset">
                             <label class="image-replace cd-email" for="signin-email">Email
                             </label>
@@ -88,6 +86,7 @@
                             <label for="remember-me">Nhớ đăng nhập
                             </label>
                         </p>
+                        <p>${msg}</p>
                         <p class="fieldset">
                             <!--<input class="full-width" type="submit" name="action" value="login">-->
                             <button class="full-width" type="submit" name="action" value="login">Login</button>
@@ -102,25 +101,42 @@
                 <!-- cd-login -->
                 <div id="cd-signup"> 
                     <!-- sign up form -->
-                    <form class="cd-form">
+                    <form class="cd-form" action="RegisterController1" method="post">
                         <p class="fieldset">
                             <label class="image-replace cd-username" for="signup-username">Username
                             </label>
-                            <input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username">
+                            <input class="full-width has-padding has-border" id="signup-username" type="text" name="regisname" placeholder="Họ và tên">
                             <span class="cd-error-message">Username không được bỏ trống!
                             </span>
                         </p>
                         <p class="fieldset">
                             <label class="image-replace cd-email" for="signup-email">Email
                             </label>
-                            <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
+                            <input class="full-width has-padding has-border" id="signup-email" type="email" name="regismail" placeholder="E-mail">
                             <span class="cd-error-message">Email không được bỏ trống!
+                            </span>
+                        </p>
+
+                        <p class="fieldset">
+                            <label class="image-replace cd-password" for="signup-phone">Phone
+                            </label>
+                            <input class="full-width has-padding has-border" id="signup-phone" type="text" name ="regisphone"  placeholder="Số điện thoại">
+                            <span class="cd-error-message">Password không được bỏ trống!
                             </span>
                         </p>
                         <p class="fieldset">
                             <label class="image-replace cd-password" for="signup-password">Password
                             </label>
-                            <input class="full-width has-padding has-border" id="signup-password" type="text"  placeholder="Password">
+                            <input class="full-width has-padding has-border" id="signup-password" type="text" name ="regispass"  placeholder="Password">
+                            <a href="#0" class="hide-password">Hide
+                            </a>
+                            <span class="cd-error-message">Password không được bỏ trống!
+                            </span>
+                        </p>
+                        <p class="fieldset">
+                            <label class="image-replace cd-password" for="signup-repassword">Password
+                            </label>
+                            <input class="full-width has-padding has-border" id="signup-repassword" type="text" name ="regisrepass"  placeholder="Password">
                             <a href="#0" class="hide-password">Hide
                             </a>
                             <span class="cd-error-message">Password không được bỏ trống!
@@ -134,7 +150,7 @@
                             </label>
                         </p>
                         <p class="fieldset">
-                            <input class="full-width has-padding" type="submit" value="Tạo tài khoản">
+                            <button class="full-width has-padding" type="submit"  >Đăng ký</button>
                         </p>
                     </form>
                     <!-- <a href="#0" class="cd-close-form">Close</a> -->
@@ -290,6 +306,19 @@
                 }
                 );
             }
+            window.onload = function () {
+                var errorMessage = '<%= request.getAttribute("msg")%>';
+                console.log(errorMessage);
+                if (errorMessage && errorMessage.trim().toLowerCase() !== "null") {
+//                document.getElementById("error-message").textContent = errorMessage;
+                    $form_modal.addClass('is-visible');
+                    $form_login.addClass('is-selected');
+                    $form_signup.removeClass('is-selected');
+                    $form_forgot_password.removeClass('is-selected');
+                    $tab_login.addClass('selected');
+                    $tab_signup.removeClass('selected');
+                }
+            };
         }
         );
         //credits https://css-tricks.com/snippets/jquery/move-cursor-to-end-of-textarea-or-input/
@@ -313,5 +342,13 @@
             $('#cody-info').hide();
         }
         );
+     var currentURL = window.location.href;
+                        console.log(webUrl);
+    </script>
+    <script>
+        // Get the current URL
+        var webUrl = window.location.href;
+        var lines = webUrl.split("/");
+        document.getElementById('url').value = lines[lines.length - 1];
     </script>
 </html>

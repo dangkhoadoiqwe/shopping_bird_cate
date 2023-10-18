@@ -30,7 +30,7 @@ public class OrderDao {
             con = DBContext.getConnection();
             if (con != null) {
                 stm = con.prepareStatement("  SELECT [paymentID],[createTime] ,C.intendTime,C.Status,O.cartID ,[cusPhone] ,[cusAddress] ,O.total \n"
-                        + "     ,[paymentStatus], cusName FROM Payment O  INNER JOIN delivery C ON O.deliveryID = C.deliveryID  ");
+                        + "     ,[paymentStatus], cusName FROM Payment O  INNER JOIN delivery C ON O.deliveryID = C.deliveryID ORDER BY [paymentID] DESC  ");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     Order order = new Order();
