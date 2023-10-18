@@ -27,7 +27,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
         <link href="css/tiny-slider.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
-        <link href="css/history.css" rel="stylesheet">
+        <link href="css/history.css" rel="stylesheet" type="text/css"/>
         <link href="css/login.css" rel="stylesheet" type="text/css"/>
         <title>Lịch sử thanh toán</title>
         <style>
@@ -41,6 +41,7 @@
                 height: 100%;
                 background: rgba(0, 0, 0, 0.5);
                 z-index: 999;
+                font-size: 12px;
             }
 
             /* CSS cho popup */
@@ -50,26 +51,49 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
                 background: #fff;
-                width: 1000px; /* Điều chỉnh chiều rộng của popup */
-                height: 920px; /* Điều chỉnh chiều cao của popup */
+                width: 950px; /* Điều chỉnh chiều rộng của popup */
+                height: 720px; /* Điều chỉnh chiều cao của popup */
                 padding: 20px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
                 z-index: 1000;
             }
-               .close-popup-button {
-        display: block;
-        margin-top: 12px;
-        padding: 10px 20px;
-        background-color: #ccc;
-        border: none;
-        cursor: pointer;
-    }
+            .close-popup-button {
+                display: block;
+                position: absolute;
+                top: 10px; /* Điều chỉnh khoảng cách từ top theo ý muốn */
+                right: 10px; /* Điều chỉnh khoảng cách từ right theo ý muốn */
+                padding: 10px 20px;
+                background-color: #ccc;
+                color: #fff;
+                border: none;
+                cursor: pointer;
+            }
+            .popup .row {
+                overflow: auto; /* Hiển thị thanh cuộn khi nội dung dài hơn popup */
+                max-height: 700px; /* Điều chỉnh chiều cao tối đa phù hợp với nhu cầu của bạn */
+            }
+            /* CSS hover cho nút tắt */
+            .close-popup-button:hover {
+                background-color: #555;
+                color: #fff;
+            } 
+            .popup h2 {
+                font-size: 14px; /* Điều chỉnh kích thước cho tiêu đề h2 */
 
-    /* CSS hover cho nút tắt */
-    .close-popup-button:hover {
-        background-color: #555;
-        color: #fff;
-    } 
+            }
+            /* CSS cho các nút button trong popup */
+            .popup button {
+                font-size: 12px; /* Điều chỉnh kích thước chữ trong nút */
+                padding: 10px 20px; /* Điều chỉnh kích thước nút theo chiều ngang và chiều cao */
+                background-color:#2f2f2f; /* Điều chỉnh màu nền của nút */
+                color: #ffffff /* Điều chỉnh màu chữ trong nút */
+                    border: none; /* Loại bỏ viền nút */
+                cursor: pointer; /* Biến con trỏ thành hình tay khi di chuột vào nút */
+            }
+
+            .popup button:hover {
+                background-color: #0056b3; /* Điều chỉnh màu nền khi di chuột vào nút */
+            }
         </style>
 
     </head>
@@ -141,7 +165,7 @@
                         <div class="col-md-6 mb-5 mb-md-0">
                             <!--  phần hóa đơn -->
                             <h2 class="h3 mb-3 text-black">Hóa đơn</h2>
-                            <div class="p-3 p-lg-5 border bg-white">
+                            <div class="p-3 border bg-white">
                                 <!-- Form hóa đơn -->
                                 <div class="form-group row">
                                     <h3>Ngày yều cầu:10-08-2023</h3>
@@ -167,22 +191,21 @@
                                 </div>
                             </div>
                             <br>
-                            <br>
-                            <br>
-                            
+
+
                             <div class="form-group">
                                 <h2 class="h3 mb-3 text-black">Ghi chú</h2>
                                 <textarea name="c_order_notes" id="c_order_notes" cols="30" rows="5" class="form-control" placeholder=""></textarea>
                             </div>
                         </div>
-                      
+
                         <div class="col-md-6" >
                             <!-- Coupon Code và Đơn hàng -->
-                            <div class="row mb-5" style=" margin-top:40px">
+                            <div class="row mb-5" style=" margin-top:22px">
                                 <div class="col-md-12" style=" margin-top:10px">
-                                    
-                                    <div class="p-3 p-lg-5 border bg-white">
-                                        <h4 class="h3 mb-3 text-black">Mã khuyến mãi</h4>
+
+                                    <div class="p-3  border bg-white">
+                                        <h2 class="h3 mb-3 text-black">Mã khuyến mãi</h2>
                                         <label for="c_code" class="text-black mb-3"></label>
                                         <div class="input-group w-75 couponcode-wrap">
                                             <input type="text" class="form-control me-2" id="c_code" placeholder="" aria-label="" aria-describedby="button-addon2">
@@ -195,7 +218,7 @@
                             </div>
                             <div class="col-md-12">
                                 <h2 class="h3 mb-3 text-black">Yêu cầu</h2>
-                                <div class="p-3 p-lg-5 border bg-white">
+                                <div class="p-3 border bg-white">
                                     <table class="table site-block-order-table mb-5">
                                         <thead>
                                         <th>Sản phẩm</th>
@@ -232,7 +255,7 @@
             </div>
 
         </div>
-
+        <%@include file="footer.jsp"%>
         <script>
             // Open the popup when the "Open Popup" button is clicked
             document.getElementById("open-popup-button").addEventListener("click", function () {
